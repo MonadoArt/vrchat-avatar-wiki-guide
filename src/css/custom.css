@@ -189,6 +189,27 @@ html::after {
    3. Content Containers
    ========================================================================== */
 
+/* Section heading banner — applied via <SectionHeader> component, or auto on doc page titles */
+.theme-doc-markdown > h1,
+h1.section-header,
+h2.section-header,
+h3.section-header,
+h4.section-header {
+  background-color: var(--xeno-beige-light);
+  color: var(--xeno-brown-menu) !important;
+  padding: 0.3rem 3rem 0.3rem 1.5rem; /* extra right padding so text clears the taper */
+  border: none;
+  border-radius: 0;
+  display: inline-block;
+  width: fit-content;
+  margin: 1.5rem 0 0.75rem -1.5rem;
+  box-sizing: border-box;
+  font-size: 1.25rem;
+  font-weight: bold;
+  /* Right-side taper: rectangle on left, arrow point on right */
+  clip-path: polygon(0 0, calc(100% - 1.5rem) 0, 100% 100%, 0 100%);
+}
+
 .container {
   background: var(--xeno-brown-dark) !important;
   border-radius: 1rem;
@@ -521,7 +542,6 @@ html::after {
 }
 
 .breadcrumbs__item:not(:last-child)::after {
-  content: "/" !important;
   color: var(--xeno-brown-menu);
   opacity: 0.7;
   margin: 0 8px;

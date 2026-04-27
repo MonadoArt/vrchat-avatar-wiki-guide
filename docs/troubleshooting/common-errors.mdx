@@ -1,0 +1,70 @@
+---
+sidebar_position: 1
+title: Common Errors
+---
+
+# Common Errors
+
+A reference for errors you're likely to run into when uploading or using avatars.
+
+---
+
+## SDK / Upload errors
+
+### "No avatar descriptor found"
+
+**Cause:** The selected object doesn't have a `VRC Avatar Descriptor` component, or no object is selected in the Builder tab.
+
+**Fix:** Select the root GameObject of your avatar in the scene, then open the SDK Builder tab again. Make sure a `VRC Avatar Descriptor` is attached to that object.
+
+---
+
+### "Build failed" with no clear reason
+
+**Cause:** Often a script compilation error somewhere in the project that prevents Unity from building.
+
+**Fix:**
+1. Check the Unity **Console** (Window → General → Console) for any red errors.
+2. Fix all script errors before trying to upload.
+3. If errors are in third-party packages, try reimporting them via the Creator Companion.
+
+---
+
+### Avatar doesn't appear in VRChat after upload
+
+**Cause:** The upload may have succeeded but the avatar is still processing on VRChat's servers, or you're looking in the wrong place.
+
+**Fix:**
+1. Wait a few minutes and check **My Avatars** in the VRChat menu.
+2. Make sure you're logged into the same VRChat account in-game as you used for the upload.
+3. If it still doesn't appear, check the VRChat **Content Manager** in the SDK to confirm the upload completed.
+
+---
+
+## Unity errors
+
+### Missing scripts on avatar components
+
+{/* Add details here */}
+
+---
+
+### Texture import errors
+
+{/* Add details here */}
+
+---
+
+## Quest-specific errors
+
+### Quest avatar shows as a different avatar than PC
+
+**Cause:** The Quest and PC versions have different Pipeline IDs and aren't linked.
+
+**Fix:** See the [Quest version linking steps](../upload/uploading#5-quest-version-optional) in the Uploading guide.
+
+---
+
+:::info
+Don't see your error here? More entries will be added over time. Feel free to reach out if you're stuck.
+:::

@@ -1,0 +1,51 @@
+---
+sidebar_position: 2
+title: Re-uploading
+---
+
+# Re-uploading
+
+If you've made changes to your avatar — or updated your packages — you'll need to re-upload it to VRChat for those changes to show up in-game. The process is almost identical to the first upload.
+
+:::info
+Re-uploading overwrites the existing version of your avatar in VRChat. You don't end up with duplicates — it updates the same avatar in your list.
+:::
+
+---
+
+## When do you need to re-upload?
+
+You need to re-upload any time you've made a change inside Unity that you want to see in VRChat. For example:
+
+- You updated a package (like GoGoLoco or VRCFury)
+- You swapped out a texture or material
+- You adjusted a setting on the avatar
+- You made any other edit inside the Unity project
+
+Simply updating packages in VCC is **not enough on its own** — you always need to re-upload after.
+
+---
+
+## How to re-upload
+
+1. Open your project in Unity through the **Creator Companion**.
+2. Make sure your avatar is in the scene. If it isn't, find it in the **Project** window and drag it into the **Hierarchy**.
+3. Click **VRChat SDK** in the top menu bar, then **Show Control Panel**.
+4. Go to the **Builder** tab and confirm your avatar is selected in the dropdown.
+5. Check for any red errors — fix those before continuing.
+6. Click **Build & Publish for Windows**.
+7. Wait for Unity to finish building. This may take a few minutes.
+
+That's it — your avatar in VRChat will now reflect the changes.
+
+:::tip
+You don't need to re-enter your avatar's name or description. VRChat remembers those from the first upload since the avatar is being updated, not created from scratch.
+:::
+
+---
+
+## Re-uploading the Quest version
+
+If your avatar has a Quest version, you'll need to re-upload that separately too. After completing the steps above, repeat them and click **Build & Publish for Android** instead of Windows.
+
+The Quest and PC versions are linked by their shared ID, so you don't need to go through the ID-linking process again — that only needs to be done once on first upload.

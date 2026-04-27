@@ -1,0 +1,125 @@
+---
+sidebar_position: 1
+title: Installation
+---
+
+# Trust Rank
+
+:::warning
+Your VRChat account needs to have a [trust rank](https://docs.vrchat.com/docs/vrchat-safety-and-trust-system) of New User or above in order to be able to upload avatars!
+If you just made your VRChat account you will need to play the game or afk in order to increase it from Visitor. Positive interactions with people (such as not getting blocked or getting friend requests) will allow you to gain trust rank faster, alternatively you can pay for VRC+ and gain New User rank immediately!
+:::
+
+# Installation
+
+To get an avatar into VRChat, you'll need to install a few things first. This page walks you through all of it step by step - no prior experience needed.
+
+:::info 
+What even is Unity?
+Unity is a game engine - the same software used to build VRChat itself. Even though you're not making a game, it's the tool VRChat uses to let you upload avatars. You don't need to know how to use it beyond the basics covered in this guide.
+:::
+
+---
+
+## Step 1 - Download the Creator Companion
+
+The **VRChat Creator Companion** (usually just called VCC) is a free program made by VRChat. Think of it as a control panel that helps you set up everything else. You install it once and it handles the rest.
+
+1. Go to [vrchat.com](https://vrchat.com) and log in with your VRChat account.
+2. Click **Downloads** from the top menu.
+3. Download the **Creator Companion** and run the installer like you would any other program.
+
+When you open it for the first time, it will ask you to sign in with your VRChat account. Go ahead and do that.
+
+:::info
+If it asks for a verification code after signing in, check your email - VRChat sends one for security.
+:::
+
+---
+
+## Step 2 - Install Unity
+
+Unity is the program that actually lets you upload the avatar. VCC will prompt you to install it automatically, so you don't need to go hunting for the right version yourself.
+
+1. Open the **Creator Companion**.
+2. If Unity isn't installed yet, VCC will show a message asking you to install it. Click **Install Unity**.
+3. This opens a program called **Unity Hub** - it's just a launcher that manages Unity for you. Follow the prompts to finish installing.
+4. During setup, you'll be asked to create a free Unity account and activate a **Personal license**. This is completely free and just lets you use Unity.
+
+:::warning
+**Don't install Unity yourself**
+
+If you go to the Unity website and download it manually, you'll probably get the wrong version. VRChat is very picky about which version it supports - always let VCC install it for you.
+:::
+
+---
+
+## Step 3 - Create a project
+
+A "project" is just a folder on your computer where all your avatar files will live. You create and manage it through the Creator Companion.
+
+1. Open the **Creator Companion** and click **Projects** in the sidebar on the left.
+2. Click the blue **Create New Project** button in the top right.
+3. From the template list, select **"Unity 2022 Avatar Project"**.
+4. Give your project a name and choose where to save it.
+
+:::tip
+**Choose a sensible save location**
+
+By default, VCC might try to save it inside a hidden system folder (AppData). It's better to save it somewhere easy to find, like `Documents\VRChat Projects\` or similar.
+:::
+
+5. Click **Create** and wait for it to finish. This might take a minute or two.
+
+---
+
+## Step 4 - Add the required packages
+
+This avatar needs four extra add-ons installed before you can upload it. These add-ons are called **packages**, and they're free. **Skipping even one will cause errors when you try to upload.**
+
+The four packages are:
+
+| Package | What it does | |
+|---|---|---|
+| **VRCFury** | Automatically sets up complex avatar features so you don't have to do it manually | <a href="vcc://vpm/addRepo?url=https%3A%2F%2Fpoiyomi.github.io/vpm/index.json" className="button button--primary button--sm">Add to VCC</a> |
+| **GoGoLoco** | Adds movement options like sitting and laying down anywhere in VRChat, especially helpful for people without fullbody tracking | <a href="vcc://vpm/addRepo?url=https%3A%2F%2Fpoiyomi.github.io/vpm/index.json" className="button button--primary button--sm">Add to VCC</a> |
+| **Poiyomi Toon** | The shader (visual style) used for the avatar's materials - without it, the avatar will appear pink | <a href="vcc://vpm/addRepo?url=https%3A%2F%2Fpoiyomi.github.io/vpm/index.json" className="button button--primary button--sm">Add to VCC</a> |
+| **ADJerry's Face Tracking Templates** | Enables face tracking support | <a href="vcc://vpm/addRepo?url=https%3A%2F%2Fpoiyomi.github.io/vpm/index.json" className="button button--primary button--sm">Add to VCC</a> |
+
+### How to install them
+
+Each package needs to be added to the Creator Companion before it can be installed. Here's how to do that:
+
+1. Open the **Creator Companion** and click **Settings** in the bottom-left corner.
+2. At the top of the Settings page, click the **Packages** tab.
+3. Click **Add Repository**.
+4. A text box will appear. Copy and paste **one** of the URLs from the list below into it, then click **Add**.
+5. A confirmation box will pop up - click **I Understand, Add Repository**.
+6. Repeat steps 3–5 for each of the four URLs.
+
+**Copy these one at a time:**
+
+```
+https://vcc.vrcfury.com
+```
+```
+https://Spokeek.github.io/goloco/index.json
+```
+```
+https://poiyomi.github.io/vpm/index.json
+```
+```
+https://Adjerry91.github.io/VRCFaceTracking-Templates/index.json
+```
+
+Once all four are added, go back to **Projects**, find your project, and click **Manage Project**. You'll now see the packages available in the list - click the **+** button next to each one to install it.
+
+:::tip
+You only need to add each repository once. After that, it'll be available for any project you create in the future.
+:::
+
+---
+
+## Next steps
+
+Once everything is installed, head to [Uploading](./uploading) to get your avatar into VRChat.

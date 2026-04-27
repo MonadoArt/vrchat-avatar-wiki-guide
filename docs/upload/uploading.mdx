@@ -1,0 +1,79 @@
+---
+sidebar_position: 3
+title: Uploading
+---
+
+# Uploading an Avatar
+
+This page covers how to upload your avatar using the VRChat SDK inside Unity. Make sure you've completed the [Installation](./installation) steps before continuing.
+We will cover how to add outfits, customize the avatar and such in [How to Customize]()
+:::caution
+add a link to the customization page
+:::
+
+---
+
+## 1. Open the SDK window
+
+In Unity, go to the top menu bar and click:
+
+**VRChat SDK → Show Control Panel**
+
+:::caution
+Put an image of where to find it
+:::
+
+This opens the SDK window. If you don't see this menu, the SDK may not be installed correctly — go back to the Creator Companion and make sure the VRChat SDK package is added to your project.
+
+---
+
+## 2. Sign in
+
+In the SDK window, go to the **Authentication** tab and sign in with your VRChat account.
+
+:::note
+You may be prompted for a two-factor authentication code. Check your email.
+:::
+
+---
+
+## 3. Select your avatar
+
+1. Switch to the **Builder** tab at the top of the SDK window.
+2. In the **Selected Avatar** dropdown, choose your avatar.
+3. The SDK will run a few checks on your avatar. Fix any errors shown in red before continuing. Warnings (yellow) are usually safe to ignore.
+
+---
+
+## 4. Upload (PCVR version)
+
+1. Fill in the **Avatar Name** and give it a **Thumbnail**. Description and tags are entirely optional.
+2. Scroll down in the Builder tab.
+3. Make sure **Build & Publish your Avatar Online** is selected as the "Build Type" and "Windows" is selected in the "Platform" dropdown.
+4. Wait for Unity to build the avatar. Depending on how many components you have added this can take a few minutes.
+5. If successful you will see a message saying "Build Successful" in green text.
+
+Once finished, your avatar will appear in VRChat under **My Avatars**.
+
+---
+
+## 5. Upload (Mobile version)
+
+If youwant to upload a Mobile compatible version, you need to link it to the same pipeline ID as the PC version so they're uploaded onto the same avatar.
+
+0. Find the prefab for the Mobile version of the avatar and drag it into the hierarchy, add the same additions as you did on the PC version.
+1. In the SDK's **Content Manager** tab, find your uploaded PC avatar and click **Copy ID**.
+2. In your scene, select the **root object of the Quest avatar**.
+3. Find the **Pipeline Manager** component on it.
+4. Paste the copied ID into the **Blueprint ID** field and click **Attach**.
+5. Now repeat the upload steps above using **Build & Publish Your Avatar Online** with **"Android"** selected in the **"Platform"** dropdown.
+
+:::caution
+If the mobile avatar is not uploaded onto the same Blueprint ID as the PCVR version they will be treated as two entirely different avatar uploads. This means that if you are on PCVR your Quest standalone friends wont see your avatar and vice-versa.
+:::
+
+---
+
+## Troubleshooting upload issues
+
+If something goes wrong during the upload, check the [Troubleshooting](../troubleshooting/common-errors) page for common errors and fixes.
