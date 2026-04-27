@@ -4,27 +4,560 @@
  * work well for content-centric websites.
  */
 
-/* You can override the default Infima variables here. */
+/* ==========================================================================
+   1. Variables & Global Resets
+   ========================================================================== */
+
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  /* Xenoblade Palette */
+  --xeno-brown-dark: rgb(49, 41, 41);
+  --xeno-beige-light: rgb(181, 177, 171);
+  --xeno-green-monado: #A4F13F;
+  --xeno-orange-header: #E68E35;
+  --xeno-brown-menu: rgb(72, 59, 34);
+
+  /* Infima Overrides */
+  --ifm-color-primary: var(--xeno-green-monado);
+  --ifm-color-primary-dark: #8edc30;
+  --ifm-color-primary-darker: #7ec72b;
+  --ifm-color-primary-darkest: #68a423;
+  --ifm-color-primary-light: #b4f360;
+  --ifm-color-primary-lighter: #bdf571;
+  --ifm-color-primary-lightest: #d7f9a2;
+
+  --ifm-background-color: var(--xeno-beige-light);
+  --ifm-navbar-background-color: rgba(33, 28, 21, 0.9);
+  --ifm-navbar-link-color: var(--xeno-beige-light);
+  --ifm-footer-background-color: var(--xeno-brown-dark);
+
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-heading-color: var(--xeno-orange-header);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* TEV pipeline approximation:
+   Stage 0: screen(dark_brown, texture) ≈ lerp(dark_brown, light_grey, texture)
+   Stage 1: multiply(stage0, vertex_gradient) — warm tan bottom, white top */
+html {
+  background-color: var(--xeno-brown-dark);
+  background-image:
+    linear-gradient(to top, rgb(238, 184, 138) 0%, rgb(181, 177, 171) 100%),
+    url('../../static/img/bg_texture.png');
+  background-blend-mode: multiply, screen;
+  background-attachment: fixed;
+  background-repeat: repeat, repeat;
+  background-size: 100% 100%, 30vh;
+}
+
+body {
+  margin: 0;
+  background: transparent !important; /* Body must be transparent to see html background */
+}
+
+/* Layout Resets: Ensuring transparent backgrounds for fixed panels */
+.theme-doc-toc-desktop,
+.table-of-contents,
+[class*="docItemCol"],
+[class*="docMainContainer"] {
+  background: transparent !important;
+}
+
+.menu {
+  padding: 1.5rem 0 !important;
+  overflow-y: auto;
+  /* Leave ~40px for the hideable sidebar collapse button */
+  max-height: calc(100vh - var(--ifm-navbar-height) - 24px - 40px);
+}
+
+.table-of-contents {
+  padding: 0.5rem;
+}
+
+/* Custom Xenoblade Scrollbar — only .menu and .table-of-contents scroll */
+.menu::-webkit-scrollbar,
+.table-of-contents::-webkit-scrollbar {
+  width: 0.875rem;
+}
+
+.menu::-webkit-scrollbar-track,
+.table-of-contents::-webkit-scrollbar-track {
+  background: rgb(45, 42, 38);
+}
+
+.menu::-webkit-scrollbar-thumb,
+.table-of-contents::-webkit-scrollbar-thumb {
+  background: var(--xeno-orange-header);
+  border: 0.25rem solid rgb(45, 42, 38);
+  border-radius: 0.625rem;
+}
+
+/* ==========================================================================
+   2. Global Decor & Structural Layout
+   ========================================================================== */
+
+/* Full-viewport decor images via mask */
+html::before,
+html::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.2;
+}
+
+/* Combined Top & Bottom Decors */
+html::before {
+  background-color: rgb(52, 18, 2);
+  background-image: radial-gradient(ellipse at top right, rgb(242, 176, 55) 0%, rgb(255, 255, 255) 65%);
+  background-blend-mode: multiply;
+
+  /* Multiple masks for Top and Bottom */
+  mask-image: url('/img/decor_top.png'), url('/img/decor_bottom.png');
+  -webkit-mask-image: url('/img/decor_top.png'), url('/img/decor_bottom.png');
+  mask-repeat: no-repeat, no-repeat;
+  mask-position: top center, bottom center;
+  mask-size: 100% auto, 100% auto;
+}
+
+/* Middle Decor */
+html::after {
+  background-color: rgb(218, 131, 39);
+  background-image:
+    radial-gradient(ellipse at top left,     rgb(250, 233, 124), transparent 65%),
+    radial-gradient(ellipse at top right,    rgb(161, 26,  3),   transparent 65%),
+    radial-gradient(ellipse at bottom left,  rgb(255, 126, 14),  transparent 65%),
+    radial-gradient(ellipse at bottom right, rgb(251, 225, 125), transparent 65%);
+  mask-image: url('/img/decor_middle.png');
+  -webkit-mask-image: url('/img/decor_middle.png');
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: 100% auto;
+}
+
+/* Main Content Wrapper & Responsive Panels */
+.main-wrapper {
+  background: transparent;
+  position: relative;
+  z-index: 2;
+  overflow: clip !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+@media (min-width: 997px) {
+  .main-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+/* Positioning for secondary elements */
+.theme-doc-toc-desktop {
+  z-index: 2;
+  position: sticky !important;
+  top: 4rem;
+  overflow: visible !important; /* Prevent cursor clipping */
+  background-color: var(--xeno-beige-light) !important;
+  border-radius: 16px;
+  padding: 0.5rem !important;
+  border: 0.1rem solid var(--xeno-brown-dark);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  margin-top: 1rem;
+}
+
+[class*="docItemCol"] {
+  background: var(--xeno-brown-dark) !important;
+  border-radius: 1rem;
+  padding: 1.5rem !important;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.1) !important;
+  z-index: 2;
+  position: relative;
+}
+
+/* ==========================================================================
+   3. Content Containers
+   ========================================================================== */
+
+.container {
+  background: var(--xeno-brown-dark) !important;
+  border-radius: 1rem;
+  padding: 1.5rem !important;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1;
+}
+
+/* On doc pages the container wraps both the article column and the ToC as siblings.
+   Reset it to transparent here and apply the brown style only to the article column. */
+[class*="docMainContainer"] .container {
+  background: transparent !important;
+  box-shadow: none;
+  padding: 0 !important;
+}
+
+/* ==========================================================================
+   4. Sidebar (Navigation Menu)
+   ========================================================================== */
+
+.theme-doc-sidebar-container {
+  background-color: var(--xeno-brown-dark) !important;
+  margin: 12px 0 12px 12px !important;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  z-index: 2;
+  position: sticky !important;
+  top: calc(var(--ifm-navbar-height) + 12px);
+  height: calc(100vh - var(--ifm-navbar-height) - 24px);
+  transition: all 0.3s ease;
+  border-right: 2px solid rgba(255, 255, 255, 0.1) !important;
+  overflow: visible !important; /* Allow cursor to pop out */
+}
+
+/* Eliminate top sidebar gap */
+.theme-doc-sidebar-menu,
+.menu,
+.menu__list,
+.navbar-sidebar__brand {
+  margin-top: 0 !important;
+}
+
+/* Top-Level Chapter Item Boxes (Light Beige Panels) */
+.menu > .menu__list > .menu__list-item {
+  background-color: var(--xeno-beige-light) !important;
+  margin: 0.375rem 0.75rem !important;
+  border-radius: 0.75rem;
+  overflow: visible; /* Prevent cursor clipping */
+  transition: all 0.2s ease;
+  border: 0.1rem solid var(--xeno-brown-dark);
+}
+
+.menu > .menu__list > .menu__list-item > .menu__link,
+.menu > .menu__list > .menu__list-item > .menu__list-item-collapsible {
+  background-color: transparent !important;
+  padding: 0.4rem 1.25rem !important;
+  color: var(--xeno-brown-menu) !important;
+  font-weight: bold;
+  border-radius: 0.75rem !important;
+}
+
+/* Horizontal Divider when unfolded (Dark Brown on Beige) */
+.menu__list-item:not(.menu__list-item--collapsed) > .menu__list-item-collapsible {
+  border-bottom: 2px solid rgba(49, 41, 41, 0.3) !important;
+  border-radius: 0 !important;
+}
+
+.menu > .menu__list > .menu__list-item > .menu__list-item-collapsible::after {
+  filter: sepia(100%) hue-rotate(320deg) brightness(1.5);
+}
+
+/* Sub-links default styling */
+.menu__link,
+.table-of-contents__link {
+  border-radius: 0 !important;
+  color: var(--xeno-brown-dark) !important;
+  padding: 10px 16px !important;
+  display: block;
+}
+
+/* Active Highlight: Monado Green */
+.table-of-contents__link--active,
+.menu__link:hover,
+.menu__link--active,
+.table-of-contents__link:hover,
+.menu > .menu__list > .menu__list-item:has(.menu__link--active) > .menu__link,
+.menu > .menu__list > .menu__list-item:has(.menu__link--active) > .menu__list-item-collapsible,
+.menu > .menu__list > .menu__list-item > .menu__list-item-collapsible:hover {
+  background-color: rgba(164, 241, 63, 0.3) !important;
+  color: var(--xeno-brown-menu) !important;
+}
+
+/* Subchapter Unified Box & Cursors */
+.menu__list-item .menu__list {
+  margin: 0 !important;
+  padding: 0 0 0 2.5rem !important;
+  background: transparent !important;
+  border: none !important;
+  overflow: visible;
+  position: relative;
+}
+
+.menu__list-item .menu__list::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 1.875rem;
+  right: 0.75rem;
+  background-color: var(--xeno-beige-light) !important;
+  border: 0.1rem solid var(--xeno-brown-dark);
+  border-radius: 0.5rem;
+  z-index: -1;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.2);
+}
+
+.menu__list-item .menu__list .menu__list-item:nth-child(odd) { background-color: rgb(204, 200, 191) !important; }
+.menu__list-item .menu__list .menu__list-item:nth-child(even) { background-color: rgb(181, 177, 171) !important; }
+
+.menu__list-item .menu__list .menu__list-item:first-child {
+  border-top-left-radius: 0.4375rem !important;
+  border-top-right-radius: 0.4375rem !important;
+}
+
+.menu__list-item .menu__list .menu__list-item:last-child {
+  border-bottom-left-radius: 0.4375rem !important;
+  border-bottom-right-radius: 0.4375rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.menu__list-item .menu__list .menu__list-item {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.menu__list-item .menu__list .menu__link {
+  padding: 6px 16px !important;
+  font-size: 0.9rem;
+  color: var(--xeno-brown-dark) !important;
+  opacity: 0.8;
+}
+
+.menu__list-item .menu__list .menu__link:hover,
+.menu__list-item .menu__list .menu__link--active {
+  background-color: rgba(164, 241, 63, 0.25) !important;
+  opacity: 1;
+}
+
+/* Active Overlapping Cursor (Sidebar Items and ToC) */
+.menu__list-item .menu__list .menu__link--active,
+.table-of-contents__link--active {
+  position: relative;
+  --xeno-cursor-c0: rgb(0, 64, 8);
+  --xeno-cursor-c1: rgb(24, 144, 18);
+  --xeno-cursor-size: 2.1875rem;
+  --xeno-cursor-offset: -1.3125rem;
+}
+
+/* Specific Larger Cursor for ToC */
+.table-of-contents__link--active {
+  --xeno-cursor-size: 2.5rem;
+  --xeno-cursor-offset: -0.75rem;
+}
+
+.menu__list-item .menu__list .menu__link--active::before,
+.menu__list-item .menu__list .menu__link--active::after,
+.table-of-contents__link--active::before,
+.table-of-contents__link--active::after {
+  content: "";
+  position: absolute;
+  left: var(--xeno-cursor-offset);
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--xeno-cursor-size);
+  height: var(--xeno-cursor-size);
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.menu__list-item .menu__list .menu__link--active::before,
+.table-of-contents__link--active::before {
+  background-color: var(--xeno-cursor-c0);
+  mask-image: url('/img/cursor_base.png');
+  -webkit-mask-image: url('/img/cursor_base.png');
+  opacity: 0.8;
+}
+
+.menu__list-item .menu__list .menu__link--active::after,
+.table-of-contents__link--active::after {
+  background-color: var(--xeno-cursor-c1);
+  mask-image: url('/img/cursor_detail.png');
+  -webkit-mask-image: url('/img/cursor_detail.png');
+  mix-blend-mode: plus-lighter;
+  opacity: .4;
+}
+
+/* ==========================================================================
+   5. Table of Contents (TOC)
+   ========================================================================== */
+
+.table-of-contents,
+.theme-doc-toc-desktop {
+  padding-right: 0 !important;
+  border-left: none !important;
+}
+
+.table-of-contents ul {
+  padding: 0 !important;
+  margin: 8px 0 8px 1.5rem !important; /* Margin for cursor overlap */
+  border-left: none !important;
+  list-style: none !important;
+  position: relative;
+}
+
+/* Background box matching the sidebar style */
+.table-of-contents ul::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -0.625rem;
+  right: 0.5rem;
+  background-color: var(--xeno-beige-light) !important;
+  border: 0.1rem solid var(--xeno-brown-dark);
+  border-radius: 0.5rem;
+  z-index: -1;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.2);
+}
+
+.table-of-contents li {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible; /* Allow cursor to overlap */
+  width: 100%;
+}
+
+.table-of-contents li:nth-child(odd) { background-color: rgb(204, 200, 191) !important; }
+.table-of-contents li:nth-child(even) { background-color: rgb(181, 177, 171) !important; }
+
+.table-of-contents li:first-child {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.table-of-contents li:last-child {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  margin-bottom: 0.75rem !important;
+}
+
+.table-of-contents__link {
+  display: block;
+  padding: 8px 16px 8px 32px !important; /* Spacing for the cursor */
+  font-size: 0.85rem !important;
+  color: var(--xeno-brown-dark) !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+}
+
+.table-of-contents__link:hover {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  color: var(--xeno-brown-dark) !important;
+}
+
+.table-of-contents__link--active {
+  background-color: rgba(164, 241, 63, 0.25) !important;
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   6. Breadcrumbs (Xenoblade Title Bar)
+   ========================================================================== */
+
+.theme-doc-breadcrumb {
+  margin-bottom: 2rem !important;
+}
+
+.breadcrumbs {
+  position: relative;
+  left: -1rem;
+  background-image: url('/img/title_bar_left.png');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: auto 100%;
+  padding: 0.625rem 4.6875rem !important;
+  border-radius: 0;
+  display: inline-flex !important;
+  min-height: 4.375rem;
+  align-items: center;
+}
+
+.breadcrumbs::before {
+  content: "";
+  position: absolute;
+  left: 4.125rem;
+  right: 1.6875rem;
+  top: 0;
+  bottom: 0;
+  background-image: url('/img/title_bar_middle.png');
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  z-index: -1;
+}
+
+.breadcrumbs::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4.6875rem;
+  background-image: url('/img/title_bar_right.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right center;
+  z-index: -1;
+}
+
+.breadcrumbs__item {
+  font-size: 0.95rem;
+  position: relative;
+  z-index: 2;
+}
+
+.breadcrumbs__item:not(:last-child)::after {
+  content: "/" !important;
+  color: var(--xeno-brown-menu);
+  opacity: 0.7;
+  margin: 0 8px;
+  font-weight: bold;
+}
+
+.breadcrumbs__link {
+  color: var(--xeno-brown-menu) !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.breadcrumbs__link:hover {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+.breadcrumbs__item--active .breadcrumbs__link {
+  color: var(--xeno-orange-header) !important;
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   7. Theme Overrides (Dark Mode)
+   ========================================================================== */
+
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: var(--xeno-green-monado);
+  --ifm-background-color: #1a1712;
+  --ifm-navbar-background-color: rgba(20, 18, 15, 0.95);
+  --docusaurus-highlighted-code-line-bg: rgba(164, 241, 63, 0.1);
+}
+
+.footer {
+  z-index: 10;
+  position: relative;
+  background-color: var(--ifm-footer-background-color, #1b1b1d) !important;
 }
