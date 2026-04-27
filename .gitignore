@@ -20,7 +20,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Claude Code
-.claude/memory/
+.claude
 
 # Local dev docs
 /dev_docs/
