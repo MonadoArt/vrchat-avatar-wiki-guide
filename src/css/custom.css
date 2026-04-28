@@ -581,3 +581,33 @@ h4.section-header {
   position: relative;
   background-color: var(--ifm-footer-background-color, #1b1b1d) !important;
 }
+
+/* Package URL code blocks in installation cards */
+.pkg-url-block pre {
+  font-size: 0.72rem !important;
+  white-space: pre !important;
+  word-break: normal !important;
+  overflow-x: auto !important;
+}
+
+.pkg-url-block button[class*="wordWrap"] {
+  display: none !important;
+}
+
+/* Package name links in install list */
+.pkg-name-link {
+  color: white;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.pkg-name-link:hover {
+  color: var(--xeno-green-monado);
+  text-decoration: none;
+}
+
+/* Add to VCC button hover — matches ToC active green */
+.pkg-add-btn:hover {
+  background-color: rgba(164, 241, 63, 0.3) !important;
+  color: var(--xeno-brown-menu) !important;
+  border-color: var(--xeno-green-monado) !important;
+}

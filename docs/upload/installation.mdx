@@ -3,12 +3,248 @@ sidebar_position: 1
 title: Installation
 ---
 
-# Trust Rank
+import { useState } from 'react';
+import CodeBlock from '@theme/CodeBlock';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
-:::warning
-Your VRChat account needs to have a [trust rank](https://docs.vrchat.com/docs/vrchat-safety-and-trust-system) of New User or above in order to be able to upload avatars!
-If you just made your VRChat account you will need to play the game or afk in order to increase it from Visitor. Positive interactions with people (such as not getting blocked or getting friend requests) will allow you to gain trust rank faster, alternatively you can pay for VRC+ and gain New User rank immediately!
-:::
+export const PackageCards = () => {
+  const [added, setAdded] = useState({});
+
+  const iconVrcfury     = useBaseUrl('/img/vpm/vrcf.png');
+  const iconPoiyomi     = useBaseUrl('/img/vpm/poiyomi.png');
+  const iconGogoloco    = useBaseUrl('/img/vpm/gogoloco.png');
+  const iconFacetracking = useBaseUrl('/img/vpm/facetracking.png');
+
+  const mandatory = [
+    {
+      id: 'vrcfury',
+      name: 'VRCFury',
+      description: 'Automatically sets up complex avatar features so you don\'t have to do it manually.',
+      url: 'vcc://vpm/addRepo?url=https%3A%2F%2Fvcc.vrcfury.com',
+      fallback: 'https://vcc.vrcfury.com',
+      icon: iconVrcfury,
+    },
+    {
+      id: 'poiyomi',
+      name: 'Poiyomi Toon',
+      description: "The shader used for the avatar's materials. Without it, the avatar will appear completely pink.",
+      url: 'vcc://vpm/addRepo?url=https%3A%2F%2Fpoiyomi.github.io/vpm/index.json',
+      fallback: 'https://poiyomi.github.io/vpm/index.json',
+      icon: iconPoiyomi,
+    },
+  ];
+
+  const optional = [
+    {
+      id: 'gogoloco',
+      name: 'GoGoLoco',
+      description: 'Adds movement options like sitting and laying down anywhere in VRChat.',
+      url: 'vcc://vpm/addRepo?url=https://Spokeek.github.io/goloco/index.json',
+      fallback: 'https://Spokeek.github.io/goloco/index.json',
+      icon: iconGogoloco,
+    },
+    {
+      id: 'facetracking',
+      name: "ADJerry's Face Tracking Templates",
+      description: 'Adds face tracking support to the avatar.',
+      url: 'vcc://vpm/addRepo?url=https://Adjerry91.github.io/VRCFaceTracking-Templates/index.json',
+      fallback: 'https://Adjerry91.github.io/VRCFaceTracking-Templates/index.json',
+      icon: iconFacetracking,
+    },
+  ];
+
+  const allAdded = [...mandatory, ...optional].every(p => added[p.id]);
+
+  const renderCard = (pkg) => {
+    const isAdded = !!added[pkg.id];
+    return (
+      <div key={pkg.id} style={{
+        border: `2px solid ${isAdded ? '#2e7d32' : 'var(--ifm-color-emphasis-300)'}`,
+        borderRadius: '8px',
+        padding: '1.25rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.75rem',
+        background: isAdded ? 'rgba(46, 125, 50, 0.07)' : 'var(--ifm-background-surface-color)',
+        transition: 'border-color 0.2s, background 0.2s',
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.75rem' }}>
+          <div style={{ flex: 1 }}>
+            <strong style={{ fontSize: '1rem', color: isAdded ? '#2e7d32' : 'inherit' }}>
+              {isAdded ? '✓ ' : ''}{pkg.name}
+            </strong>
+            <p style={{ fontSize: '0.875rem', margin: '0.35rem 0 0', color: 'var(--ifm-color-emphasis-700)', lineHeight: 1.5 }}>
+              {pkg.description}
+            </p>
+          </div>
+          <img
+            src={pkg.icon}
+            alt={pkg.name}
+            style={{
+              width: '40px',
+              height: '40px',
+              flexShrink: 0,
+              objectFit: 'contain',
+            }}
+          />
+        </div>
+        <div style={{ marginTop: 'auto' }}>
+          <a
+            href={pkg.url}
+            onClick={() => setAdded(prev => ({ ...prev, [pkg.id]: true }))}
+            className={`button button--${isAdded ? 'success' : 'secondary'} pkg-add-btn`}
+            style={{
+              display: 'block',
+              textAlign: 'center',
+              textDecoration: 'none',
+              ...(isAdded ? {} : {
+                background: 'var(--xeno-beige-light)',
+                color: 'var(--xeno-brown-menu)',
+                borderColor: 'var(--xeno-brown-menu)',
+              }),
+            }}
+          >
+            {isAdded ? '✓ Added to VCC' : 'Add to VCC'}
+          </a>
+          <p style={{ fontSize: '0.75rem', margin: '0.5rem 0 0', color: 'var(--ifm-color-emphasis-600)', lineHeight: 1.4 }}>
+            Didn't work? Go to <strong>Settings {'>'} Packages {'>'} Add Repository</strong> and paste:
+          </p>
+          <div className="pkg-url-block">
+            <CodeBlock language="text">{pkg.fallback}</CodeBlock>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const sectionLabel = (text, color) => (
+    <h3 style={{ color, margin: '1.5rem 0 0.5rem' }}>{text}</h3>
+  );
+
+  return (
+    <div>
+      {sectionLabel('Mandatory Packages', 'var(--ifm-color-danger)')}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+        {mandatory.map(renderCard)}
+      </div>
+
+      {sectionLabel('Optional — but heavily recommended', '#b45309')}
+      <div style={{ background: 'rgba(180, 83, 9, 0.08)', border: '1px solid rgba(180, 83, 9, 0.35)', borderRadius: '8px', padding: '0.75rem 1rem', marginBottom: '0.75rem', fontSize: '0.875rem', lineHeight: 1.5 }}>
+        ⚠️ These packages are not strictly required, but <strong>pay close attention during the upload process</strong> if you skip them — missing packages will produce errors and the upload will fail.
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+        {optional.map(renderCard)}
+      </div>
+
+      {allAdded && (
+        <div style={{ background: 'rgba(46, 125, 50, 0.1)', border: '2px solid #2e7d32', borderRadius: '8px', padding: '1rem', textAlign: 'center', marginTop: '1.25rem' }}>
+          <strong style={{ color: '#2e7d32' }}>✓ All packages added!</strong> Head to the <strong>Projects</strong> tab in VCC, open <strong>Manage Project</strong>, and click <strong>+</strong> next to each one to install them.
+        </div>
+      )}
+    </div>
+  );
+};
+
+export const AddIcon = () => (
+  <span style={{
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '20px',
+    height: '20px',
+    borderRadius: '6px',
+    background: '#3a3a3a',
+    verticalAlign: 'text-bottom',
+    margin: '0 2px',
+    flexShrink: 0,
+  }}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="white" width="24" height="24">
+      <path d="M15 11a1 1 0 1 1 2 0v4h4a1 1 0 1 1 0 2h-4v4a1 1 0 1 1-2 0v-4h-4a1 1 0 1 1 0-2h4v-4Zm15 5a14 14 0 1 1-28 0 14 14 0 0 1 28 0Zm-2 0a12 12 0 1 0-24 0 12 12 0 0 0 24 0Z" stroke="white" strokeWidth="0.8" strokeLinejoin="round"/>
+    </svg>
+  </span>
+);
+
+export const VersionNone = () => (
+  <span style={{
+    display: 'inline-flex', alignItems: 'center', gap: '3px',
+    padding: '1px 6px', borderRadius: '4px',
+    border: '1px solid var(--ifm-color-emphasis-300)',
+    background: 'var(--ifm-background-surface-color)',
+    fontSize: '0.75rem', fontFamily: 'var(--ifm-font-family-monospace)',
+    color: 'var(--ifm-color-emphasis-800)',
+    verticalAlign: 'text-bottom', margin: '0 2px', userSelect: 'none',
+  }}>
+    none
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="10" height="10" style={{ opacity: 0.4, flexShrink: 0 }}>
+      <path d="M15.85 7.65c.2.2.2.5 0 .7l-5.46 5.49a.55.55 0 0 1-.78 0L4.15 8.35a.5.5 0 1 1 .7-.7L10 12.8l5.15-5.16c.2-.2.5-.2.7 0Z"/>
+    </svg>
+  </span>
+);
+
+export const VersionInstalled = () => (
+  <span style={{
+    display: 'inline-flex', alignItems: 'center', gap: '3px',
+    padding: '1px 6px', borderRadius: '4px',
+    border: '1px solid var(--ifm-color-emphasis-300)',
+    background: 'var(--ifm-background-surface-color)',
+    fontSize: '0.75rem', fontFamily: 'var(--ifm-font-family-monospace)',
+    color: 'var(--ifm-color-emphasis-800)',
+    verticalAlign: 'text-bottom', margin: '0 2px', userSelect: 'none',
+  }}>
+    1.2.3
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="10" height="10" style={{ opacity: 0.7, flexShrink: 0 }}>
+      <path d="M15.85 7.65c.2.2.2.5 0 .7l-5.46 5.49a.55.55 0 0 1-.78 0L4.15 8.35a.5.5 0 1 1 .7-.7L10 12.8l5.15-5.16c.2-.2.5-.2.7 0Z"/>
+    </svg>
+  </span>
+);
+
+export const RemoveIcon = () => (
+  <span style={{
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '20px',
+    height: '20px',
+    borderRadius: '6px',
+    background: '#3a3a3a',
+    verticalAlign: 'text-bottom',
+    margin: '0 2px',
+    flexShrink: 0,
+  }}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="#bc2f32" width="24" height="24">
+      <path d="M28 16a12 12 0 1 0-24 0 12 12 0 0 0 24 0Zm2 0a14 14 0 1 1-28 0 14 14 0 0 1 28 0Zm-20-1a1 1 0 1 0 0 2h12a1 1 0 1 0 0-2H10Z" stroke="#bc2f32" strokeWidth="0.8" strokeLinejoin="round"/>
+    </svg>
+  </span>
+);
+
+export const PackageInstallList = () => {
+  const items = [
+    { icon: useBaseUrl('/img/vpm/vrcf.png'),         name: 'VRCFury',                  url: 'vcc://vpm/addRepo?url=https%3A%2F%2Fvcc.vrcfury.com',                                                              note: null },
+    { icon: useBaseUrl('/img/vpm/gogoloco.png'),     name: 'GoGoLoco',                 url: 'vcc://vpm/addRepo?url=https://Spokeek.github.io/goloco/index.json',                                                 note: null },
+    { icon: useBaseUrl('/img/vpm/facetracking.png'), name: "VRCFT - Jerry's Templates", url: 'vcc://vpm/addRepo?url=https://Adjerry91.github.io/VRCFaceTracking-Templates/index.json',                           note: null },
+    {
+      icon: useBaseUrl('/img/vpm/poiyomi.png'),
+      name: 'Poiyomi Toon',
+      url: 'vcc://vpm/addRepo?url=https%3A%2F%2Fpoiyomi.github.io/vpm/index.json',
+      note: "Make sure you pick Toon, not Pro. Pro is the paid version — if you haven't purchased it, installing Pro will not work correctly.",
+    },
+  ];
+
+  return (
+    <ul style={{ listStyle: 'none', padding: '0 0 0 1.5rem', margin: '0.75rem 0' }}>
+      {items.map((item) => (
+        <li key={item.name} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', marginBottom: '0.6rem' }}>
+          <img src={item.icon} alt={item.name} style={{ width: '24px', height: '24px', objectFit: 'contain', flexShrink: 0, marginTop: '2px' }} />
+          <span>
+            <strong><a href={item.url} className="pkg-name-link">{item.name}</a></strong>
+            {item.note && <span style={{ color: 'var(--ifm-color-emphasis-700)', fontSize: '0.875rem' }}> — {item.note}</span>}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
 
 # Installation
 
@@ -20,6 +256,13 @@ Unity is a game engine - the same software used to build VRChat itself. Even tho
 :::
 
 ---
+
+# Trust Rank
+
+:::warning
+Your VRChat account needs to have a [trust rank](https://docs.vrchat.com/docs/vrchat-safety-and-trust-system) of New User or above in order to be able to upload avatars!
+If you just made your VRChat account you will need to play the game or afk in order to increase it from Visitor. Positive interactions with people (such as not getting blocked or getting friend requests) will allow you to gain trust rank faster, alternatively you can pay for VRC+ and gain New User rank immediately!
+:::
 
 ## Step 1 - Download the Creator Companion
 
@@ -52,6 +295,22 @@ Unity is the program that actually lets you upload the avatar. VCC will prompt y
 If you go to the Unity website and download it manually, you'll probably get the wrong version. VRChat is very picky about which version it supports - always let VCC install it for you.
 :::
 
+:::caution
+**Already have Unity installed? You might have the wrong version.**
+
+If you haven't updated VCC or Unity in a while, you may have **Unity 2019** installed instead of the required **Unity 2022**. Using the wrong version will cause your project to break.
+
+To fix this:
+
+1. First, make sure your **Creator Companion** itself is up to date - check for updates and install them if available.
+2. Open the **Creator Companion** and go to **Settings** in the bottom-left corner.
+3. Click the **General** tab.
+4. If you see a pop-up or banner that says something like **"No Recommended Version Yet"** or shows an outdated Unity version, click **Install Now**.
+5. Wait for Unity Hub to finish installing the correct version.
+
+Once Unity 2022 is installed, you're good to continue.
+:::
+
 ---
 
 ## Step 3 - Create a project
@@ -73,51 +332,34 @@ By default, VCC might try to save it inside a hidden system folder (AppData). It
 
 ---
 
-## Step 4 - Add the required packages
+## Step 4 - Add the package sources to VCC
 
-This avatar needs four extra add-ons installed before you can upload it. These add-ons are called **packages**, and they're free. **Skipping even one will cause errors when you try to upload.**
+Before you can install anything, VCC needs to know where to download these packages from. Think of this like adding a store to your app — you're not buying anything yet, just telling VCC where to look.
 
-The four packages are:
+Click **Add to VCC** on each card below. Once you've clicked all four, a message will appear at the bottom telling you what to do next.
 
-| Package | What it does | |
-|---|---|---|
-| **VRCFury** | Automatically sets up complex avatar features so you don't have to do it manually | <a href="vcc://vpm/addRepo?url=https%3A%2F%2Fpoiyomi.github.io/vpm/index.json" className="button button--primary button--sm">Add to VCC</a> |
-| **GoGoLoco** | Adds movement options like sitting and laying down anywhere in VRChat, especially helpful for people without fullbody tracking | <a href="vcc://vpm/addRepo?url=https%3A%2F%2Fpoiyomi.github.io/vpm/index.json" className="button button--primary button--sm">Add to VCC</a> |
-| **Poiyomi Toon** | The shader (visual style) used for the avatar's materials - without it, the avatar will appear pink | <a href="vcc://vpm/addRepo?url=https%3A%2F%2Fpoiyomi.github.io/vpm/index.json" className="button button--primary button--sm">Add to VCC</a> |
-| **ADJerry's Face Tracking Templates** | Enables face tracking support | <a href="vcc://vpm/addRepo?url=https%3A%2F%2Fpoiyomi.github.io/vpm/index.json" className="button button--primary button--sm">Add to VCC</a> |
-
-### How to install them
-
-Each package needs to be added to the Creator Companion before it can be installed. Here's how to do that:
-
-1. Open the **Creator Companion** and click **Settings** in the bottom-left corner.
-2. At the top of the Settings page, click the **Packages** tab.
-3. Click **Add Repository**.
-4. A text box will appear. Copy and paste **one** of the URLs from the list below into it, then click **Add**.
-5. A confirmation box will pop up - click **I Understand, Add Repository**.
-6. Repeat steps 3–5 for each of the four URLs.
-
-**Copy these one at a time:**
-
-```
-https://vcc.vrcfury.com
-```
-```
-https://Spokeek.github.io/goloco/index.json
-```
-```
-https://poiyomi.github.io/vpm/index.json
-```
-```
-https://Adjerry91.github.io/VRCFaceTracking-Templates/index.json
-```
-
-Once all four are added, go back to **Projects**, find your project, and click **Manage Project**. You'll now see the packages available in the list - click the **+** button next to each one to install it.
+<PackageCards />
 
 :::tip
-You only need to add each repository once. After that, it'll be available for any project you create in the future.
+You only need to do this once per package, ever. Once a source is added to VCC, it stays there for all future projects too.
 :::
 
+---
+
+## Step 5 - Install the packages into your project
+
+Now that VCC knows where the packages are, you need to actually install them into your project. This is the step that puts them in your Unity project and makes them usable.
+
+1. Open the **Creator Companion** and click **Projects** in the sidebar on the left.
+2. Find your project in the list and click **Manage Project**.
+3. You'll see a list of packages. Find each of the following and click the <AddIcon /> button next to them:
+
+<PackageInstallList />
+4. Wait for VCC to finish installing each one — it may take a moment.
+
+:::info
+You'll know it worked when the version box changes from <VersionNone /> to a version number (e.g. <VersionInstalled />), and the <AddIcon /> button changes to <RemoveIcon />.
+:::
 ---
 
 ## Next steps
