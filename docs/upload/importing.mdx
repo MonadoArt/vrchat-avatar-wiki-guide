@@ -3,9 +3,11 @@ sidebar_position: 3
 title: Importing the Avatar
 ---
 
+import { SceneIcon, PrefabIcon, PrefabVariantIcon, UnityPackageIcon } from '@site/src/components/UnityIcon';
+
 # Importing the Avatar
 
-To get the avatar into Unity you need to import a **Unity Package** - a `.unitypackage` file that contains the model, textures, animations, and everything else the avatar needs.
+To get the avatar into Unity you need to import a **Unity Package** - a `.unitypackage` <UnityPackageIcon /> file that contains the model, textures, animations, and everything else the avatar needs.
 
 ---
 
@@ -22,7 +24,7 @@ Unity is slow to open. Just let it load and don't click anything while it does.
 
 ## Step 2 - Get the Unity Package
 
-You should have a `.unitypackage` file from your avatar download, named something like `Lucario ReUnited VRC.unitypackage`.
+You should have a `.unitypackage` <UnityPackageIcon /> file from your avatar download, named something like `Lucario ReUnited VRC.unitypackage`.
 
 :::tip
 **Not sure where it is?**
@@ -49,7 +51,7 @@ These two panels are easy to mix up. The **Hierarchy** (left side of the screen)
 1. Right-click the **Assets** folder.
 2. Hover over **Import Package**.
 3. Click **Custom Package...**.
-4. Find your `.unitypackage` file in the file browser and select it.
+4. Find your `.unitypackage` <UnityPackageIcon /> file in the file browser and select it.
 
 :::caution
 Put an image of the right-click menu here
@@ -59,7 +61,7 @@ Put an image of the right-click menu here
 
 **Option B - Drag and drop**
 
-1. Open the folder where your `.unitypackage` file is saved.
+1. Open the folder where your `.unitypackage` <UnityPackageIcon /> file is saved.
 2. Drag the file on top of the **Project window** in Unity.
 3. Hold until the cursor changes, then let go.
 
@@ -67,7 +69,7 @@ Put an image of the right-click menu here
 
 **Option C - Double-click the file**
 
-Double-click the `.unitypackage` file in your file explorer. If Unity is open it will pick it up automatically.
+Double-click the `.unitypackage` <UnityPackageIcon /> file in your file explorer. If Unity is open it will pick it up automatically.
 
 ---
 
@@ -91,10 +93,10 @@ Assets / Monado_Art / Lucario ReUnited VRC /
 
 Inside you'll find:
 
-- **The Scene** - has the Unity logo as its icon. Double-click to open it. If you're new to Unity this is the easiest starting point since the avatar is already set up inside it.
-- **The Prefab** - has a blue cube icon. Drag it from the Project window into the **Hierarchy** to add it to your scene. The included scene has both prefabs placed in it side by side, so opening it first is a good way to see what each one looks like. There are two versions:
-  - **Lucario ReUnited PC Prefab** - the base version, with the Sir Aaron outfit and mohawk hair on by default.
-  - **Lucario ReUnited PC Lite Prefab** - same but with a few things removed to hit a better performance rank. Good pick if you want to be easier on lower-end PCs.
+- **The Scene** <SceneIcon /> - Double-click to open it. If you're new to Unity this is the easiest starting point since the avatar is already set up inside it.
+- **The Prefab** <PrefabIcon /> - Drag it from the Project window into the **Hierarchy** to add it to your scene. The included scene has both prefabs placed in it side by side, so opening it first is a good way to see what each one looks like. There are two versions:
+  - <PrefabVariantIcon /> **Lucario ReUnited PC Prefab** - the base version, with the Sir Aaron outfit and mohawk hair on by default.
+  - <PrefabVariantIcon /> **Lucario ReUnited PC Lite Prefab** - same but with a few things removed to hit a better performance rank. Good pick if you want to be easier on lower-end PCs.
 
 :::caution
 Put an image of the Project window showing the folder and files here
