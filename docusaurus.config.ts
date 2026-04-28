@@ -106,46 +106,22 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Wiki',
           items: [
-            {
-              label: 'Tutorial',
-              to: '/docs/intro',
-            },
+            { label: 'Welcome',      to: '/docs/intro' },
+            { label: 'Installation', to: '/docs/upload/installation' },
+            { label: 'Uploading',    to: '/docs/upload/uploading' },
+            { label: 'Troubleshooting', to: '/docs/troubleshooting/common-errors' },
           ],
         },
         {
-          title: 'Community',
+          title: 'Monado Art',
           items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/MonadoArt',
-            },
+            { label: 'GitHub', href: 'https://github.com/MonadoArt' },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Monado Art. Built with Docusaurus.`,
+      copyright: `© ${new Date().getFullYear()} Monado Art · Built with <a href="https://docusaurus.io" target="_blank" rel="noopener noreferrer">Docusaurus</a>`,
     },
     prism: {
       theme: prismThemes.github,

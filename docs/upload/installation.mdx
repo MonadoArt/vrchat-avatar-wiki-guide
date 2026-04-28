@@ -6,6 +6,7 @@ title: Installation
 import { useState } from 'react';
 import CodeBlock from '@theme/CodeBlock';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import { SectionTab, SectionBanner, GaugeHeader } from '@site/src/components/XenoMarkers';
 
 export const PackageCards = () => {
   const [added, setAdded] = useState({});
@@ -128,9 +129,9 @@ export const PackageCards = () => {
         {mandatory.map(renderCard)}
       </div>
 
-      {sectionLabel('Optional — but heavily recommended', '#b45309')}
+      {sectionLabel('Optional - but heavily recommended', '#b45309')}
       <div style={{ background: 'rgba(180, 83, 9, 0.08)', border: '1px solid rgba(180, 83, 9, 0.35)', borderRadius: '8px', padding: '0.75rem 1rem', marginBottom: '0.75rem', fontSize: '0.875rem', lineHeight: 1.5 }}>
-        ⚠️ These packages are not strictly required, but <strong>pay close attention during the upload process</strong> if you skip them — missing packages will produce errors and the upload will fail.
+        ⚠️ These packages are not strictly required, but <strong>pay close attention during the upload process</strong> if you skip them - missing packages will produce errors and the upload will fail.
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
         {optional.map(renderCard)}
@@ -226,7 +227,7 @@ export const PackageInstallList = () => {
       icon: useBaseUrl('/img/vpm/poiyomi.png'),
       name: 'Poiyomi Toon',
       url: 'vcc://vpm/addRepo?url=https%3A%2F%2Fpoiyomi.github.io/vpm/index.json',
-      note: "Make sure you pick Toon, not Pro. Pro is the paid version — if you haven't purchased it, installing Pro will not work correctly.",
+      note: "Make sure you pick Toon, not Pro. Pro is the paid version - if you haven't purchased it, installing Pro will not work correctly.",
     },
   ];
 
@@ -237,7 +238,7 @@ export const PackageInstallList = () => {
           <img src={item.icon} alt={item.name} style={{ width: '24px', height: '24px', objectFit: 'contain', flexShrink: 0, marginTop: '2px' }} />
           <span>
             <strong><a href={item.url} className="pkg-name-link">{item.name}</a></strong>
-            {item.note && <span style={{ color: 'var(--ifm-color-emphasis-700)', fontSize: '0.875rem' }}> — {item.note}</span>}
+            {item.note && <span style={{ color: 'var(--ifm-color-emphasis-700)', fontSize: '0.875rem' }}> - {item.note}</span>}
           </span>
         </li>
       ))}
@@ -265,6 +266,8 @@ If you just made your VRChat account you will need to play the game or afk in or
 :::
 
 ## Step 1 - Download the Creator Companion
+
+<SectionBanner>Step 1 - Download the Creator Companion</SectionBanner>
 
 The **VRChat Creator Companion** (usually just called VCC) is a free program made by VRChat. Think of it as a control panel that helps you set up everything else. You install it once and it handles the rest.
 
@@ -334,7 +337,7 @@ By default, VCC might try to save it inside a hidden system folder (AppData). It
 
 ## Step 4 - Add the package sources to VCC
 
-Before you can install anything, VCC needs to know where to download these packages from. Think of this like adding a store to your app — you're not buying anything yet, just telling VCC where to look.
+Before you can install anything, VCC needs to know where to find these packages. Think of it like adding a store to your app - you're not buying anything yet, just telling VCC where to look.
 
 Click **Add to VCC** on each card below. Once you've clicked all four, a message will appear at the bottom telling you what to do next.
 
@@ -355,7 +358,7 @@ Now that VCC knows where the packages are, you need to actually install them int
 3. You'll see a list of packages. Find each of the following and click the <AddIcon /> button next to them:
 
 <PackageInstallList />
-4. Wait for VCC to finish installing each one — it may take a moment.
+4. Wait for VCC to finish installing each one - it may take a moment.
 
 :::info
 You'll know it worked when the version box changes from <VersionNone /> to a version number (e.g. <VersionInstalled />), and the <AddIcon /> button changes to <RemoveIcon />.
