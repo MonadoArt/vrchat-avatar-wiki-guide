@@ -12,9 +12,32 @@
   /* Xenoblade Palette */
   --xeno-brown-dark: rgb(49, 41, 41);
   --xeno-beige-light: rgb(181, 177, 171);
+  --xeno-beige-mid: rgb(204, 200, 191);        /* sidebar / ToC alternating row (odd) */
   --xeno-green-monado: #A4F13F;
   --xeno-orange-header: #E68E35;
   --xeno-brown-menu: rgb(72, 59, 34);
+  --xeno-metallic-yellow: #9b947d;
+  --xeno-frame-dark: rgb(20, 14, 6);           /* location card frame & label border */
+  --xeno-scrollbar-track: rgb(45, 42, 38);     /* scrollbar track */
+  --xeno-dark-bg: #1a1712;                     /* dark mode page background */
+
+  /* Rivet */
+  --xeno-rivet-bright: #d4a96a;
+  --xeno-rivet-dark: #3a2008;
+
+  /* Gauge / GaugeHeader gradient stops (shared by h1, gauge header, breadcrumbs) */
+  --xeno-gauge-dark: rgba(14, 11, 7, 0.88);   /* dark fade at both ends */
+  --xeno-gauge-mid: rgba(70, 55, 30, 0.75);   /* warm brown center */
+
+  /* Background decor colors - TEV pipeline approximation */
+  --xeno-bg-tan: rgb(238, 184, 138);           /* html background gradient warm end */
+  --xeno-decor-base: rgb(52, 18, 2);           /* top/bottom decor base */
+  --xeno-decor-gold: rgb(242, 176, 55);        /* top/bottom decor radial highlight */
+  --xeno-decor-mid-base: rgb(218, 131, 39);    /* middle decor base */
+  --xeno-decor-mid-tl: rgb(250, 233, 124);     /* middle decor gradient - top left */
+  --xeno-decor-mid-tr: rgb(161, 26, 3);        /* middle decor gradient - top right */
+  --xeno-decor-mid-bl: rgb(255, 126, 14);      /* middle decor gradient - bottom left */
+  --xeno-decor-mid-br: rgb(251, 225, 125);     /* middle decor gradient - bottom right */
 
   /* Infima Overrides */
   --ifm-color-primary: var(--xeno-green-monado);
@@ -41,7 +64,7 @@ html {
   overflow-x: hidden; /* prevent 100vw pseudo-elements from creating horizontal scroll */
   background-color: var(--xeno-brown-dark);
   background-image:
-    linear-gradient(to top, rgb(238, 184, 138) 0%, rgb(181, 177, 171) 100%),
+    linear-gradient(to top, var(--xeno-bg-tan) 0%, var(--xeno-beige-light) 100%),
     url('../../static/img/bg_texture.png');
   background-blend-mode: multiply, screen;
   background-attachment: fixed;
@@ -81,13 +104,13 @@ body {
 
 .menu::-webkit-scrollbar-track,
 .table-of-contents::-webkit-scrollbar-track {
-  background: rgb(45, 42, 38);
+  background: var(--xeno-scrollbar-track);
 }
 
 .menu::-webkit-scrollbar-thumb,
 .table-of-contents::-webkit-scrollbar-thumb {
   background: var(--xeno-orange-header);
-  border: 0.25rem solid rgb(45, 42, 38);
+  border: 0.25rem solid var(--xeno-scrollbar-track);
   border-radius: 0.625rem;
 }
 
@@ -111,8 +134,8 @@ html::after {
 
 /* Combined Top & Bottom Decors */
 html::before {
-  background-color: rgb(52, 18, 2);
-  background-image: radial-gradient(ellipse at top right, rgb(242, 176, 55) 0%, rgb(255, 255, 255) 65%);
+  background-color: var(--xeno-decor-base);
+  background-image: radial-gradient(ellipse at top right, var(--xeno-decor-gold) 0%, rgb(255, 255, 255) 65%);
   background-blend-mode: multiply;
 
   /* Multiple masks for Top and Bottom */
@@ -125,12 +148,12 @@ html::before {
 
 /* Middle Decor */
 html::after {
-  background-color: rgb(218, 131, 39);
+  background-color: var(--xeno-decor-mid-base);
   background-image:
-    radial-gradient(ellipse at top left,     rgb(250, 233, 124), transparent 65%),
-    radial-gradient(ellipse at top right,    rgb(161, 26,  3),   transparent 65%),
-    radial-gradient(ellipse at bottom left,  rgb(255, 126, 14),  transparent 65%),
-    radial-gradient(ellipse at bottom right, rgb(251, 225, 125), transparent 65%);
+    radial-gradient(ellipse at top left,     var(--xeno-decor-mid-tl), transparent 65%),
+    radial-gradient(ellipse at top right,    var(--xeno-decor-mid-tr), transparent 65%),
+    radial-gradient(ellipse at bottom left,  var(--xeno-decor-mid-bl), transparent 65%),
+    radial-gradient(ellipse at bottom right, var(--xeno-decor-mid-br), transparent 65%);
   mask-image: url('/img/decor_middle.png');
   -webkit-mask-image: url('/img/decor_middle.png');
   mask-repeat: no-repeat;
@@ -216,13 +239,13 @@ h4.section-header {
   width: 100%;
   background: linear-gradient(to right,
     transparent 0%,
-    rgba(14, 11, 7, 0.88) 16%,
-    rgba(70, 55, 30, 0.75) 50%,
-    rgba(14, 11, 7, 0.88) 84%,
+    var(--xeno-gauge-dark) 16%,
+    var(--xeno-gauge-mid) 50%,
+    var(--xeno-gauge-dark) 84%,
     transparent 100%
   );
   color: var(--xeno-beige-light) !important;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
   text-align: center;
   padding: 0.3em 3em;
@@ -347,7 +370,7 @@ h4.section-header {
   width: 100%;
   background-color: var(--xeno-beige-light);
   color: var(--xeno-brown-menu) !important;
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 700;
   text-align: center;
   padding: 0.35em 3em;
@@ -375,9 +398,9 @@ h4.section-header {
   margin: 1.25em 0 0.3em 0;
   background: linear-gradient(to right,
     transparent 0%,
-    rgba(14, 11, 7, 0.88) 16%,
-    rgba(70, 55, 30, 0.75) 50%,
-    rgba(14, 11, 7, 0.88) 84%,
+    var(--xeno-gauge-dark) 16%,
+    var(--xeno-gauge-mid) 50%,
+    var(--xeno-gauge-dark) 84%,
     transparent 100%
   );
   color: var(--xeno-beige-light);
@@ -426,7 +449,126 @@ h4.section-header {
   font-size: 0.72rem;
 }
 
-/* ── /XenoMarkers ───────────────────────────────────────────────────────── */
+/* ── Location Card (XB1 Colony/Area card style) ────────────────────────── */
+
+/* Outer wrapper - provides top margin so the label capsule has room to float above */
+.xeno-location-card {
+  position: relative;
+  display: inline-block;
+  margin: 1.4em 0 0.75em 0;
+}
+
+/* Layer 2: the dark frame.
+   overflow: visible so rivets poke out.
+   padding creates the gap between border and image. */
+.xeno-location-card__frame {
+  position: relative;
+  border: 3px solid var(--xeno-metallic-yellow);
+  border-radius: 8px;
+  overflow: visible;
+  background: var(--xeno-frame-dark); /* fills the padding gap */
+  padding: 4px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Layer 1: the image, slightly inset inside the frame */
+.xeno-location-card__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  vertical-align: bottom; /* eliminates inline-block gap below image */
+}
+
+/* Rivets - square with 2 sharp corners (outer diagonal + inner diagonal)
+   and 2 rounded corners (along the frame edges).
+   Each corner rivet is oriented so sharp points aim outward and inward,
+   rounded corners face along the frame sides.
+
+   CSS border-radius order: top-left, top-right, bottom-right, bottom-left
+
+   Pattern A (TL and BR rivets): outer=TL or BR (sharp), inner=BR or TL (sharp)
+   Pattern B (TR and BL rivets): outer=TR or BL (sharp), inner=BL or TR (sharp) */
+
+.xeno-location-card__rivet {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  /* Layer: dark square housing */
+  background: var(--xeno-brown-dark);
+  box-shadow: 0 0 0 2px var(--xeno-metallic-yellow), 0 2px 4px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+/* Layer: metal rivet head, smaller and offset toward the inner corner of each housing */
+.xeno-location-card__rivet::before {
+  content: '';
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--xeno-rivet-bright), var(--xeno-rivet-dark));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Inner corner for TL = bottom-right */
+.xeno-location-card__rivet--tl::before { top: 60%; left: 60%; transform: translate(-50%, -50%); }
+/* Inner corner for TR = bottom-left */
+.xeno-location-card__rivet--tr::before { top: 60%; left: 40%; transform: translate(-50%, -50%); }
+/* Inner corner for BL = top-right */
+.xeno-location-card__rivet--bl::before { top: 40%; left: 60%; transform: translate(-50%, -50%); }
+/* Inner corner for BR = top-left */
+.xeno-location-card__rivet--br::before { top: 40%; left: 40%; transform: translate(-50%, -50%); }
+
+/* Moved inward to -3px - outer edge of rivet sits 3px outside the frame.
+   The label width is calculated to match this outer edge exactly. */
+
+/* TL: rounded on diagonal axis (outer=TL, inner=BR), sharp along frame edges (TR, BL) */
+.xeno-location-card__rivet--tl {
+  top: -3px; left: -3px;
+  border-radius: 50% 0 50% 0;
+}
+
+/* TR: rounded on diagonal axis (outer=TR, inner=BL), sharp along frame edges (TL, BR) */
+.xeno-location-card__rivet--tr {
+  top: -3px; right: -3px;
+  border-radius: 0 50% 0 50%;
+}
+
+/* BL: rounded on diagonal axis (outer=BL, inner=TR), sharp along frame edges (TL, BR) */
+.xeno-location-card__rivet--bl {
+  bottom: -3px; left: -3px;
+  border-radius: 0 50% 0 50%;
+}
+
+/* BR: rounded on diagonal axis (outer=BR, inner=TL), sharp along frame edges (TR, BL) */
+.xeno-location-card__rivet--br {
+  bottom: -3px; right: -3px;
+  border-radius: 50% 0 50% 0;
+}
+
+/* Layer 3: pill capsule label, centered on the top border, sized to content */
+.xeno-location-card__label {
+  position: absolute;
+  top: -1.2em;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: var(--xeno-beige-light);
+  color: var(--xeno-brown-menu);
+  border: 2.5px solid var(--xeno-frame-dark);
+  border-radius: 999px;
+  padding: 0.2em 1.5em;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  z-index: 3;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* ── /Location Card ─────────────────────────────────────────────────────── */
 
 .container {
   background: var(--xeno-brown-dark) !important;
@@ -545,8 +687,8 @@ h4.section-header {
   box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.2);
 }
 
-.menu__list-item .menu__list .menu__list-item:nth-child(odd) { background-color: rgb(204, 200, 191) !important; }
-.menu__list-item .menu__list .menu__list-item:nth-child(even) { background-color: rgb(181, 177, 171) !important; }
+.menu__list-item .menu__list .menu__list-item:nth-child(odd) { background-color: var(--xeno-beige-mid) !important; }
+.menu__list-item .menu__list .menu__list-item:nth-child(even) { background-color: var(--xeno-beige-light) !important; }
 
 .menu__list-item .menu__list .menu__list-item:first-child {
   border-top-left-radius: 0.4375rem !important;
@@ -671,8 +813,8 @@ h4.section-header {
   width: 100%;
 }
 
-.table-of-contents li:nth-child(odd) { background-color: rgb(204, 200, 191) !important; }
-.table-of-contents li:nth-child(even) { background-color: rgb(181, 177, 171) !important; }
+.table-of-contents li:nth-child(odd) { background-color: var(--xeno-beige-mid) !important; }
+.table-of-contents li:nth-child(even) { background-color: var(--xeno-beige-light) !important; }
 
 .table-of-contents li:first-child {
   border-top-left-radius: 0.5rem;
@@ -763,9 +905,9 @@ h4.section-header {
   padding: 0.3em 3em !important;
   background: linear-gradient(to right,
     transparent 0%,
-    rgba(14, 11, 7, 0.88) 16%,
-    rgba(70, 55, 30, 0.75) 50%,
-    rgba(14, 11, 7, 0.88) 84%,
+    var(--xeno-gauge-dark) 16%,
+    var(--xeno-gauge-mid) 50%,
+    var(--xeno-gauge-dark) 84%,
     transparent 100%
   );
   font-size: 0.95rem;
@@ -834,7 +976,7 @@ h4.section-header {
 
 [data-theme='dark'] {
   --ifm-color-primary: var(--xeno-green-monado);
-  --ifm-background-color: #1a1712;
+  --ifm-background-color: var(--xeno-dark-bg);
   --ifm-navbar-background-color: rgba(20, 18, 15, 0.95);
   --docusaurus-highlighted-code-line-bg: rgba(164, 241, 63, 0.1);
 }
@@ -928,7 +1070,7 @@ h4.section-header {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #d4a96a, #3a2008);
+  background: radial-gradient(circle at 35% 35%, var(--xeno-rivet-bright), var(--xeno-rivet-dark));
   box-shadow: 0 0 0 2px var(--xeno-orange-header);
   z-index: 11;
 }

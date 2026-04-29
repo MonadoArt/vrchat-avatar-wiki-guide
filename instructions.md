@@ -71,6 +71,7 @@ All colors are defined once in `src/css/custom.css` under `:root`. Never hardcod
 | `--xeno-green-monado` | `#A4F13F` | Primary color, active states, links |
 | `--xeno-orange-header` | `#E68E35` | Heading accents, borders, active indicators |
 | `--xeno-brown-menu` | `rgb(72, 59, 34)` | Text on light backgrounds |
+| `--xeno-metallic-yellow` | `#9b947d` | LocationCard frame border and rivet outline |
 
 Infima overrides (also in `:root` - do not duplicate):
 - `--ifm-color-primary` → `--xeno-green-monado`
