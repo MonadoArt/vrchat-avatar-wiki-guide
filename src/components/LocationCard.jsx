@@ -17,8 +17,10 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 export const LocationCard = ({ src, title, alt, style }) => {
   const imgSrc = useBaseUrl(src);
+  // When no title is provided, remove the top margin reserved for the label capsule
+  const cardStyle = title ? style : { marginTop: 0, ...style };
   return (
-    <div className="xeno-location-card" style={style}>
+    <div className="xeno-location-card" style={cardStyle}>
       <div className="xeno-location-card__frame">
         <img
           src={imgSrc}
