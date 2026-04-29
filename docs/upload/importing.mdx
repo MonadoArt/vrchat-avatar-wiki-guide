@@ -4,6 +4,9 @@ title: Importing the Avatar
 ---
 
 import { SceneIcon, PrefabIcon, PrefabVariantIcon, UnityPackageIcon } from '@site/src/components/UnityIcon';
+import { LocationCard } from '@site/src/components/LocationCard';
+import { PlaceholderCard } from '@site/src/components/PlaceholderCard';
+import { GaugeHeader, SubSectionBanner } from '@site/src/components/XenoMarkers';
 
 # Importing the Avatar
 
@@ -17,14 +20,27 @@ To get the avatar into Unity you need to import a **Unity Package** - a `.unityp
 2. Click **Open Project** next to your project. Unity will launch, which can take a minute or two.
 
 :::info
-Unity is slow to open. Just let it load and don't click anything while it does.
+Unity is slow to open. Just let it load.
 :::
 
 ---
 
 ## Step 2 - Get the Unity Package
 
+
+
+<div style={{display:'flex', flexWrap:'wrap-reverse', gap:'2rem', alignItems:'flex-end', paddingTop:'1.5em'}}>
+<div style={{flex:1, minWidth:'280px'}}>
+
 You should have a `.unitypackage` <UnityPackageIcon /> file from your avatar download, named something like `Lucario ReUnited VRC.unitypackage`.
+
+</div>
+<div style={{flexShrink:0, width:'220px', maxWidth:'100%'}}>
+
+<PlaceholderCard title="Right-click Menu" text="Put a screenshot of the right-click menu here" style={{marginTop:0}} />
+
+</div>
+</div>
 
 :::tip
 **Not sure where it is?**
@@ -38,7 +54,11 @@ Check your Downloads folder, or wherever you saved it after downloading.
 
 There are three ways to do this - pick whichever works for you:
 
-**Option A - Right-click the Assets folder**
+:::Danger
+Have the tutorial videos play when the user hovers over the option
+:::
+### Option A - Right-click the Assets folder
+<SubSectionBanner>Option A - Right-click the Assets folder</SubSectionBanner>
 
 The **Project window** is the panel at the bottom of Unity that shows all your project files. Inside it you'll see a folder called **Assets** in the left sidebar.
 
@@ -48,28 +68,60 @@ The **Project window** is the panel at the bottom of Unity that shows all your p
 These two panels are easy to mix up. The **Hierarchy** (left side of the screen) shows the objects in your current scene. The **Project window** (bottom) shows your files on disk. You want the Project window for this step.
 :::
 
+<div style={{display:'flex', flexWrap:'wrap-reverse', gap:'2rem', alignItems:'flex-end', paddingTop:'1.5em'}}>
+<div style={{flex:1, minWidth:'280px'}}>
+
 1. Right-click the **Assets** folder.
 2. Hover over **Import Package**.
 3. Click **Custom Package...**.
 4. Find your `.unitypackage` <UnityPackageIcon /> file in the file browser and select it.
 
-:::caution
-Put an image of the right-click menu here
-:::
+</div>
+<div style={{flexShrink:0, width:'220px', maxWidth:'100%'}}>
+
+<PlaceholderCard title="Right-click Menu" text="Put a screenshot of the right-click menu here" style={{marginTop:0}} />
+
+</div>
+</div>
 
 ---
 
-**Option B - Drag and drop**
+### Option B - Drag and drop
+<SubSectionBanner>Option B - Drag and drop</SubSectionBanner>
+
+<div style={{display:'flex', flexWrap:'wrap-reverse', gap:'2rem', alignItems:'flex-end', paddingTop:'1.5em'}}>
+<div style={{flex:1, minWidth:'280px'}}>
 
 1. Open the folder where your `.unitypackage` <UnityPackageIcon /> file is saved.
 2. Drag the file on top of the **Project window** in Unity.
 3. Hold until the cursor changes, then let go.
 
+</div>
+<div style={{flexShrink:0, width:'220px', maxWidth:'100%'}}>
+
+<PlaceholderCard title="Drag and Drop" text="Put a screenshot of the drag and drop here" style={{marginTop:0}} />
+
+</div>
+</div>
+
 ---
 
-**Option C - Double-click the file**
+### Option C - Double-click the file
+<SubSectionBanner>Option C - Double-click the file</SubSectionBanner>
 
-Double-click the `.unitypackage` <UnityPackageIcon /> file in your file explorer. If Unity is open it will pick it up automatically.
+<div style={{display:'flex', flexWrap:'wrap-reverse', gap:'2rem', alignItems:'flex-end', paddingTop:'1.5em'}}>
+<div style={{flex:1, minWidth:'280px'}}>
+
+1. Find the the `.unitypackage` <UnityPackageIcon /> file in your file explorer.
+2. Double-click the `.unitypackage` <UnityPackageIcon />. If Unity is open it will pick it up automatically.
+
+</div>
+<div style={{flexShrink:0, width:'220px', maxWidth:'100%'}}>
+
+<PlaceholderCard title="Double-click Import" text="Put a screenshot of the double-click import here" style={{marginTop:0}} />
+
+</div>
+</div>
 
 ---
 
@@ -112,6 +164,8 @@ Put an image of the Project window showing the folder and files here
 
 ## Before you start customizing
 
+:::warning
 I know, you're probably very excited to start customizing the avatar right now! - but hold off for just a bit! Do a clean upload first to make sure everything is working correctly before you start making changes. It's much easier to spot problems on a fresh import than after you've already modified things.
 
 Head to [Uploading](./uploading) to get it into VRChat first.
+:::

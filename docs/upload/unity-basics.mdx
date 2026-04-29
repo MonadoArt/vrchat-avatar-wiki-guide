@@ -3,6 +3,8 @@ sidebar_position: 2
 title: Unity Basics
 ---
 
+import { LocationCard } from '@site/src/components/LocationCard';
+
 # Unity Basics
 
 :::tip
@@ -19,10 +21,7 @@ When you open your project for the first time, Unity can look pretty overwhelmin
 
 When Unity first opens, you'll see something like this:
 
-:::caution 
-TODO
-IMAGE: Full screenshot of the Unity editor with each panel labeled
-:::
+<LocationCard src="/img/unity-default-scene.png" title="Unity Editor Layout" />
 
 Each section is its own panel, and you can resize or rearrange them. Don't worry if yours looks slightly different - Unity lets you move things around.
 
@@ -32,9 +31,7 @@ Each section is its own panel, and you can resize or rearrange them. Don't worry
 
 **Where:** Top-left panel.
 
-:::caution TODO
-IMAGE: Screenshot of the Hierarchy panel with an avatar expanded to show its children
-:::
+<LocationCard src="/img/unity-default-scene.png" title="Hierarchy Panel" />
 
 The Hierarchy is a list of everything that exists in your current scene. Think of it like a folder tree - objects can be nested inside other objects.
 
@@ -42,9 +39,7 @@ For avatar work, this is where you'll find your avatar. It will usually appear a
 
 When you click something in the Hierarchy, it gets selected and its details show up in the Inspector on the right.
 
-:::caution TODO
-GIF: Clicking an object in the Hierarchy and the Inspector updating on the right
-:::
+<LocationCard src="/img/unity-default-scene.png" title="Hierarchy - Inspector Link" />
 
 ---
 
@@ -52,9 +47,7 @@ GIF: Clicking an object in the Hierarchy and the Inspector updating on the right
 
 **Where:** Right-side panel.
 
-:::caution TODO
-IMAGE: Screenshot of the Inspector showing an avatar's components (VRC Avatar Descriptor, etc.)
-:::
+<LocationCard src="/img/unity-default-scene.png" title="Inspector Panel" />
 
 The Inspector shows you the details of whatever you have selected. If you click on your avatar in the Hierarchy, the Inspector will show all the components attached to it - things like the Avatar Descriptor (which tells VRChat this is an avatar) and any other settings.
 
@@ -70,9 +63,7 @@ If you click somewhere and the Inspector goes blank or shows something unexpecte
 
 **Where:** Large panel in the center.
 
-:::caution TODO
-IMAGE: Screenshot of the Scene View with an avatar visible
-:::
+<LocationCard src="/img/unity-default-scene.png" title="Scene View" />
 
 The Scene View is a 3D viewport where you can see and move around your avatar visually. You can think of it like a free camera flying around your scene.
 
@@ -88,9 +79,7 @@ The Scene View is a 3D viewport where you can see and move around your avatar vi
 Mention scroll speed and shift to speed up flying
 :::
 
-:::caution TODO
-GIF: Navigating around the Scene View using the controls above
-:::
+<LocationCard src="/img/unity-default-scene.png" title="Scene View Navigation" />
 
 For uploading, you don't really need to move things around in the Scene View - just knowing how to navigate it is enough.
 
@@ -100,9 +89,7 @@ For uploading, you don't really need to move things around in the Scene View - j
 
 **Where:** Usually tabbed behind the Scene View (click the "Game" tab to switch).
 
-:::caution TODO
-IMAGE: Screenshot of the Game tab selected, showing the in-scene camera view
-:::
+<LocationCard src="/img/unity-default-scene.png" title="Game View" />
 
 The Game View shows what the camera inside the scene sees - basically a preview of what things would look like in-game. For avatar uploading you won't use this much.
 
@@ -112,17 +99,13 @@ The Game View shows what the camera inside the scene sees - basically a preview 
 
 **Where:** Bottom panel.
 
-:::caution TODO
-IMAGE: Screenshot of the Project window showing a typical avatar project's folder structure
-:::
+<LocationCard src="/img/unity-default-scene.png" title="Project Window" />
 
 The Project window is your file browser. It shows all the files that make up your project - textures, materials, scripts, prefabs, and so on. Think of it like File Explorer, but only showing the contents of your project folder.
 
 When you import your avatar files, they'll appear here. You can double-click folders to open them, and drag files from the Project window into the Hierarchy to add them to your scene.
 
-:::caution TODO
-GIF: Dragging a prefab from the Project window into the Hierarchy
-:::
+<LocationCard src="/img/unity-default-scene.png" title="Project - Hierarchy Drag" />
 
 ---
 
@@ -130,9 +113,7 @@ GIF: Dragging a prefab from the Project window into the Hierarchy
 
 **Where:** Usually tabbed next to the Project window (click "Console" to switch).
 
-:::caution TODO
-IMAGE: Screenshot of the Console showing a mix of white, yellow, and red messages
-:::
+<LocationCard src="/img/unity-default-scene.png" title="Console" />
 
 The Console shows messages from Unity - information, warnings, and errors.
 
@@ -152,9 +133,7 @@ If you see a wall of red errors when you first open your project, don't panic. M
 
 **Where:** Very top of the window.
 
-:::caution TODO
-IMAGE: Screenshot of the top menu bar with "VRChat SDK" highlighted
-:::
+<LocationCard src="/img/unity-default-scene.png" title="Toolbar" />
 
 The row of menus across the top (File, Edit, Assets, GameObject, Component, VRChat SDK, Window, Help) works like any other program. The one you'll use most is **VRChat SDK**, which is where you open the upload panel.
 
