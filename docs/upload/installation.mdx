@@ -6,7 +6,7 @@ title: Installation
 import { useState } from 'react';
 import CodeBlock from '@theme/CodeBlock';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import { SectionTab, SectionBanner, GaugeHeader } from '@site/src/components/XenoMarkers';
+import { GaugeHeader, SubSectionBanner } from '@site/src/components/XenoMarkers';
 
 export const PackageCards = () => {
   const [added, setAdded] = useState({});
@@ -258,7 +258,7 @@ Unity is a game engine - the same software used to build VRChat itself. Even tho
 
 ---
 
-# Trust Rank
+<SubSectionBanner>Trust Rank</SubSectionBanner>
 
 :::warning
 Your VRChat account needs to have a [trust rank](https://docs.vrchat.com/docs/vrchat-safety-and-trust-system) of New User or above in order to be able to upload avatars!
@@ -266,8 +266,6 @@ If you just made your VRChat account you will need to play the game or afk in or
 :::
 
 ## Step 1 - Download the Creator Companion
-
-<SectionBanner>Step 1 - Download the Creator Companion</SectionBanner>
 
 The **VRChat Creator Companion** (usually just called VCC) is a free program made by VRChat. Think of it as a control panel that helps you set up everything else. You install it once and it handles the rest.
 
@@ -337,7 +335,7 @@ By default, VCC might try to save it inside a hidden system folder (AppData). It
 
 ## Step 4 - Add the package sources to VCC
 
-Before you can install anything, VCC needs to know where to find these packages. Think of it like adding a store to your app - you're not buying anything yet, just telling VCC where to look.
+Before you can install anything, VCC needs to know where to find these packages.
 
 Click **Add to VCC** on each card below. Once you've clicked all four, a message will appear at the bottom telling you what to do next.
 

@@ -5,7 +5,13 @@
  *   → small dark compact label, like the gray "Party Gauge" tab above a panel
  *
  * <SectionBanner>Chain attacks</SectionBanner>
- *   → full-width beige banner with bold text, like the "Chain attacks" divider bar
+ *   → full-width centered beige hexagon ribbon, like the "Chain attacks" divider bar
+ *
+ * <SubSectionBanner>Trust Rank</SubSectionBanner>
+ *   → left-aligned beige banner that tapers on the right only, like the h1 title bar
+ *
+ * <GaugeHeader value="3/3">Party Gauge</GaugeHeader>
+ *   → dark bar fading to transparent on both ends, gradient lines top and bottom
  */
 
 // size prop sets font-size; all internal dimensions use `em` so both
@@ -20,6 +26,14 @@ export const SectionTab = ({ children, size }) => (
 
 export const SectionBanner = ({ children, size }) => (
   <div className="xeno-section-banner" style={size ? { fontSize: size } : undefined}>
+    {children}
+  </div>
+);
+
+// Left-aligned beige banner, tapers on the right only. Same look as the h1 title bar.
+// Use for named sub-sections that need a visual break but aren't page-level headings.
+export const SubSectionBanner = ({ children, size }) => (
+  <div className="xeno-subsection-banner" style={size ? { fontSize: size } : undefined}>
     {children}
   </div>
 );

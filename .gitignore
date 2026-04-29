@@ -21,6 +21,7 @@ yarn-error.log*
 
 # Claude Code
 .claude
+.instructions.md
 
 # Local dev docs
 /dev_docs/
