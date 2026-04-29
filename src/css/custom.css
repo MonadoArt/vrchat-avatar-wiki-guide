@@ -4,6 +4,27 @@
  * work well for content-centric websites.
  */
 
+/*
+ * LIGHT MODE - needs work before enabling
+ *
+ * The site is locked to dark mode (docusaurus.config.ts: disableSwitch: true,
+ * respectPrefersColorScheme: false). Before enabling light mode, this block
+ * needs to override every xeno palette variable and every hardcoded dark
+ * background/color rule below so the XB1 theme reads correctly on a light
+ * background. Until then, leave this commented out.
+ *
+ * [data-theme='light'] {
+ *   --xeno-brown-dark: ...;
+ *   --xeno-beige-light: ...;
+ *   --xeno-frame-dark: ...;
+ *   --xeno-gauge-dark: ...;
+ *   --xeno-gauge-mid: ...;
+ *   --ifm-background-color: ...;
+ *   --ifm-font-color-base: ...;
+ *   ... etc
+ * }
+ */
+
 /* ==========================================================================
    1. Variables & Global Resets
    ========================================================================== */
@@ -974,12 +995,12 @@ h4.section-header {
    7. Theme Overrides (Dark Mode)
    ========================================================================== */
 
-[data-theme='dark'] {
+/* [data-theme='dark'] {
   --ifm-color-primary: var(--xeno-green-monado);
   --ifm-background-color: var(--xeno-dark-bg);
   --ifm-navbar-background-color: rgba(20, 18, 15, 0.95);
   --docusaurus-highlighted-code-line-bg: rgba(164, 241, 63, 0.1);
-}
+} */
 
 /* ── Footer: XB1 button-prompt bar ── */
 .footer,

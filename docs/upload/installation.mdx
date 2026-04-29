@@ -8,9 +8,10 @@ import CodeBlock from '@theme/CodeBlock';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { GaugeHeader, SubSectionBanner } from '@site/src/components/XenoMarkers';
 import { LocationCard } from '@site/src/components/LocationCard';
+import { useVccAdded } from '@site/src/components/useVccAdded';
 
 export const PackageCards = () => {
-  const [added, setAdded] = useState({});
+  const { added, handleClick } = useVccAdded();
 
   const iconVrcfury     = useBaseUrl('/img/vpm/vrcf.png');
   const iconPoiyomi     = useBaseUrl('/img/vpm/poiyomi.png');
@@ -93,7 +94,7 @@ export const PackageCards = () => {
         <div style={{ marginTop: 'auto' }}>
           <a
             href={pkg.url}
-            onClick={() => setAdded(prev => ({ ...prev, [pkg.id]: true }))}
+            onClick={() => handleClick(pkg.id)}
             className={`button button--${isAdded ? 'success' : 'secondary'} pkg-add-btn`}
             style={{
               display: 'block',
@@ -125,17 +126,59 @@ export const PackageCards = () => {
 
   return (
     <div>
-      {sectionLabel('Mandatory Packages', 'var(--ifm-color-danger)')}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
-        {mandatory.map(renderCard)}
+      <div style={{ position: 'relative', marginTop: '2em', marginBottom: '1.5rem' }}>
+        <div style={{
+          position: 'absolute', top: '-1em', left: '50%', transform: 'translateX(-50%)',
+          whiteSpace: 'nowrap', background: '#7a1010', color: '#ffd6d6',
+          border: '2.5px solid #c0392b', borderRadius: '999px',
+          padding: '0.2em 1.5em', fontSize: '1.05rem', fontWeight: 700,
+          letterSpacing: '0.03em', zIndex: 3, boxShadow: '0 2px 8px rgba(180,0,0,0.5)',
+        }}>
+          Mandatory Dependencies
+        </div>
+        <div style={{
+          position: 'relative', border: '3px solid #c0392b', borderRadius: '8px',
+          padding: '1.25rem', paddingTop: '1.75rem',
+          background: 'rgba(120,10,10,0.25)',
+          boxShadow: 'inset 0 0 0 1px rgba(255,100,100,0.1), 0 4px 16px rgba(120,0,0,0.4)',
+        }}>
+          <div className="xeno-location-card__rivet xeno-location-card__rivet--tl" />
+          <div className="xeno-location-card__rivet xeno-location-card__rivet--tr" />
+          <div className="xeno-location-card__rivet xeno-location-card__rivet--bl" />
+          <div className="xeno-location-card__rivet xeno-location-card__rivet--br" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+            {mandatory.map(renderCard)}
+          </div>
+        </div>
       </div>
 
-      {sectionLabel('Optional - but heavily recommended', '#b45309')}
-      <div style={{ background: 'rgba(180, 83, 9, 0.08)', border: '1px solid rgba(180, 83, 9, 0.35)', borderRadius: '8px', padding: '0.75rem 1rem', marginBottom: '0.75rem', fontSize: '0.875rem', lineHeight: 1.5 }}>
-        ⚠️ These packages are not strictly required, but <strong>pay close attention during the upload process</strong> if you skip them - missing packages will produce errors and the upload will fail.
-      </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
-        {optional.map(renderCard)}
+      <div style={{ position: 'relative', marginTop: '2em', marginBottom: '1.5rem' }}>
+        <div style={{
+          position: 'absolute', top: '-1em', left: '50%', transform: 'translateX(-50%)',
+          whiteSpace: 'nowrap', background: '#6b3a00', color: '#fde68a',
+          border: '2.5px solid #d97706', borderRadius: '999px',
+          padding: '0.2em 1.5em', fontSize: '1.05rem', fontWeight: 700,
+          letterSpacing: '0.03em', zIndex: 3, boxShadow: '0 2px 8px rgba(180,100,0,0.5)',
+        }}>
+          Optional - but heavily recommended
+        </div>
+        <div style={{
+          position: 'relative', border: '3px solid #d97706', borderRadius: '8px',
+          padding: '1.25rem', paddingTop: '1.75rem',
+          background: 'rgba(100,50,0,0.25)',
+          boxShadow: 'inset 0 0 0 1px rgba(255,180,50,0.08), 0 4px 16px rgba(120,60,0,0.4)',
+        }}>
+          <div className="xeno-location-card__rivet xeno-location-card__rivet--tl" />
+          <div className="xeno-location-card__rivet xeno-location-card__rivet--tr" />
+          <div className="xeno-location-card__rivet xeno-location-card__rivet--bl" />
+          <div className="xeno-location-card__rivet xeno-location-card__rivet--br" />
+          <div style={{ background: 'rgba(180, 83, 9, 0.15)', border: '1px solid rgba(217,119,6,0.4)', borderRadius: '8px', padding: '0.75rem 1rem', marginBottom: '0.75rem', fontSize: '0.875rem', lineHeight: 1.5 }}>
+            ⚠️ These packages are not strictly required, but <strong>pay close attention during the upload process</strong> if you skip them - missing packages will produce errors and the upload will fail.
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+            {optional.map(renderCard)}
+          </div>
+        </div>
       </div>
 
       {allAdded && (
@@ -250,16 +293,11 @@ export const PackageInstallList = () => {
 
 # Installation
 
-To get an avatar into VRChat, you'll need to install a few things first. This page walks you through all of it step by step - no prior experience needed.
-
-:::info 
-What even is Unity?
-Unity is a game engine - the same software used to build VRChat itself. Even though you're not making a game, it's the tool VRChat uses to let you upload avatars. You don't need to know how to use it beyond the basics covered in this guide.
-:::
+#### To get an avatar into VRChat, you'll need to install a few things first. This page walks you through all of it step by step - no prior experience needed.
 
 ---
 
-## VRChat Trust Rank Requirement
+## Step 0 - VRChat Trust Rank Requirement
 
 <div style={{display:'flex', flexWrap:'wrap-reverse', gap:'2rem', alignItems:'flex-start', paddingTop:'1.5em'}}>
 <div style={{flex:1, minWidth:'280px'}}>
@@ -349,11 +387,11 @@ By default, VCC might try to save it inside a hidden system folder (AppData). It
 
 Before you can install anything, VCC needs to know where to find these packages.
 
-Click **Add to VCC** on each card below. Once you've clicked all four, a message will appear at the bottom telling you what to do next.
+Click <span className="button button--secondary pkg-add-btn" style={{background:'var(--xeno-beige-light)',color:'var(--xeno-brown-menu)',borderColor:'var(--xeno-brown-menu)',pointerEvents:'none',padding:'0.15em 0.75em',fontSize:'0.85em',verticalAlign:'middle'}}>Add to VCC</span> on each card below. Once you've clicked all four, a message will appear at the bottom telling you what to do next.
 
 <PackageCards />
 
-:::tip
+:::info
 You only need to do this once per package, ever. Once a source is added to VCC, it stays there for all future projects too.
 :::
 
