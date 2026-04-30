@@ -991,6 +991,15 @@ h4.section-header {
   font-weight: bold;
 }
 
+@media (max-width: 996px) {
+  .breadcrumbs {
+    padding: 0.4em 1.25rem !important;
+    font-size: 0.82rem;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+}
+
 /* ==========================================================================
    7. Theme Overrides (Dark Mode)
    ========================================================================== */
