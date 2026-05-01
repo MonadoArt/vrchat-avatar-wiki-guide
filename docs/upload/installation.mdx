@@ -1,11 +1,12 @@
 ---
 sidebar_position: 1
-title: Installation
+title: 1. Installing needed things
 ---
 
 import { useState } from 'react';
 import CodeBlock from '@theme/CodeBlock';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import IconExternalLink from '@theme/Icon/ExternalLink';
 import { GaugeHeader, SubSectionBanner } from '@site/src/components/XenoMarkers';
 import { LocationCard } from '@site/src/components/LocationCard';
 import { useVccAdded } from '@site/src/components/useVccAdded';
@@ -107,7 +108,7 @@ export const PackageCards = () => {
               }),
             }}
           >
-            {isAdded ? '✓ Added to VCC' : 'Add to VCC'}
+            {isAdded ? '✓ Added to VCC' : <><span>Add to VCC</span><IconExternalLink /></>}
           </a>
           <p style={{ fontSize: '0.75rem', margin: '0.5rem 0 0', color: 'var(--ifm-color-emphasis-600)', lineHeight: 1.4 }}>
             Didn't work? Go to <strong>Settings {'>'} Packages {'>'} Add Repository</strong> and paste:
@@ -281,7 +282,7 @@ export const PackageInstallList = () => {
         <li key={item.name} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', marginBottom: '0.6rem' }}>
           <img src={item.icon} alt={item.name} style={{ width: '24px', height: '24px', objectFit: 'contain', flexShrink: 0, marginTop: '2px' }} />
           <span>
-            <strong><a href={item.url} className="pkg-name-link">{item.name}</a></strong>
+            <strong><a href={item.url} className="pkg-name-link">{item.name}<IconExternalLink /></a></strong>
             {item.note && <span style={{ color: 'var(--ifm-color-emphasis-700)', fontSize: '0.875rem' }}> - {item.note}</span>}
           </span>
         </li>
@@ -387,7 +388,7 @@ By default, VCC might try to save it inside a hidden system folder (AppData). It
 
 Before you can install anything, VCC needs to know where to find these packages.
 
-Click <span className="button button--secondary pkg-add-btn" style={{background:'var(--xeno-beige-light)',color:'var(--xeno-brown-menu)',borderColor:'var(--xeno-brown-menu)',pointerEvents:'none',padding:'0.15em 0.75em',fontSize:'0.85em',verticalAlign:'middle'}}>Add to VCC</span> on each card below. Once you've clicked all four, a message will appear at the bottom telling you what to do next.
+Click <span className="button button--secondary pkg-add-btn" style={{background:'var(--xeno-beige-light)',color:'var(--xeno-brown-menu)',borderColor:'var(--xeno-brown-menu)',pointerEvents:'none',padding:'0.15em 0.75em',fontSize:'0.85em',verticalAlign:'middle'}}><span>Add to VCC</span><IconExternalLink /></span> on each card below. Once you've clicked all four, a message will appear at the bottom telling you what to do next.
 
 <PackageCards />
 
