@@ -117,19 +117,22 @@ body {
   padding: 0.5rem;
 }
 
-/* Custom Xenoblade Scrollbar - only .menu and .table-of-contents scroll */
+/* Custom Xenoblade Scrollbar - only .menu, .table-of-contents, and .theme-doc-toc-desktop scroll */
 .menu::-webkit-scrollbar,
-.table-of-contents::-webkit-scrollbar {
+.table-of-contents::-webkit-scrollbar,
+.theme-doc-toc-desktop::-webkit-scrollbar {
   width: 0.875rem;
 }
 
 .menu::-webkit-scrollbar-track,
-.table-of-contents::-webkit-scrollbar-track {
+.table-of-contents::-webkit-scrollbar-track,
+.theme-doc-toc-desktop::-webkit-scrollbar-track {
   background: var(--xeno-scrollbar-track);
 }
 
 .menu::-webkit-scrollbar-thumb,
-.table-of-contents::-webkit-scrollbar-thumb {
+.table-of-contents::-webkit-scrollbar-thumb,
+.theme-doc-toc-desktop::-webkit-scrollbar-thumb {
   background: var(--xeno-orange-header);
   border: 0.25rem solid var(--xeno-scrollbar-track);
   border-radius: 0.625rem;
@@ -211,7 +214,8 @@ html::after {
   z-index: 2;
   position: sticky !important;
   top: 4rem;
-  overflow: visible !important; /* Prevent cursor clipping */
+  max-height: calc(100vh - var(--ifm-navbar-height) - 2rem);
+  overflow-y: auto;
   background-color: var(--xeno-beige-light) !important;
   border-radius: 16px;
   padding: 0.5rem !important;
