@@ -10,7 +10,10 @@
  * Usage:
  *   <LocationCard src="/img/something.png" title="Colony 6" />
  *   <LocationCard src="/img/something.png" title="Colony 6" alt="Colony 6 screenshot" />
- *   <LocationCard src="/img/something.png" title="Top left" highlight={{t:0, l:0, w:0.1, h:0.1}} />
+ *   <LocationCard src="/img/something.png" highlight={[
+ *    {l:0,   t:0,   w:0.2, h:0.2, text:"Top left"},
+ *    {l:0.4, t:0.4, w:0.2, h:0.2, text:"Center"},
+ *   ]} />
  *
  * src goes through useBaseUrl automatically - pass the /img/ path as-is.
  */
@@ -36,13 +39,14 @@ export const LocationCard = ({ src, title, alt, style, highlight }) => {
   // When no title is provided, remove the top margin reserved for the label capsule
   const cardStyle = title ? style : { marginTop: 0, ...style };
 
-  /** @type {HighlightOptions} */
-  let hi = highlight;
   if (highlight) {
-    if ([hi.t, hi.l, hi.w, hi.h].some(x => x < 0 || x > 1))
-      console.warn("/!\ Highlight coordinates are out of range (0-1)")
-    if ([hi.t + hi.h, hi.l + hi.w].some(x => x < 0 || x > 1))
-      console.warn("/!\ Highlight reaches outside the picture")
+    Array.from(highlight).forEach((x, i) => {
+      /** @type {HighlightOptions} */ const hi = x // JSDoc type casting
+      if ([hi.t, hi.l, hi.w, hi.h].some(x => x < 0 || x > 1))
+        console.warn(`/!\\ Highlight #${i} coordinates are out of range (0-1)`)
+      if ([hi.t + hi.h, hi.l + hi.w].some(x => x < 0 || x > 1))
+        console.warn(`/!\\ Highlight #${i} reaches outside the picture`)
+    })
   }
 
   const percent = (x=0) => `${x*100}%`
@@ -56,7 +60,8 @@ export const LocationCard = ({ src, title, alt, style, highlight }) => {
             alt={alt || title || ''}
             className="xeno-location-card__image"
           />
-          {highlight && <div className="xeno-location-card__highlight" style={{
+          {highlight && Array.from(highlight).map(hi =>
+          <div className="xeno-location-card__highlight" style={{
               position: "absolute",
               top:    percent(hi.t),
               left:   percent(hi.l),
@@ -67,7 +72,7 @@ export const LocationCard = ({ src, title, alt, style, highlight }) => {
             data-hi-left   = {hi.l}
             data-hi-width  = {hi.w}
             data-hi-height = {hi.h}
-          >{hi.text}</div>}
+          >{hi.text || ""}</div>)}
         </div>
         <div className="xeno-location-card__rivet xeno-location-card__rivet--tl" />
         <div className="xeno-location-card__rivet xeno-location-card__rivet--tr" />
