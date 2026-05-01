@@ -3,7 +3,7 @@
  *
  * Four layers:
  *   1. Image - the card content
- *   2. Highlight - an optional rectangular region
+ *   2. Highlight - rectangular regions
  *   3. Frame - dark border with rivets at each corner
  *   4. Label - pill capsule centered on the top border
  *
@@ -16,14 +16,15 @@
  *   ]} />
  *
  * src goes through useBaseUrl automatically - pass the /img/ path as-is.
- * highlight can be a single object or an array of them, text property is optional.
+ * highlight can be a single object or an array of them.
  */
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
 /**
  * @typedef {{
- *   t: number,l: number, w: number, h: number, text?: string
+ *   t: number,l: number, w: number, h: number,
+ *   text?: string, style?: object, grow?: number
  * } } HighlightOptions
  */
 // /**
@@ -64,10 +65,11 @@ export const LocationCard = ({ src, title, alt, style, highlight }) => {
           {highlight && [highlight].flat().map((/** @type {HighlightOptions} */ hi, i) =>
           <div className="xeno-location-card__highlight" key={(hi.text||"")+i} style={{
               position: "absolute",
-              top:    percent(hi.t),
-              left:   percent(hi.l),
-              width:  percent(hi.w),
-              height: percent(hi.h),
+              top:    hi.grow ? `calc(${percent(hi.t)} - ${hi.grow}px)` : percent(hi.t),
+              left:   hi.grow ? `calc(${percent(hi.l)} - ${hi.grow}px)` : percent(hi.l),
+              width:  hi.grow ? `calc(${percent(hi.w)} + ${2*hi.grow}px)` : percent(hi.w),
+              height: hi.grow ? `calc(${percent(hi.h)} + ${2*hi.grow}px)` : percent(hi.h),
+              ...(hi.style || {})
             }}
             data-hi-top    = {hi.t}
             data-hi-left   = {hi.l}
