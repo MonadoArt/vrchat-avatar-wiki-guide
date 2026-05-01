@@ -132,7 +132,7 @@ themes: [
             { label: 'Welcome',      to: '/docs/intro' },
             { label: 'Installation', to: '/docs/upload/installation' },
             { label: 'Uploading',    to: '/docs/upload/uploading' },
-            { label: 'Troubleshooting', to: '/docs/troubleshooting/common-errors' },
+            { label: 'Troubleshooting', to: '/docs/troubleshooting' },
           ],
         },
         {
