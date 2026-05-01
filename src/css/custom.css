@@ -31,34 +31,34 @@
 
 :root {
   /* Xenoblade Palette */
-  --xeno-brown-dark: rgb(49, 41, 41);
-  --xeno-beige-light: rgb(181, 177, 171);
-  --xeno-beige-mid: rgb(204, 200, 191);        /* sidebar / ToC alternating row (odd) */
-  --xeno-green-monado: #A4F13F;
-  --xeno-orange-header: #E68E35;
-  --xeno-brown-menu: rgb(72, 59, 34);
+  --xeno-brown-dark: #312929;
+  --xeno-beige-light: #b5b1ab;
+  --xeno-beige-mid: #ccc8bf;        /* sidebar / ToC alternating row (odd) */
+  --xeno-green-monado: #a4f13f;
+  --xeno-orange-header: #e68e35;
+  --xeno-brown-menu: #483b22;
   --xeno-metallic-yellow: #9b947d;
-  --xeno-frame-dark: rgb(20, 14, 6);           /* location card frame & label border */
-  --xeno-scrollbar-track: rgb(45, 42, 38);     /* scrollbar track */
-  --xeno-dark-bg: #1a1712;                     /* dark mode page background */
+  --xeno-frame-dark: #140e06;         /* location card frame & label border */
+  --xeno-scrollbar-track: #2d2a26;    /* scrollbar track */
+  --xeno-dark-bg: #1a1712;            /* dark mode page background */
 
   /* Rivet */
   --xeno-rivet-bright: #d4a96a;
   --xeno-rivet-dark: #3a2008;
 
   /* Gauge / GaugeHeader gradient stops (shared by h1, gauge header, breadcrumbs) */
-  --xeno-gauge-dark: rgba(14, 11, 7, 0.88);   /* dark fade at both ends */
-  --xeno-gauge-mid: rgba(70, 55, 30, 0.75);   /* warm brown center */
+  --xeno-gauge-dark: #0e0b07e0;   /* dark fade at both ends */
+  --xeno-gauge-mid: #46371ebf;    /* warm brown center */
 
   /* Background decor colors - TEV pipeline approximation */
-  --xeno-bg-tan: rgb(238, 184, 138);           /* html background gradient warm end */
-  --xeno-decor-base: rgb(52, 18, 2);           /* top/bottom decor base */
-  --xeno-decor-gold: rgb(242, 176, 55);        /* top/bottom decor radial highlight */
-  --xeno-decor-mid-base: rgb(218, 131, 39);    /* middle decor base */
-  --xeno-decor-mid-tl: rgb(250, 233, 124);     /* middle decor gradient - top left */
-  --xeno-decor-mid-tr: rgb(161, 26, 3);        /* middle decor gradient - top right */
-  --xeno-decor-mid-bl: rgb(255, 126, 14);      /* middle decor gradient - bottom left */
-  --xeno-decor-mid-br: rgb(251, 225, 125);     /* middle decor gradient - bottom right */
+  --xeno-bg-tan: #eeb88a;           /* html background gradient warm end */
+  --xeno-decor-base: #341202;       /* top/bottom decor base */
+  --xeno-decor-gold: #f2b037;       /* top/bottom decor radial highlight */
+  --xeno-decor-mid-base: #da8327;   /* middle decor base */
+  --xeno-decor-mid-tl: #fae97c;     /* middle decor gradient - top left */
+  --xeno-decor-mid-tr: #a11a03;     /* middle decor gradient - top right */
+  --xeno-decor-mid-bl: #ff7e0e;     /* middle decor gradient - bottom left */
+  --xeno-decor-mid-br: #fbe17d;     /* middle decor gradient - bottom right */
 
   /* Infima Overrides */
   --ifm-color-primary: var(--xeno-green-monado);
@@ -70,7 +70,7 @@
   --ifm-color-primary-lightest: #d7f9a2;
 
   --ifm-background-color: var(--xeno-beige-light);
-  --ifm-navbar-background-color: rgba(33, 28, 21, 0.9);
+  --ifm-navbar-background-color: #211c15e6;
   --ifm-navbar-link-color: var(--xeno-beige-light);
   --ifm-footer-background-color: transparent;
 
@@ -1233,4 +1233,13 @@ h4.section-header {
   background-color: rgba(164, 241, 63, 0.3) !important;
   color: var(--xeno-brown-menu) !important;
   border-color: var(--xeno-green-monado) !important;
+}
+
+/* ==========================================================================
+   Global elements
+   ========================================================================== */
+
+kbd {
+  --ifm-color-emphasis-0: var(--xeno-dark-bg);
+  --ifm-color-emphasis-400: var(--xeno-beige-light);
 }
