@@ -16,6 +16,7 @@
  *   ]} />
  *
  * src goes through useBaseUrl automatically - pass the /img/ path as-is.
+ * highlight can be a single object or an array of them, text property is optional.
  */
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -40,7 +41,7 @@ export const LocationCard = ({ src, title, alt, style, highlight }) => {
   const cardStyle = title ? style : { marginTop: 0, ...style };
 
   if (highlight) {
-    Array.from(highlight).forEach((x, i) => {
+    [highlight].flat().forEach((x, i) => {
       /** @type {HighlightOptions} */ const hi = x // JSDoc type casting
       if ([hi.t, hi.l, hi.w, hi.h].some(x => x < 0 || x > 1))
         console.warn(`/!\\ Highlight #${i} coordinates are out of range (0-1)`)
@@ -54,14 +55,14 @@ export const LocationCard = ({ src, title, alt, style, highlight }) => {
   return (
     <div className="xeno-location-card" style={cardStyle}>
       <div className="xeno-location-card__frame"> {/* Has a 4px padding */}
-        <div style={{position: "relative"}}>
+        <div className="xeno-location-card__image-container" style={{position: "relative"}}>
           <img
             src={imgSrc}
             alt={alt || title || ''}
-            className="xeno-location-card__image"
+            className={"xeno-location-card__image" + (highlight ? " xeno-location-card__darkened" : "")}
           />
-          {highlight && Array.from(highlight).map(hi =>
-          <div className="xeno-location-card__highlight" style={{
+          {highlight && [highlight].flat().map((/** @type {HighlightOptions} */ hi, i) =>
+          <div className="xeno-location-card__highlight" key={(hi.text||"")+i} style={{
               position: "absolute",
               top:    percent(hi.t),
               left:   percent(hi.l),

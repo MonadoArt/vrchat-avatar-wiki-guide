@@ -537,6 +537,7 @@ h4.section-header {
   position: relative;
   display: inline-block;
   margin: 1.4em 0 0.75em 0;
+  --dark: 0.5;
 }
 
 /* Layer 2: the dark frame.
@@ -565,24 +566,47 @@ h4.section-header {
 
 /* Highlighted regions */
 .xeno-location-card__highlight {
+  /* Inner text */
+  color: white;
+  text-shadow: 0 0 8px #012e;
+  /* Centering */
+  display: grid;
+  place-items: center;
+  /* Fill */
+  box-shadow: 0 0 1rem #012e;
   border: 4px dotted var(--xeno-decor-mid-base);
-  color: var(--xeno-decor-gold);
-  text-shadow: 0 0 8px #0124;
   background: radial-gradient(
     circle at center,
-    color-mix(in srgb, var(--xeno-decor-mid-base), transparent 80%),
-    transparent
+    transparent 50%,
+    color-mix(in srgb, var(--xeno-decor-mid-base), transparent 60%) 200%
   );
   border-radius: .5rem;
-  &:hover {
+  /* Dark */
+  backdrop-filter: brightness(calc(1 + var(--dark)));
+  -webkit-backdrop-filter: brightness(calc(1 + var(--dark)));
+}
+
+.xeno-location-card__darkened {
+  filter: brightness(calc(1 - var(--dark)));
+}
+
+.xeno-location-card__image-container:hover {
+  & .xeno-location-card__darkened { filter: brightness(1); }
+  & .xeno-location-card__highlight {
     opacity: 30%;
+    backdrop-filter: brightness(1);
+    -webkit-backdrop-filter: brightness(1);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .xeno-location-card__highlight {
     animation: .6s gold-flash linear alternate infinite;
-    transition: opacity ease-out .2s;
+    transition: all ease-out .2s;
+  }
+
+  .xeno-location-card__darkened {
+    transition: filter ease-out .2s;
   }
 
   @keyframes gold-flash {
