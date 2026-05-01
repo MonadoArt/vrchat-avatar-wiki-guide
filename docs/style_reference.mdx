@@ -1,0 +1,245 @@
+---
+sidebar_position: 99
+title: Style Reference
+---
+
+import { SectionTab, SectionBanner, SubSectionBanner, GaugeHeader } from '@site/src/components/XenoMarkers';
+import { LocationCard } from '@site/src/components/LocationCard';
+import { SceneIcon, PrefabIcon, ModelIcon, PrefabModelIcon, PrefabVariantIcon, UnityPackageIcon, UnityPackage } from '@site/src/components/UnityIcon';
+
+## Style Reference
+
+Quick visual reference for every heading and ribbon style used across this wiki.
+
+### Ribbons
+
+<SectionTab>SectionTab</SectionTab>
+<SectionBanner>SectionBanner</SectionBanner>
+
+<br />
+
+<SubSectionBanner>SubSectionBanner</SubSectionBanner>
+
+<GaugeHeader value="right value">GaugeHeader</GaugeHeader>
+
+`##` headings automatically get the SectionBanner style:
+
+## Default h2 (auto SectionBanner)
+
+### Location Card
+
+<LocationCard src="/img/settings-test.png" title="Settings" />
+
+To not have a title just have the title be emtpy
+
+### Colors
+
+<div style={{display:'flex',flexWrap:'wrap',gap:'0.75rem',margin:'1rem 0'}}>
+  {[
+    {name:'--xeno-brown-dark',       value:'rgb(49, 41, 41)'},
+    {name:'--xeno-beige-light',      value:'rgb(181, 177, 171)'},
+    {name:'--xeno-beige-mid',        value:'rgb(204, 200, 191)'},
+    {name:'--xeno-green-monado',     value:'#A4F13F'},
+    {name:'--xeno-orange-header',    value:'#E68E35'},
+    {name:'--xeno-brown-menu',       value:'rgb(72, 59, 34)'},
+    {name:'--xeno-metallic-yellow',  value:'#9b947d'},
+    {name:'--xeno-frame-dark',       value:'rgb(20, 14, 6)'},
+    {name:'--xeno-scrollbar-track',  value:'rgb(45, 42, 38)'},
+    {name:'--xeno-rivet-bright',     value:'#d4a96a'},
+    {name:'--xeno-rivet-dark',       value:'#3a2008'},
+  ].map(c => (
+    <div key={c.name} style={{display:'flex',alignItems:'center',gap:'0.5rem',background:'rgba(0,0,0,0.25)',padding:'0.4rem 0.75rem',borderRadius:'0.4rem'}}>
+      <div style={{width:'2rem',height:'2rem',borderRadius:'0.25rem',background:c.value,border:'1px solid rgba(255,255,255,0.2)',flexShrink:0}}/>
+      <div>
+        <div style={{fontSize:'0.75rem',fontFamily:'monospace',color:'var(--xeno-green-monado)'}}>{c.name}</div>
+        <div style={{fontSize:'0.7rem',opacity:0.6,fontFamily:'monospace'}}>{c.value}</div>
+      </div>
+    </div>
+  ))}
+</div>
+
+---
+
+## Contributing
+
+This section is for anyone adding or editing pages. Read it before touching anything.
+
+### Admonitions
+
+<SubSectionBanner>Admonitions</SubSectionBanner>
+
+Admonitions are callout boxes for things that need to stand out. Keep them short and punchy - one or two sentences max. Here are all the available types:
+
+:::note
+This is a **note**. Use it for neutral extra context that's helpful but not critical. Tag: `:::note`
+:::
+
+:::tip
+This is a **tip**. Use it for shortcuts, recommendations, or things that make life easier. Tag: `:::tip`
+:::
+
+:::info
+This is an **info** box. Use it for background context the reader might not know. Tag: `:::info`
+:::
+
+:::caution
+This is a **caution**. Use it for things that are easy to get wrong or miss. Also used as a placeholder marker for screenshots that still need to be added. Tag: `:::caution`
+:::
+
+:::warning
+This is a **warning**. Use it for things that can actually break something if ignored. Tag: `:::warning`
+:::
+
+:::danger
+This is **danger**. Use it sparingly - only for things with serious consequences. Tag: `:::danger`
+:::
+
+For screenshot placeholders specifically, the convention is:
+
+```
+:::caution
+Put an image of X here
+:::
+```
+
+Don't remove these - they mark where screenshots still need to go. When you have the screenshot, replace the whole block with a standard image tag.
+
+### Page Structure
+
+<SubSectionBanner>Page Structure</SubSectionBanner>
+
+Every page file is `.mdx` (not `.md`) so React components work inline. The frontmatter at the top sets the sidebar position and title:
+
+```mdx
+---
+sidebar_position: 2
+title: My Page
+---
+```
+
+To use any of the style components, import them at the top of the file right after the frontmatter block:
+
+```mdx
+import { SectionBanner, SubSectionBanner, GaugeHeader, SectionTab } from '@site/src/components/XenoMarkers';
+```
+
+### Using the Style Components
+
+<SubSectionBanner>Using the Style Components</SubSectionBanner>
+
+Most of the time you just need `##` headings - they automatically get the SectionBanner style with no import required:
+
+```mdx
+## My Section
+```
+
+Use the explicit components when you need something the auto-style can't do, like a tab label above a banner, a named sub-section break, or a gauge bar with a right-side value:
+
+```mdx
+<SectionTab>Optional</SectionTab>
+<SectionBanner>My Section</SectionBanner>
+
+<SubSectionBanner>Named Break</SubSectionBanner>
+
+<GaugeHeader value="3/3">Progress Header</GaugeHeader>
+```
+
+### Sizing Overrides
+
+<SubSectionBanner>Sizing Overrides</SubSectionBanner>
+
+Every component accepts a `size` prop that sets its `font-size`. Because all internal dimensions (padding, taper depth, margins) use `em` units, everything scales proportionally - you only need to change one value:
+
+```mdx
+<SectionBanner size="0.8rem">Smaller than default</SectionBanner>
+<SectionBanner size="1.5rem">Bigger than default</SectionBanner>
+<GaugeHeader size="1rem" value="done">Larger gauge</GaugeHeader>
+```
+
+Default sizes: `SectionTab` → `0.72rem`, `SectionBanner` → `1rem`, `SubSectionBanner` → `1.25rem`, `GaugeHeader` → `0.78rem`.
+
+### ToC and Components
+
+<SubSectionBanner>ToC and Components</SubSectionBanner>
+
+The table of contents only picks up markdown `##` headings - JSX components are invisible to it. If a section using an explicit component also needs a ToC entry, add a `##` heading immediately before it:
+
+```mdx
+## My Section
+
+<SectionBanner>My Section</SectionBanner>
+```
+
+The CSS collapses the `##` heading visually (so the component shows instead) while keeping the anchor alive for the ToC link.
+
+### Images and Assets
+
+<SubSectionBanner>Images and Assets</SubSectionBanner>
+
+Static images go in `static/img/`. In **markdown prose**, use the path as-is:
+
+```md
+![alt text](/img/something.png)
+```
+
+Inside a **React component or JSX**, always use `useBaseUrl` or the path will break in production:
+
+```jsx
+import useBaseUrl from '@docusaurus/useBaseUrl';
+const src = useBaseUrl('/img/something.png');
+```
+
+### Colors
+
+<SubSectionBanner>Colors</SubSectionBanner>
+
+Never hardcode hex or rgb values anywhere in CSS or JSX. Always reference the CSS variables defined in `src/css/custom.css`. The full palette is in the color swatches above.
+
+### Unity Icons
+
+<SubSectionBanner>Unity Icons</SubSectionBanner>
+
+Small inline icons that match the Unity editor's own file-type indicators. Use them next to any mention of a specific Unity asset type so readers can visually identify the file they're looking for.
+
+Import from `UnityIcon`:
+
+```mdx
+import { SceneIcon, PrefabIcon, ModelIcon, PrefabModelIcon, PrefabVariantIcon, UnityPackageIcon, UnityPackage } from '@site/src/components/UnityIcon';
+```
+
+Available icons:
+
+<div style={{display:'flex',flexDirection:'column',gap:'0.5rem',margin:'1rem 0'}}>
+  {[
+    { label: 'SceneIcon',         el: <SceneIcon /> },
+    { label: 'PrefabIcon',        el: <PrefabIcon /> },
+    { label: 'ModelIcon',         el: <ModelIcon /> },
+    { label: 'PrefabModelIcon',   el: <PrefabModelIcon /> },
+    { label: 'PrefabVariantIcon', el: <PrefabVariantIcon /> },
+    { label: 'UnityPackageIcon',  el: <UnityPackageIcon /> },
+  ].map(({ label, el }) => (
+    <div key={label} style={{display:'flex',alignItems:'center',gap:'0.75rem',background:'rgba(0,0,0,0.25)',padding:'0.4rem 0.75rem',borderRadius:'0.4rem'}}>
+      {el}
+      <code style={{fontSize:'0.85rem'}}>{`<${label} />`}</code>
+    </div>
+  ))}
+</div>
+
+All icon components accept an optional `size` prop (number, pixels). Default is `16`.
+
+```mdx
+Double-click the scene file <SceneIcon /> to open it.
+Drag the prefab <PrefabIcon /> into the Hierarchy.
+```
+
+**`<UnityPackage />`** is a special badge that combines the `.unitypackage` filename and icon into a styled inline element that looks like a code span:
+
+<div style={{margin:'0.75rem 0'}}>
+  Save your <UnityPackage /> file somewhere you can find it.
+</div>
+
+```mdx
+Save your <UnityPackage /> file somewhere you can find it.
+```
+
+Use `<UnityPackage />` wherever you'd otherwise write `` `.unitypackage` <UnityPackageIcon /> `` — it's the same thing in one tag.
