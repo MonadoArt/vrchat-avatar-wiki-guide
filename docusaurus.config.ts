@@ -81,7 +81,7 @@ themes: [
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/embed-banner.png',
     docs: {
       sidebar: {
         hideable: true,
@@ -132,7 +132,7 @@ themes: [
             { label: 'Welcome',      to: '/docs/intro' },
             { label: 'Installation', to: '/docs/upload/installation' },
             { label: 'Uploading',    to: '/docs/upload/uploading' },
-            { label: 'Troubleshooting', to: '/docs/troubleshooting/common-errors' },
+            { label: 'Troubleshooting', to: '/docs/troubleshooting' },
           ],
         },
         {
