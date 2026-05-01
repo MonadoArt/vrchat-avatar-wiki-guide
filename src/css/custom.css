@@ -741,14 +741,42 @@ h4.section-header {
   border-radius: 0.75rem !important;
 }
 
+.menu > .menu__list > .menu__list-item > .menu__list-item-collapsible {
+  align-items: center;
+}
+
+/* The .menu__link inside a collapsible wrapper inherits padding from the generic
+   .menu__link rule — zero it out so only the wrapper's padding controls the indent,
+   keeping text aligned with non-collapsible items. */
+.menu > .menu__list > .menu__list-item > .menu__list-item-collapsible > .menu__link {
+  padding: 0 !important;
+  flex: 1;
+}
+
 /* Horizontal Divider when unfolded (Dark Brown on Beige) */
 .menu__list-item:not(.menu__list-item--collapsed) > .menu__list-item-collapsible {
   border-bottom: 2px solid rgba(49, 41, 41, 0.3) !important;
   border-radius: 0 !important;
 }
 
-.menu > .menu__list > .menu__list-item > .menu__list-item-collapsible::after {
-  filter: sepia(100%) hue-rotate(320deg) brightness(1.5);
+/* Caret arrow — use mask + currentColor so the arrow always inherits the
+   text colour (including hover/active states) instead of a hardcoded value.
+   The SVG fill must be opaque white so the alpha channel works as a clean mask. */
+.menu > .menu__list > .menu__list-item {
+  --ifm-menu-link-sublist-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16px' height='16px' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z'/%3E%3C/svg%3E");
+}
+
+.menu > .menu__list > .menu__list-item .menu__caret::before {
+  background: currentColor !important; /* clears background-image, sets colour */
+  mask-image: var(--ifm-menu-link-sublist-icon);
+  mask-size: 2rem 2rem;
+  mask-repeat: no-repeat;
+  mask-position: 50%;
+  -webkit-mask-image: var(--ifm-menu-link-sublist-icon);
+  -webkit-mask-size: 2rem 2rem;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: 50%;
+  filter: none !important;
 }
 
 /* Sub-links default styling */
@@ -767,7 +795,10 @@ h4.section-header {
 .table-of-contents__link:hover,
 .menu > .menu__list > .menu__list-item:has(.menu__link--active) > .menu__link,
 .menu > .menu__list > .menu__list-item:has(.menu__link--active) > .menu__list-item-collapsible,
-.menu > .menu__list > .menu__list-item > .menu__list-item-collapsible:hover {
+.menu > .menu__list > .menu__list-item > .menu__list-item-collapsible:hover,
+/* Top-level non-collapsible items: needs higher specificity (0-5-0) to beat the
+   transparent !important rule (0-4-0) on the same element */
+.menu > .menu__list > .menu__list-item > .menu__link:hover {
   background-color: rgba(164, 241, 63, 0.3) !important;
   color: var(--xeno-brown-menu) !important;
 }
