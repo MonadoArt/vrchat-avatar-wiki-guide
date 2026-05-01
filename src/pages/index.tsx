@@ -96,19 +96,17 @@ export default function Home(): ReactNode {
             />
             <LandingCard
               title="Store Pages"
-              description="Browse avatars and assets available across our storefronts."
+              description="Browse avatars and assets available for free over at Gumroad."
               buttons={[
-                { label: 'Gumroad',  to: 'https://placeholder.example.com', external: true },
-                { label: 'Jinxxy',   to: 'https://placeholder.example.com', external: true },
-                { label: 'Payhip',   to: 'https://placeholder.example.com', external: true },
+                { label: 'Gumroad',  to: 'https://monadoart.gumroad.com/', external: true }
               ]}
             />
             <LandingCard
-              title="Patreon"
-              description="Support Monado Art and get early access to new avatars and assets."
+              title="Patreon and Ko-fi"
+              description="If you think the project is cool and want to support it, consider donating! It helps cover hosting costs and gives you early access to content!"
               buttons={[
-                { label: 'Visit Patreon', to: 'https://placeholder.example.com', external: true },
-                { label: 'Visit Ko-fi', to: 'https://placeholder.example.com', external: true },
+                { label: 'Visit Patreon', to: 'https://patreon.com/Monado_Art', external: true },
+                { label: 'Visit Ko-fi', to: 'https://ko-fi.com/monadoart', external: true },
               ]}
             />
           </div>
