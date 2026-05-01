@@ -995,8 +995,14 @@ h4.section-header {
   .breadcrumbs {
     padding: 0.4em 1.25rem !important;
     font-size: 0.82rem;
-    flex-wrap: wrap;
-    gap: 0;
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+
+  .breadcrumbs__link {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
