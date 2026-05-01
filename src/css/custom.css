@@ -1137,3 +1137,12 @@ h4.section-header {
   color: var(--xeno-brown-menu) !important;
   border-color: var(--xeno-green-monado) !important;
 }
+
+/* ==========================================================================
+   Global elements
+   ========================================================================== */
+
+kbd {
+  --ifm-color-emphasis-0: var(--xeno-dark-bg);
+  --ifm-color-emphasis-400: var(--xeno-beige-light);
+}
