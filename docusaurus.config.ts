@@ -5,8 +5,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Monado Art Wiki',
-  tagline: 'Your guide to VRChat Avatars & Assets',
+  title: 'Wiki site',
+  tagline: 'figure out something witty and funny to put here',
   favicon: 'img/logo.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -68,6 +68,17 @@ const config: Config = {
     ],
   ],
 
+themes: [
+  [
+    '@easyops-cn/docusaurus-search-local',
+    {
+      hashed: true,
+      docsRouteBasePath: '/docs',
+      indexBlog: false,
+    },
+  ],
+],
+
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
@@ -82,7 +93,7 @@ const config: Config = {
       respectPrefersColorScheme: false,
     },
     navbar: {
-      title: 'Avatar Wiki',
+      title: 'Monado Art!',
       logo: {
         alt: 'Monado Art Logo',
         src: 'img/logo.png',
@@ -92,13 +103,23 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Wiki',
+          label: 'Avatar Wiki',
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/MonadoArt',
-          label: 'GitHub',
+          type: 'dropdown',
+          label: 'Community',
           position: 'right',
+          items: [
+            {
+              label: 'Twitter / X',
+              href: 'https://x.com/Monado_Art',
+            },
+            {
+              label: 'Discord Server',
+              href: 'https://discord.gg/DtsFNcynqn',
+            },
+          ],
         },
       ],
     },
