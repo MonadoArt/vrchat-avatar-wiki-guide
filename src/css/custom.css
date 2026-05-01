@@ -563,6 +563,34 @@ h4.section-header {
   vertical-align: bottom; /* eliminates inline-block gap below image */
 }
 
+/* Highlighted regions */
+.xeno-location-card__highlight {
+  border: 4px dotted var(--xeno-decor-mid-base);
+  color: var(--xeno-decor-gold);
+  text-shadow: 0 0 8px #0124;
+  background: radial-gradient(
+    circle at center,
+    color-mix(in srgb, var(--xeno-decor-mid-base), transparent 80%),
+    transparent
+  );
+  border-radius: .5rem;
+  &:hover {
+    opacity: 30%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .xeno-location-card__highlight {
+    animation: .6s gold-flash linear alternate infinite;
+    transition: opacity ease-out .2s;
+  }
+
+  @keyframes gold-flash {
+    from {border-color: var(--xeno-decor-mid-base)}
+    to   {border-color: var(--xeno-decor-mid-br)}
+  }
+}
+
 /* Rivets - square with 2 sharp corners (outer diagonal + inner diagonal)
    and 2 rounded corners (along the frame edges).
    Each corner rivet is oriented so sharp points aim outward and inward,
@@ -1076,6 +1104,13 @@ h4.section-header {
   --ifm-navbar-background-color: rgba(20, 18, 15, 0.95);
   --docusaurus-highlighted-code-line-bg: rgba(164, 241, 63, 0.1);
 } */
+
+/* Header styles */
+.navbar {
+  border-bottom: solid 1px var(--xeno-orange-header);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
 
 /* ── Footer: XB1 button-prompt bar ── */
 .footer,
