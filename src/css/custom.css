@@ -238,6 +238,12 @@ html::after {
    3. Content Containers
    ========================================================================== */
 
+/* Cutting-edge typography tweaks */
+p, li { text-wrap: pretty; }
+h1, h2, h3, h4, h5, h6,
+[class*=Heading], [class*=heading]
+{ text-wrap: balance; }
+
 /* Section heading banner - applied via <SubSectionBanner> or .section-header classes */
 h1.section-header,
 h2.section-header,
@@ -736,6 +742,10 @@ h4.section-header {
   transition: all 0.3s ease;
   border-right: 2px solid rgba(255, 255, 255, 0.1) !important;
   overflow: visible !important; /* Allow cursor to pop out */
+  & button {
+    border: none;
+    border-radius: 0 0 16px 16px;
+  }
 }
 
 /* Eliminate top sidebar gap */
@@ -1108,6 +1118,8 @@ h4.section-header {
 .breadcrumbs__item {
   position: relative;
   z-index: 2;
+  display: flex;
+  align-items: center;
 }
 
 .breadcrumbs__item:not(:last-child)::after {
@@ -1289,8 +1301,8 @@ h4.section-header {
 
 /* Add to VCC button hover - matches ToC active green */
 .pkg-add-btn:hover {
-  background-color: rgba(164, 241, 63, 0.3) !important;
-  color: var(--xeno-brown-menu) !important;
+  background-color: color-mix(in srgb, var(--xeno-green-monado), transparent 30%) !important;
+  color: white !important; /* var(--xeno-brown-menu) */
   border-color: var(--xeno-green-monado) !important;
 }
 
@@ -1302,3 +1314,6 @@ kbd {
   --ifm-color-emphasis-0: var(--xeno-dark-bg);
   --ifm-color-emphasis-400: var(--xeno-beige-light);
 }
+
+abbr[title] { cursor: help }
+.sc { font-variant: small-caps }

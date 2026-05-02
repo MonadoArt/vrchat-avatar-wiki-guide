@@ -294,18 +294,19 @@ export const PackageInstallList = () => {
 
 # Installation
 
-#### To get an avatar into VRChat, you'll need to install a few things first. This page walks you through all of it step by step - no prior experience needed.
+#### <div style={{textAlign:"center", marginBottom:"-1.2em"}}>To get an avatar into VRChat, you'll need to install a few things first. This page walks you through all of it step by step - no prior experience needed.</div>
+{/* textWrapStyle: "pretty" */}
 
 ---
 
 ## Step 0 - VRChat Trust Rank Requirement
 
-<div style={{display:'flex', flexWrap:'wrap-reverse', gap:'2rem', alignItems:'flex-end', paddingTop:'1.5em'}}>
+<div style={{display:'flex', flexWrap:'wrap-reverse', justifyContent:"center", gap:'2rem', alignItems:'flex-end', paddingTop:'1.5em'}}>
 <div style={{flex:1, minWidth:'280px'}}>
 
 :::warning
 Your VRChat account needs to have a [**trust rank**](https://docs.vrchat.com/docs/vrchat-safety-and-trust-system) of **New User** or above in order to be able to upload avatars! <br />
-If you just made your VRChat account you will need to play the game or afk in order to increase it from Visitor. Positive interactions with people (such as not getting blocked or getting friend requests) will allow you to gain trust rank faster, alternatively you can pay for VRC+ and gain New User rank immediately!
+If you just made your VRChat account you will need to play the game or <abbr title="away from keyboard">afk</abbr> in order to increase it from <span class="sc">Visitor</span>. Positive interactions with people (such as not getting blocked or getting friend requests) will allow you to gain trust rank faster, alternatively you can pay for VRC+ and gain <span class="sc">New User</span> rank immediately!
 :::
 
 </div>
@@ -334,7 +335,7 @@ If it asks for a verification code after signing in, check your email - VRChat s
 
 ## Step 2 - Install Unity
 
-Unity is the program that actually lets you upload the avatar. VCC will prompt you to install it automatically, so you don't need to go hunting for the right version yourself.
+Unity is the program that actually lets you upload the avatar. <abbr title="VRChat Creator Companion">VCC</abbr> will prompt you to install it automatically, so you don't need to go hunting for the right version yourself.
 
 1. Open the **Creator Companion**.
 2. If Unity isn't installed yet, VCC will show a message asking you to install it. Click **Install Unity**.
@@ -344,7 +345,7 @@ Unity is the program that actually lets you upload the avatar. VCC will prompt y
 :::warning
 **Don't install Unity yourself**
 
-If you go to the Unity website and download it manually, you'll probably get the wrong version. VRChat is very picky about which version it supports - always let VCC install it for you.
+If you go to the Unity website and download it manually, you'll probably get the wrong version. VRChat is very picky about which version it supports - always let <abbr title="VRChat Creator Companion">VCC</abbr> install it for you.
 :::
 
 :::caution
@@ -367,7 +368,7 @@ Once Unity 2022 is installed, you're good to continue.
 
 ## Step 3 - Create a project
 
-A "project" is just a folder on your computer where all your avatar files will live. You create and manage it through the Creator Companion.
+A <q>project</q> is just a folder on your computer where all your avatar files will live. You create and manage it through the Creator Companion.
 
 1. Open the **Creator Companion** and click **Projects** in the sidebar on the left.
 2. Click the blue **Create New Project** button in the top right.
@@ -388,12 +389,12 @@ By default, VCC might try to save it inside a hidden system folder (AppData). It
 
 Before you can install anything, VCC needs to know where to find these packages.
 
-Click <span className="button button--secondary pkg-add-btn" style={{background:'var(--xeno-beige-light)',color:'var(--xeno-brown-menu)',borderColor:'var(--xeno-brown-menu)',pointerEvents:'none',padding:'0.15em 0.75em',fontSize:'0.85em',verticalAlign:'middle'}}><span>Add to VCC</span><IconExternalLink /></span> on each card below. Once you've clicked all four, a message will appear at the bottom telling you what to do next.
+Click <span style={{cursor:"not-allowed"}}><span className="button button--secondary pkg-add-btn" style={{background:'var(--xeno-beige-light)',color:'var(--xeno-brown-menu)',borderColor:'var(--xeno-brown-menu)',pointerEvents:'none',padding:'0.15em 0.75em',fontSize:'0.85em',verticalAlign:'middle'}}><span>Add to VCC</span><IconExternalLink /></span></span> on each card below. Once you've clicked all four, a message will appear at the bottom telling you what to do next.
 
-<PackageCards />
+<PackageCards/>
 
 :::info
-You only need to do this once per package, ever. Once a source is added to VCC, it stays there for all future projects too.
+You only need to do this once per package, *ever*. Once a source is added to VCC, it stays there for all future projects too.
 :::
 
 ---
@@ -410,7 +411,7 @@ Now that VCC knows where the packages are, you need to actually install them int
 4. Wait for VCC to finish installing each one - it may take a moment.
 
 :::info
-You'll know it worked when the version box changes from <VersionNone /> to a version number (e.g. <VersionInstalled />), and the <AddIcon /> button changes to <RemoveIcon />.
+You'll know it worked when the version box changes from <VersionNone /> to a version number (e.g. <VersionInstalled />), and the <AddIcon />&nbsp;button changes to <RemoveIcon />.
 :::
 ---
 
