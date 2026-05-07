@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_=self.webpackChunk_||[]).push([["220"],{1912(a){a.exports=JSON.parse('{"blogBasePath":"/vrchat-avatar-wiki-guide/docs/intro/blog","blogTitle":"Blog","authorsListPath":"/vrchat-avatar-wiki-guide/docs/intro/blog/authors"}')}}]);
