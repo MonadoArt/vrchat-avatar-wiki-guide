@@ -1,0 +1,23 @@
+.menuExternalLink {
+  align-items: center;
+}
+
+.linkWithIcon {
+  display: flex !important;
+  align-items: center;
+}
+
+.linkLabel {
+  overflow: hidden;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.sidebarIcon {
+  flex-shrink: 0;
+  width: 2em;
+  height: 2em;
+  margin-right: 0.4em;
+}

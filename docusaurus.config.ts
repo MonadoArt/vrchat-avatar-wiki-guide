@@ -18,7 +18,7 @@ const config: Config = {
   url: 'https://monadoart.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/vrchat-avatar-wiki-guide/',
+  baseUrl: '/vrchat-avatar-wiki-guide/docs/intro',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -55,7 +55,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/MonadoArt/vrchat-avatar-wiki-guide/tree/main/blog/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -99,13 +99,6 @@ themes: [
         src: 'img/logo.png',
       },
       items: [
-        {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Avatar Wiki',
-        },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
           type: 'dropdown',
           label: 'Community',

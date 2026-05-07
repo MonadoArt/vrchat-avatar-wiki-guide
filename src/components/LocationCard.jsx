@@ -20,6 +20,7 @@
  */
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import { XenoCardFrame, xenoCardFrameStyles } from './XenoCardFrame';
 
 /**
  * @typedef {{
@@ -36,10 +37,8 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 //  * @returns {Element}
 //  */
 
-export const LocationCard = ({ src, title, alt, style, highlight }) => {
+export const LocationCard = ({ src, title, alt, style, highlight, topSpacing }) => {
   const imgSrc = useBaseUrl(src);
-  // When no title is provided, remove the top margin reserved for the label capsule
-  const cardStyle = title ? style : { marginTop: 0, ...style };
 
   if (highlight) {
     [highlight].flat().forEach((x, i) => {
@@ -54,16 +53,15 @@ export const LocationCard = ({ src, title, alt, style, highlight }) => {
   const percent = (x=0) => `${x*100}%`
 
   return (
-    <div className="xeno-location-card" style={cardStyle}>
-      <div className="xeno-location-card__frame"> {/* Has a 4px padding */}
-        <div className="xeno-location-card__image-container" style={{position: "relative"}}>
+    <XenoCardFrame title={title} style={style} topSpacing={topSpacing}>
+      <div className={xenoCardFrameStyles.imageContainer}>
           <img
             src={imgSrc}
             alt={alt || title || ''}
-            className={"xeno-location-card__image" + (highlight ? " xeno-location-card__darkened" : "")}
+            className={`${xenoCardFrameStyles.image}${highlight ? ` ${xenoCardFrameStyles.darkened}` : ''}`}
           />
           {highlight && [highlight].flat().map((/** @type {HighlightOptions} */ hi, i) =>
-          <div className="xeno-location-card__highlight" key={(hi.text||"")+i} style={{
+          <div className={xenoCardFrameStyles.highlight} key={(hi.text||"")+i} style={{
               position: "absolute",
               top:    hi.grow ? `calc(${percent(hi.t)} - ${hi.grow}px)` : percent(hi.t),
               left:   hi.grow ? `calc(${percent(hi.l)} - ${hi.grow}px)` : percent(hi.l),
@@ -76,13 +74,7 @@ export const LocationCard = ({ src, title, alt, style, highlight }) => {
             data-hi-width  = {hi.w}
             data-hi-height = {hi.h}
           >{hi.text || ""}</div>)}
-        </div>
-        <div className="xeno-location-card__rivet xeno-location-card__rivet--tl" />
-        <div className="xeno-location-card__rivet xeno-location-card__rivet--tr" />
-        <div className="xeno-location-card__rivet xeno-location-card__rivet--bl" />
-        <div className="xeno-location-card__rivet xeno-location-card__rivet--br" />
       </div>
-      {title && <div className="xeno-location-card__label">{title}</div>}
-    </div>
+    </XenoCardFrame>
   );
 };

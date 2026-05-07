@@ -3,49 +3,36 @@ sidebar_position: 4
 title: 🔄️ Updating
 ---
 
-# Re-uploading
+# Updating Your Avatar
 
-If you've changed something on your avatar - or updated your packages - you'll need to re-upload for those changes to actually show up in VRChat. It's basically the same process as the first upload.
-
-:::info
-Re-uploading overwrites the existing version of your avatar. No duplicates - it just updates the same one in your list.
-:::
+Got a new version of your avatar? Whether the creator pushed an update or you just want to apply changes, here's how to get it into VRChat.
 
 ---
 
-## When do you need to re-upload?
+## Step 1: Import the new unitypackage
 
-Any time you've changed something in Unity that you want to see in VRChat. For example:
+Download the updated avatar package from the creator, then import it into your Unity project by double-clicking the `.unitypackage` file (or dragging it into the Project window). Unity will ask which files to import — in most cases you can import everything.
 
-- You updated a package (like GoGoLoco or VRCFury)
-- You swapped out a texture or material
-- You adjusted a setting on the avatar
-- You made any other edit inside the Unity project
-
-Just updating packages in VCC is **not enough on its own** - you always need to re-upload after.
+This overwrites the old avatar files in your project with the new ones.
 
 ---
 
-## How to re-upload
+## Step 2: Upload it
 
-1. Open your project in Unity through the **Creator Companion**.
-2. Make sure your avatar is in the scene. If it isn't, find it in the **Project** window and drag it into the **Hierarchy**.
-3. Click **VRChat SDK** in the top menu bar, then **Show Control Panel**.
-4. Go to the **Builder** tab and confirm your avatar is selected in the dropdown.
-5. Check for any red errors - fix those before continuing.
-6. Click **Build & Publish for Windows**.
-7. Wait for Unity to finish building. This can take a few minutes.
-
-Done - your avatar in VRChat will now reflect the changes.
+Once the import is done, upload the avatar the same way you did the first time. Head over to the [Uploading](./uploading) page if you need a refresher on the steps.
 
 :::tip
-You don't need to re-enter the name or description. VRChat remembers those from the first upload since you're updating, not creating a new one.
+You don't need to re-enter the name or description. VRChat remembers those from your first upload since you're updating the same avatar, not creating a new one.
+:::
+
+:::info
+Uploading overwrites the existing version of your avatar — no duplicates, it just updates the same one in your list.
 :::
 
 ---
 
-## Re-uploading the Quest version
+## Don't forget the Quest version!
 
-If your avatar has a Quest version, you'll need to re-upload that separately too. Once you've done the steps above, repeat them and click **Build & Publish for Android** instead of Windows.
+If your avatar has a Quest version, make sure you upload that too — otherwise Quest users (including yourself on Quest) will still see the old version. Once you've uploaded for Windows, repeat the process and click **Build & Publish for Android** instead.
 
-The Quest and PC versions are linked by their shared ID so you don't need to go through the ID-linking process again - that only has to be done once on first upload.
+The Quest and PC versions are already linked from your first upload, so you don't need to redo that part.

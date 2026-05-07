@@ -1,0 +1,85 @@
+.sectionTab {
+  display: inline-block;
+  background-color: var(--xeno-brown-dark);
+  color: var(--xeno-beige-light);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.25em 0.9em 0.25em 0.7em;
+  margin-bottom: 0.25em;
+  clip-path: polygon(0 0, calc(100% - 0.6em) 0, 100% 100%, 0 100%);
+  border-left: 0.2em solid var(--xeno-orange-header);
+}
+
+.sectionBanner {
+  display: block;
+  width: 100%;
+  background-color: var(--xeno-beige-light);
+  color: var(--xeno-brown-menu);
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.35em 3em;
+  margin: 0.05em 0 1em 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.02em;
+  clip-path: polygon(1.5em 0%, calc(100% - 1.5em) 0%, 100% 50%, calc(100% - 1.5em) 100%, 1.5em 100%, 0% 50%);
+}
+
+.subSectionBanner {
+  display: inline-block;
+  width: fit-content;
+  background-color: var(--xeno-beige-light);
+  color: var(--xeno-brown-menu);
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 0.25em 2.5em 0.25em 1.25em;
+  margin: 1.2em 0 0.6em -1.5rem;
+  box-sizing: border-box;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  clip-path: polygon(0 0, calc(100% - 1.5em) 0, 100% 100%, 0 100%);
+}
+
+.gaugeHeader {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3em 3em;
+  margin: 1.25em 0 0.3em 0;
+  background: linear-gradient(to right, transparent 0%, var(--xeno-gauge-dark) 16%, var(--xeno-gauge-mid) 50%, var(--xeno-gauge-dark) 84%, transparent 100%);
+  color: var(--xeno-beige-light);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.gaugeHeader::before,
+.gaugeHeader::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent 0%, var(--xeno-orange-header) 16%, var(--xeno-beige-light) 50%, var(--xeno-orange-header) 84%, transparent 100%);
+}
+
+.gaugeHeader::before {
+  top: 0;
+}
+
+.gaugeHeader::after {
+  bottom: 0;
+}
+
+.gaugeHeaderLabel {
+  opacity: 0.9;
+}
+
+.gaugeHeaderValue {
+  opacity: 0.7;
+  font-size: 0.72rem;
+}

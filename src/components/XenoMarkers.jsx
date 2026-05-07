@@ -1,3 +1,5 @@
+import styles from './XenoMarkers.module.css';
+
 /**
  * XenoMarkers - reusable section markers styled after Xenoblade 1's tutorial UI.
  *
@@ -18,30 +20,89 @@
 // vertical (padding) and horizontal (taper depth, padding) scale with it.
 // e.g. size="0.8rem" shrinks, size="1.4rem" grows.
 
-export const SectionTab = ({ children, size }) => (
-  <div className="xeno-section-tab" style={size ? { fontSize: size } : undefined}>
+/**
+ * @typedef {object} SizedMarkerProps
+ * @property {import('react').ReactNode} children
+ * @property {string=} size
+ * @property {string=} className
+ * @property {import('react').CSSProperties=} style
+ */
+
+/**
+ * @typedef {object} GaugeHeaderProps
+ * @property {import('react').ReactNode} children
+ * @property {string=} size
+ * @property {import('react').ReactNode=} value
+ * @property {string=} className
+ * @property {string=} labelClassName
+ * @property {string=} valueClassName
+ * @property {import('react').CSSProperties=} style
+ */
+
+const withSizeStyle = (size, style) => (
+  size ? { fontSize: size, ...style } : style
+);
+
+/**
+ * @param {SizedMarkerProps} props
+ */
+export const SectionTab = ({ children, size, className = '', style }) => (
+  <div
+    className={`${styles.sectionTab} ${className}`.trim()}
+    data-xeno-marker="section-tab"
+    style={withSizeStyle(size, style)}
+  >
     {children}
   </div>
 );
 
-export const SectionBanner = ({ children, size }) => (
-  <div className="xeno-section-banner" style={size ? { fontSize: size } : undefined}>
+/**
+ * @param {SizedMarkerProps} props
+ */
+export const SectionBanner = ({ children, size, className = '', style }) => (
+  <div
+    className={`${styles.sectionBanner} ${className}`.trim()}
+    data-xeno-marker="section-banner"
+    style={withSizeStyle(size, style)}
+  >
     {children}
   </div>
 );
 
 // Left-aligned beige banner, tapers on the right only. Same look as the h1 title bar.
 // Use for named sub-sections that need a visual break but aren't page-level headings.
-export const SubSectionBanner = ({ children, size }) => (
-  <div className="xeno-subsection-banner" style={size ? { fontSize: size } : undefined}>
+/**
+ * @param {SizedMarkerProps} props
+ */
+export const SubSectionBanner = ({ children, size, className = '', style }) => (
+  <div
+    className={`${styles.subSectionBanner} ${className}`.trim()}
+    data-xeno-marker="subsection-banner"
+    style={withSizeStyle(size, style)}
+  >
     {children}
   </div>
 );
 
 // Optional `value` prop renders a right-aligned counter (e.g. value="3/3").
-export const GaugeHeader = ({ children, value, size }) => (
-  <div className="xeno-gauge-header" style={size ? { fontSize: size } : undefined}>
-    <span className="xeno-gauge-header__label">{children}</span>
-    {value && <span className="xeno-gauge-header__value">{value}</span>}
+/**
+ * @param {GaugeHeaderProps} props
+ */
+export const GaugeHeader = ({
+  children,
+  value,
+  size,
+  className = '',
+  labelClassName = '',
+  valueClassName = '',
+  style,
+}) => (
+  <div
+    className={`${styles.gaugeHeader} ${className}`.trim()}
+    data-xeno-marker="gauge-header"
+    style={withSizeStyle(size, style)}
+  >
+    <span className={`${styles.gaugeHeaderLabel} ${labelClassName}`.trim()}>{children}</span>
+    {value && <span className={`${styles.gaugeHeaderValue} ${valueClassName}`.trim()}>{value}</span>}
   </div>
 );

@@ -1,14 +1,14 @@
 /**
  * HoverOption + HoverVideo
  *
- * HoverOption  — hover-aware wrapper. Adds a warm background highlight and
+ * HoverOption  - hover-aware wrapper. Adds a warm background highlight and
  *                left accent on hover. Provides hover state via context.
  *
- * HoverVideo   — video card that plays when its parent HoverOption is hovered.
+ * HoverVideo   - video card that plays when its parent HoverOption is hovered.
  *                Drop it anywhere inside a HoverOption. Styled identically to
  *                LocationCard (same frame, rivets, label capsule).
  *
- * Usage — keep your existing MDX layout, just wrap it and swap PlaceholderCard:
+ * Usage - keep your existing MDX layout, just wrap it and swap PlaceholderCard:
  *
  *   <HoverOption>
  *     <div style={{display:'flex', flexWrap:'wrap-reverse', gap:'2rem', alignItems:'flex-end', paddingTop:'1.5em'}}>
@@ -25,17 +25,15 @@
  *     </div>
  *   </HoverOption>
  *
- * `src` is optional — omit it while the video isn't ready and a placeholder is shown.
+ * `src` is optional - omit it while the video isn't ready and a placeholder is shown.
  */
 
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-
-/* ── Context ──────────────────────────────────────────────────────────────── */
+import { XenoCardFrame, xenoCardFrameStyles } from './XenoCardFrame';
+import styles from './HoverOption.module.css';
 
 const HoverOptionContext = createContext(false);
-
-/* ── HoverOption ──────────────────────────────────────────────────────────── */
 
 export const HoverOption = ({ children }) => {
   const [hovered, setHovered] = useState(false);
@@ -43,7 +41,7 @@ export const HoverOption = ({ children }) => {
   return (
     <HoverOptionContext.Provider value={hovered}>
       <div
-        className={`xeno-hover-option${hovered ? ' xeno-hover-option--active' : ''}`}
+        className={`${styles.hoverOption}${hovered ? ` ${styles.hoverOptionActive}` : ''}`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -52,8 +50,6 @@ export const HoverOption = ({ children }) => {
     </HoverOptionContext.Provider>
   );
 };
-
-/* ── HoverVideo ───────────────────────────────────────────────────────────── */
 
 export const HoverVideo = ({ src, title }) => {
   const hovered = useContext(HoverOptionContext);
@@ -73,30 +69,22 @@ export const HoverVideo = ({ src, title }) => {
   }, [hovered]);
 
   return (
-    <div className="xeno-location-card" style={{ marginTop: 0 }}>
-      <div className="xeno-location-card__frame">
-        <div className="xeno-location-card__rivet xeno-location-card__rivet--tl" />
-        <div className="xeno-location-card__rivet xeno-location-card__rivet--tr" />
-        <div className="xeno-location-card__rivet xeno-location-card__rivet--bl" />
-        <div className="xeno-location-card__rivet xeno-location-card__rivet--br" />
-        {src ? (
-          <video
-            ref={videoRef}
-            src={resolvedSrc}
-            muted
-            loop
-            playsInline
-            className="xeno-location-card__image"
-            style={{ display: 'block' }}
-          />
-        ) : (
-          <div className="xeno-hover-option__placeholder">
-            <span className="xeno-hover-option__placeholder-icon">▶</span>
-            <span className="xeno-hover-option__placeholder-text">Video coming soon</span>
-          </div>
-        )}
-      </div>
-      {title && <div className="xeno-location-card__label">{title}</div>}
-    </div>
+    <XenoCardFrame title={title} topSpacing="none">
+      {src ? (
+        <video
+          ref={videoRef}
+          src={resolvedSrc}
+          muted
+          loop
+          playsInline
+          className={`${styles.videoMedia} ${xenoCardFrameStyles.mediaBlock}`}
+        />
+      ) : (
+        <div className={styles.placeholder}>
+          <span className={styles.placeholderIcon}>{'\u25B6'}</span>
+          <span className={styles.placeholderText}>Video coming soon</span>
+        </div>
+      )}
+    </XenoCardFrame>
   );
 };

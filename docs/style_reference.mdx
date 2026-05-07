@@ -5,7 +5,8 @@ title: Style Reference
 
 import { SectionTab, SectionBanner, SubSectionBanner, GaugeHeader } from '@site/src/components/XenoMarkers';
 import { LocationCard } from '@site/src/components/LocationCard';
-import { SceneIcon, PrefabIcon, ModelIcon, PrefabModelIcon, PrefabVariantIcon, UnityPackageIcon, UnityPackage } from '@site/src/components/UnityIcon';
+import ColorTokenPalette from '@site/src/components/ColorTokenPalette';
+import { UnityIconReference } from '@site/src/components/UnityIconReference';
 
 ## Style Reference
 
@@ -34,30 +35,7 @@ To not have a title just have the title be emtpy
 
 ### Colors
 
-<div style={{display:'flex',flexWrap:'wrap',gap:'0.75rem',margin:'1rem 0'}}>
-  {[
-    '--xeno-brown-dark',
-    '--xeno-beige-light',
-    '--xeno-beige-mid',
-    '--xeno-green-monado',
-    '--xeno-orange-header',
-    '--xeno-brown-menu',
-    '--xeno-metallic-yellow',
-    '--xeno-frame-dark',
-    '--xeno-scrollbar-track',
-    '--xeno-rivet-bright',
-    '--xeno-rivet-dark',
-  ].map(c => ({name: c, value: getComputedStyle(document.body).getPropertyValue(c)}))
-  .map(c => (
-    <div key={c.name} style={{display:'flex',alignItems:'center',gap:'0.5rem',background:'rgba(0,0,0,0.25)',padding:'0.4rem 0.75rem',borderRadius:'0.4rem'}}>
-      <div style={{width:'2rem',height:'2rem',borderRadius:'0.25rem',background:c.value,border:'1px solid rgba(255,255,255,0.2)',flexShrink:0}}/>
-      <div>
-        <div style={{fontSize:'0.75rem',fontFamily:'monospace',color:'var(--xeno-green-monado)'}}>{c.name}</div>
-        <div style={{fontSize:'0.7rem',opacity:0.6,fontFamily:'monospace'}}>{c.value}</div>
-      </div>
-    </div>
-  ))}
-</div>
+<ColorTokenPalette />
 
 ---
 
@@ -210,21 +188,7 @@ import { SceneIcon, PrefabIcon, ModelIcon, PrefabModelIcon, PrefabVariantIcon, U
 
 Available icons:
 
-<div style={{display:'flex',flexDirection:'column',gap:'0.5rem',margin:'1rem 0'}}>
-  {[
-    { label: 'SceneIcon',         el: <SceneIcon /> },
-    { label: 'PrefabIcon',        el: <PrefabIcon /> },
-    { label: 'ModelIcon',         el: <ModelIcon /> },
-    { label: 'PrefabModelIcon',   el: <PrefabModelIcon /> },
-    { label: 'PrefabVariantIcon', el: <PrefabVariantIcon /> },
-    { label: 'UnityPackageIcon',  el: <UnityPackageIcon /> },
-  ].map(({ label, el }) => (
-    <div key={label} style={{display:'flex',alignItems:'center',gap:'0.75rem',background:'rgba(0,0,0,0.25)',padding:'0.4rem 0.75rem',borderRadius:'0.4rem'}}>
-      {el}
-      <code style={{fontSize:'0.85rem'}}>{`<${label} />`}</code>
-    </div>
-  ))}
-</div>
+<UnityIconReference />
 
 All icon components accept an optional `size` prop (number, pixels). Default is `16`.
 
@@ -234,10 +198,6 @@ Drag the prefab <PrefabIcon /> into the Hierarchy.
 ```
 
 **`<UnityPackage />`** is a special badge that combines the `.unitypackage` filename and icon into a styled inline element that looks like a code span:
-
-<div style={{margin:'0.75rem 0'}}>
-  Save your <UnityPackage /> file somewhere you can find it.
-</div>
 
 ```mdx
 Save your <UnityPackage /> file somewhere you can find it.
