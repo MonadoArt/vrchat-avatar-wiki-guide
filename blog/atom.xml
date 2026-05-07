@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="atom.xsl"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://monadoart.github.io/vrchat-avatar-wiki-guide/docs/intro/blog</id>
+    <id>https://monadoart.github.io/vrchat-avatar-wiki-guide/blog</id>
     <title>Wiki site Blog</title>
     <updated>2026-05-07T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://monadoart.github.io/vrchat-avatar-wiki-guide/docs/intro/blog"/>
+    <link rel="alternate" href="https://monadoart.github.io/vrchat-avatar-wiki-guide/blog"/>
     <subtitle>Wiki site Blog</subtitle>
-    <icon>https://monadoart.github.io/vrchat-avatar-wiki-guide/docs/intro/img/logo.png</icon>
+    <icon>https://monadoart.github.io/vrchat-avatar-wiki-guide/img/logo.png</icon>
     <entry>
         <title type="html"><![CDATA[funny]]></title>
-        <id>https://monadoart.github.io/vrchat-avatar-wiki-guide/docs/intro/blog/2026/05/07/funny</id>
-        <link href="https://monadoart.github.io/vrchat-avatar-wiki-guide/docs/intro/blog/2026/05/07/funny"/>
+        <id>https://monadoart.github.io/vrchat-avatar-wiki-guide/blog/2026/05/07/funny</id>
+        <link href="https://monadoart.github.io/vrchat-avatar-wiki-guide/blog/2026/05/07/funny"/>
         <updated>2026-05-07T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Hi]]></summary>
         <content type="html"><![CDATA[<p>Hi

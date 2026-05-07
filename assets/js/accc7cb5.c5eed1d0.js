@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_=self.webpackChunk_||[]).push([["849"],{7467(a){a.exports=JSON.parse('{"metadata":{"permalink":"/vrchat-avatar-wiki-guide/docs/intro/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>Wiki site Blog</title>
-        <link>https://monadoart.github.io/vrchat-avatar-wiki-guide/docs/intro/blog</link>
+        <link>https://monadoart.github.io/vrchat-avatar-wiki-guide/blog</link>
         <description>Wiki site Blog</description>
         <lastBuildDate>Thu, 07 May 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
@@ -10,8 +10,8 @@
         <language>en</language>
         <item>
             <title><![CDATA[funny]]></title>
-            <link>https://monadoart.github.io/vrchat-avatar-wiki-guide/docs/intro/blog/2026/05/07/funny</link>
-            <guid>https://monadoart.github.io/vrchat-avatar-wiki-guide/docs/intro/blog/2026/05/07/funny</guid>
+            <link>https://monadoart.github.io/vrchat-avatar-wiki-guide/blog/2026/05/07/funny</link>
+            <guid>https://monadoart.github.io/vrchat-avatar-wiki-guide/blog/2026/05/07/funny</guid>
             <pubDate>Thu, 07 May 2026 00:00:00 GMT</pubDate>
             <description><![CDATA[Hi]]></description>
             <content:encoded><![CDATA[<p>Hi
