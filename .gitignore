@@ -20,7 +20,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Claude Code
-.claude
+/.claude
 instructions.md
 instructions_dev.md
 
