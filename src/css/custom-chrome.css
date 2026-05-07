@@ -87,24 +87,10 @@
    7. Theme Overrides (Dark Mode)
    ========================================================================== */
 
-/* backdrop-filter must live on ::before, NOT on .navbar directly.
-   In Chromium, backdrop-filter on a parent creates a new containing block
-   for position:fixed children — the mobile sidebar (.navbar-sidebar) is
-   position:fixed and a DOM child of .navbar, so it gets trapped inside the
-   navbar's height instead of the full viewport. Moving the blur to ::before
-   preserves the frosted-glass effect without affecting child positioning. */
 .navbar {
   border-bottom: solid 1px var(--xeno-orange-header);
-}
-
-.navbar::before {
-  content: '';
-  position: absolute;
-  inset: 0;
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-  z-index: -1;
-  pointer-events: none;
 }
 
 .footer,
