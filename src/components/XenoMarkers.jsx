@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './XenoMarkers.module.css';
 
 /**
@@ -78,15 +79,35 @@ export const SectionBanner = ({ children, size, className = '', style }) => (
 /**
  * @param {SizedMarkerProps} props
  */
-export const SubSectionBanner = ({ children, size, className = '', style }) => (
-  <div
-    className={`${styles.subSectionBanner} ${className}`.trim()}
-    data-xeno-marker="subsection-banner"
-    style={withSizeStyle(size, style)}
-  >
-    {children}
-  </div>
-);
+export const SubSectionBanner = ({ children, size, className = '', style }) => {
+  const markerRef = React.useRef(/** @type {HTMLDivElement | null} */ (null));
+  const [inferredLabel, setInferredLabel] = React.useState('');
+  const hasExplicitChildren = children !== undefined && children !== null && children !== '';
+
+  React.useEffect(() => {
+    if (hasExplicitChildren || !markerRef.current) {
+      return;
+    }
+
+    const previousHeading = markerRef.current.previousElementSibling;
+    if (!(previousHeading instanceof HTMLHeadingElement)) {
+      return;
+    }
+
+    setInferredLabel(previousHeading.textContent?.trim() || '');
+  }, [hasExplicitChildren]);
+
+  return (
+    <div
+      ref={markerRef}
+      className={`${styles.subSectionBanner} ${className}`.trim()}
+      data-xeno-marker="subsection-banner"
+      style={withSizeStyle(size, style)}
+    >
+      {hasExplicitChildren ? children : inferredLabel}
+    </div>
+  );
+};
 
 // Optional `value` prop renders a right-aligned counter (e.g. value="3/3").
 /**

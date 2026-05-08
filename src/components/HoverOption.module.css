@@ -28,6 +28,35 @@
   vertical-align: bottom;
 }
 
+.videoShell {
+  position: relative;
+}
+
+.videoButton {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: zoom-in;
+}
+
+.videoButton:focus-visible {
+  outline: 3px solid var(--xeno-metallic-yellow);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+.lightboxVideo {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(100vh - 12rem);
+  border-radius: 8px;
+  background: black;
+}
+
 .placeholder {
   min-height: 120px;
   display: flex;

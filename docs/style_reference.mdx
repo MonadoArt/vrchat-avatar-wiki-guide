@@ -3,8 +3,6 @@ sidebar_position: 99
 title: Style Reference
 ---
 
-import { SectionTab, SectionBanner, SubSectionBanner, GaugeHeader } from '@site/src/components/XenoMarkers';
-import { LocationCard } from '@site/src/components/LocationCard';
 import { PlaceholderCard } from '@site/src/components/PlaceholderCard';
 import { XenoCardFrame } from '@site/src/components/XenoCardFrame';
 import { HoverOption, HoverVideo } from '@site/src/components/HoverOption';
@@ -28,13 +26,13 @@ The `##` above is what every `##` heading looks like automatically — no import
 <SubSectionBanner>SubSectionBanner</SubSectionBanner>
 ```in order to replace a subsection name with the banner do
 ### Subsection Name
-<SubSectionBanner>Subsection Name (this will replace the subsection on the page</SubSectionBanner>
+<SubSectionBanner />
 ```
 
 <GaugeHeader value="right value">GaugeHeader</GaugeHeader>
 
 ### Usage
-<SubSectionBanner>Usage</SubSectionBanner>
+<SubSectionBanner />
 
 Most of the time `##` headings are all you need. Use the explicit components when you need a tab label above a banner, a named sub-section break, or a gauge bar with a right-side value:
 
@@ -44,13 +42,14 @@ import { SectionTab, SectionBanner, SubSectionBanner, GaugeHeader } from '@site/
 <SectionTab>Optional</SectionTab>
 <SectionBanner>My Section</SectionBanner>
 
-<SubSectionBanner>Named Break</SubSectionBanner>
+### Named Break
+<SubSectionBanner />
 
 <GaugeHeader value="3/3">Progress Header</GaugeHeader>
 ```
 
 ### Sizing
-<SubSectionBanner>Sizing</SubSectionBanner>
+<SubSectionBanner />
 
 Every component accepts a `size` prop that sets its `font-size`. All internal dimensions use `em` units so everything scales proportionally:
 
@@ -63,7 +62,7 @@ Every component accepts a `size` prop that sets its `font-size`. All internal di
 Default sizes: `SectionTab` → `0.72rem`, `SectionBanner` → `1rem`, `SubSectionBanner` → `1.25rem`, `GaugeHeader` → `0.78rem`.
 
 ### ToC Behavior
-<SubSectionBanner>ToC Behavior</SubSectionBanner>
+<SubSectionBanner />
 
 The table of contents only picks up markdown `##` headings — JSX components are invisible to it. If a section using an explicit component also needs a ToC entry, place a `##` heading immediately before it:
 
@@ -80,7 +79,7 @@ The CSS collapses the `##` heading visually (the component shows instead) while 
 All card components share a dark frame with metallic-yellow rivets at each corner.
 
 ### LocationCard
-<SubSectionBanner>Location Card</SubSectionBanner>
+<SubSectionBanner />
 
 <LocationCard src="/img/settings-test.png" title="Settings" />
 
@@ -107,7 +106,7 @@ The `highlight` prop annotates regions of the screenshot. Coordinates are fracti
 ```
 
 ### PlaceholderCard
-<SubSectionBanner>Placeholder Card</SubSectionBanner>
+<SubSectionBanner />
 
 <PlaceholderCard title="Right-click Menu" text="Put a screenshot of the right-click menu here" />
 
@@ -120,7 +119,7 @@ import { PlaceholderCard } from '@site/src/components/PlaceholderCard';
 ```
 
 ### XenoCardFrame
-<SubSectionBanner>XenoCardFrame</SubSectionBanner>
+<SubSectionBanner />
 
 <XenoCardFrame title="Custom Content">
   <p style={{ padding: '1rem', color: 'white' }}>Anything here gets the riveted frame.</p>
@@ -145,7 +144,7 @@ Never hardcode hex or rgb values anywhere in CSS or JSX. Always reference the `-
 ## Layout
 
 ### DocsPageLead
-<SubSectionBanner>DocsPageLead</SubSectionBanner>
+<SubSectionBanner />
 
 Centers a short intro sentence directly under the page `h1`. Collapses its own bottom margin so it sits tight against whatever follows.
 
@@ -160,7 +159,7 @@ import { DocsPageLead } from '@site/src/components/DocsPageLead';
 ```
 
 ### DocsMediaRow
-<SubSectionBanner>DocsMediaRow</SubSectionBanner>
+<SubSectionBanner />
 
 Two-column layout: text on the left, a media card on the right. Stacks vertically on narrow viewports with the media below. The `media` prop takes any JSX, typically a `<LocationCard />` or `<HoverVideo />`.
 
@@ -176,7 +175,7 @@ and aligns to the bottom of the text column.
 ```
 
 ### HoverOption & HoverVideo
-<SubSectionBanner>HoverOption & HoverVideo</SubSectionBanner>
+<SubSectionBanner />
 
 Hover-aware wrapper for optional steps that have an accompanying video. Hovering the `<HoverOption>` block adds a warm left accent bar and plays the embedded `<HoverVideo>`. Omit `src` from `<HoverVideo>` to show a "Video coming soon" placeholder instead.
 
@@ -197,7 +196,7 @@ The hover effect degrades gracefully to plain content if JS is unavailable.
 ## Inline Icons
 
 ### VCC Interface Elements
-<SubSectionBanner>VCC Interface Elements</SubSectionBanner>
+<SubSectionBanner />
 
 These render inline replicas of VCC's own UI so prose instructions match what the reader sees. Import what you need:
 
@@ -274,7 +273,7 @@ Save your <UnityPackage /> file somewhere you can find it.
 ## Page Setup
 
 ### File Structure
-<SubSectionBanner>File Structure</SubSectionBanner>
+<SubSectionBanner />
 
 Every page is `.mdx` (not `.md`) so React components work inline. Frontmatter sets the sidebar position and title:
 
@@ -288,7 +287,7 @@ title: My Page
 Imports go right after the frontmatter block, before any content.
 
 ### Images & Assets
-<SubSectionBanner>Images & Assets</SubSectionBanner>
+<SubSectionBanner />
 
 Static images go in `static/img/`. In **markdown prose**, use the path as-is:
 
@@ -304,7 +303,7 @@ const src = useBaseUrl('/img/something.png');
 ```
 
 ### Admonitions
-<SubSectionBanner>Admonitions</SubSectionBanner>
+<SubSectionBanner />
 
 Callout boxes for things that need to stand out. Keep them short — one or two sentences max.
 
@@ -333,7 +332,7 @@ Callout boxes for things that need to stand out. Keep them short — one or two 
 :::
 
 ### CSS Architecture
-<SubSectionBanner>CSS Architecture</SubSectionBanner>
+<SubSectionBanner />
 
 The site CSS is split into six files loaded in dependency order from `src/css/custom.css`:
 

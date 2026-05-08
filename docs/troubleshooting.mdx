@@ -2,6 +2,9 @@
 sidebar_position: 5
 title: ⚠️ Troubleshooting
 ---
+import trustStyles from '@site/src/components/TrustRankRequirement.module.css';
+import { HoverOption, HoverVideo } from '@site/src/components/HoverOption';
+import { DocsMediaRow } from '@site/src/components/DocsMediaRow';
 
 # Common Errors
 
@@ -30,14 +33,21 @@ A reference for errors you're likely to run into when uploading or using avatars
 
 ---
 
-### Avatar doesn't appear in VRChat after upload
+### "VRCFury encountered an error."
+<SubsectionBanner />
 
-**Cause:** The upload may have succeeded but the avatar is still processing on VRChat's servers, or you're looking in the wrong place.
-
-**Fix:**
-1. Wait a few minutes and check **My Avatars** in the VRChat menu.
-2. Make sure you're logged into the same VRChat account in-game as you used for the upload.
-3. If it still doesn't appear, check the VRChat **Content Manager** in the SDK to confirm the upload completed.
+<div>
+    <div>
+    If you get this error while entering play mode or attempting to upload the model that means you are missing either **GoGoLoco** or **ADJerry's Facetracking Templates** while using an older version of the Avatar. <br />
+    Please either update the Lucario Avatar or remove "FT- Lucario ReUnited UE FaceTracking Prefab" or "GogoLoco Beyond - Lucario ReUnited  (VRCFury)" from the avatar in the Hierarchy. <br />
+    Compare your error to the images below to know which one to delete.
+    </div>
+    <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem", flexWrap: "nowrap" }}>
+        <LocationCard src="/img/troubleshooting/gogoloco-error.png" title="GoGoLoco Error" style={{ flex: "0 1 auto", minWidth: 0 }} />
+        <LocationCard src="/img/troubleshooting/vrcft-error.png" title="VRCFT Error" style={{ flex: "0 1 auto", minWidth: 0 }} imageHeight="301px" />
+        [The 1px is needed for the frames to align]: #
+    </div>
+</div>
 
 ---
 
@@ -49,13 +59,28 @@ A reference for errors you're likely to run into when uploading or using avatars
 
 ---
 
-### Texture import errors
+### Avatar shows as bright neon pink
+<SubsectionBanner />
 
-{/* Add details here */}
+<div className={trustStyles.row}>
+    <div className={trustStyles.content}>
+        If your avatar appears as neon pink you most likely are missing the Poiyomi Shaders! <br />
+        In order to fix you will need to install Poiyomi (Follow this [guide](./upload/installation#step-4---add-the-package-sources-to-vcc))
+    </div>
+    <div className={trustStyles.media}>
+        <LocationCard src="/img/troubleshooting/shader-error.png"/>
+    </div>
+</div>
+
+<HoverOption>
+<DocsMediaRow media={<HoverVideo src="/vid/troubleshooting/fixShadersGuide.mp4" title="Fixing Shaders" resetOnHover="true"/>}>
+Test
+</DocsMediaRow>
+</HoverOption>
 
 ---
 
-## Quest-specific errors
+## Quest-specific issues
 
 ### Quest avatar shows as a different avatar than PC
 

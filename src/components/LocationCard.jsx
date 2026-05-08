@@ -19,6 +19,8 @@
  * highlight can be a single object or an array of them.
  */
 
+import React from 'react';
+import { createPortal } from 'react-dom';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { XenoCardFrame, xenoCardFrameStyles } from './XenoCardFrame';
 
@@ -29,8 +31,78 @@ import { XenoCardFrame, xenoCardFrameStyles } from './XenoCardFrame';
  * } } HighlightOptions
  */
 
-export const LocationCard = ({ src, title, alt, style, highlight, topSpacing }) => {
+export const LocationCard = ({ src, title, alt, style, imageStyle, imageHeight, highlight, topSpacing }) => {
   const imgSrc = useBaseUrl(src);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [isRendered, setIsRendered] = React.useState(false);
+  const [isVisible, setIsVisible] = React.useState(false);
+  const dialogTitleId = React.useId();
+  const closeTimeoutRef = React.useRef(/** @type {ReturnType<typeof setTimeout> | null} */ (null));
+
+  const closeLightbox = React.useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  React.useEffect(() => {
+    if (isOpen) {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+        closeTimeoutRef.current = null;
+      }
+      setIsRendered(true);
+      return undefined;
+    }
+
+    setIsVisible(false);
+
+    if (!isRendered) {
+      return undefined;
+    }
+
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsRendered(false);
+      closeTimeoutRef.current = null;
+    }, 180);
+
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+        closeTimeoutRef.current = null;
+      }
+    };
+  }, [isOpen, isRendered]);
+
+  React.useEffect(() => {
+    if (!isRendered) {
+      return undefined;
+    }
+
+    const frameId = window.requestAnimationFrame(() => {
+      setIsVisible(true);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
+  }, [isRendered]);
+
+  React.useEffect(() => {
+    if (!isOpen) {
+      return undefined;
+    }
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        closeLightbox();
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [closeLightbox, isOpen]);
 
   if (highlight) {
     [highlight].flat().forEach((x, i) => {
@@ -43,14 +115,71 @@ export const LocationCard = ({ src, title, alt, style, highlight, topSpacing }) 
   }
 
   const percent = (x=0) => `${x*100}%`
+  const resolvedImageStyle = imageHeight
+    ? {
+        width: 'auto',
+        height: 'auto',
+        maxHeight: imageHeight,
+        maxWidth: '100%',
+        ...imageStyle,
+      }
+    : imageStyle;
+  const lightbox = isRendered && typeof document !== 'undefined' ? createPortal(
+    <div
+      className={`${xenoCardFrameStyles.lightbox} ${isVisible ? xenoCardFrameStyles.lightboxOpen : ''}`.trim()}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={dialogTitleId}
+      onClick={closeLightbox}
+    >
+      <div
+        className={`${xenoCardFrameStyles.lightboxPanel} ${isVisible ? xenoCardFrameStyles.lightboxPanelOpen : ''}`.trim()}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          type="button"
+          className={xenoCardFrameStyles.lightboxClose}
+          onClick={closeLightbox}
+          aria-label="Close enlarged image"
+        >
+          x
+        </button>
+        <img
+          src={imgSrc}
+          alt={alt || title || ''}
+          className={xenoCardFrameStyles.lightboxImage}
+          onClick={closeLightbox}
+        />
+        {(title || alt) && (
+          <div id={dialogTitleId} className={xenoCardFrameStyles.lightboxCaption}>
+            {title || alt}
+          </div>
+        )}
+      </div>
+    </div>,
+    document.body,
+  ) : null
 
   return (
-    <XenoCardFrame title={title} style={style} topSpacing={topSpacing}>
-      <div className={xenoCardFrameStyles.imageContainer}>
+    <>
+      <XenoCardFrame
+        title={title}
+        style={style}
+        topSpacing={topSpacing}
+        className={xenoCardFrameStyles.interactiveCard}
+      >
+        <button
+          type="button"
+          className={xenoCardFrameStyles.imageButton}
+          onClick={() => setIsOpen(true)}
+          aria-label={`Open enlarged image${title ? `: ${title}` : ''}`}
+        >
+          <div className={xenoCardFrameStyles.imageContainer}>
           <img
             src={imgSrc}
             alt={alt || title || ''}
             className={`${xenoCardFrameStyles.image}${highlight ? ` ${xenoCardFrameStyles.darkened}` : ''}`}
+            style={resolvedImageStyle}
           />
           {highlight && [highlight].flat().map((/** @type {HighlightOptions} */ hi, i) =>
           <div className={xenoCardFrameStyles.highlight} key={(hi.text||"")+i} style={{
@@ -66,7 +195,10 @@ export const LocationCard = ({ src, title, alt, style, highlight, topSpacing }) 
             data-hi-width  = {hi.w}
             data-hi-height = {hi.h}
           >{hi.text || ""}</div>)}
-      </div>
-    </XenoCardFrame>
+          </div>
+        </button>
+      </XenoCardFrame>
+      {lightbox}
+    </>
   );
 };

@@ -1,12 +1,13 @@
 /**
- * HoverOption + HoverVideo
+ * HoverOption + VideoFrame
  *
  * HoverOption  - hover-aware wrapper. Adds a warm background highlight and
  *                left accent on hover. Provides hover state via context.
  *
- * HoverVideo   - video card that plays when its parent HoverOption is hovered.
+ * VideoFrame   - framed video card with optional hover-driven playback.
  *                Drop it anywhere inside a HoverOption. Styled identically to
- *                LocationCard (same frame, rivets, label capsule).
+ *                LocationCard (same frame, rivets, label capsule), and can
+ *                be expanded into a fullscreen player with native controls.
  *
  * Usage - keep your existing MDX layout, just wrap it and swap PlaceholderCard:
  *
@@ -19,21 +20,25 @@
  *       </div>
  *       <div style={{flexShrink:0, width:'220px', maxWidth:'100%'}}>
  *
- *         <HoverVideo src="/video/option-a.mp4" title="Right-click Menu" />
+ *         <VideoFrame src="/video/option-a.mp4" title="Right-click Menu" />
  *
  *       </div>
  *     </div>
  *   </HoverOption>
  *
  * `src` is optional - omit it while the video isn't ready and a placeholder is shown.
+ * `hover` enables hover-controlled play/pause. Defaults to false.
+ * `resetOnUnfocus` rewinds when hover is lost. Defaults to false.
+ * `resetOnHover` rewinds when hover begins. Defaults to false.
  */
 
-import { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { createContext, createElement, useCallback, useContext, useEffect, useId, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { XenoCardFrame, xenoCardFrameStyles } from './XenoCardFrame';
 import styles from './HoverOption.module.css';
 
-const HoverOptionContext = createContext(false);
+const HoverOptionContext = createContext(/** @type {boolean | null} */ (null));
 
 export const HoverOption = ({ children }) => {
   const [hovered, setHovered] = useState(false);
@@ -51,34 +56,249 @@ export const HoverOption = ({ children }) => {
   );
 };
 
-export const HoverVideo = ({ src, title }) => {
+export const VideoFrame = ({
+  src,
+  title,
+  hover = false,
+  resetOnUnfocus = false,
+  resetOnHover = false,
+}) => {
   const hovered = useContext(HoverOptionContext);
-  const videoRef = useRef(null);
+  const hasHoverOptionParent = hovered !== null;
+  const previewVideoRef = useRef(null);
+  const lightboxVideoRef = useRef(null);
+  const previousHoveredRef = useRef(hovered);
   const resolvedSrc = useBaseUrl(src ?? '/');
+  const [isOpen, setIsOpen] = useState(false);
+  const [isRendered, setIsRendered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [resumeTime, setResumeTime] = useState(0);
+  const closeTimeoutRef = useRef(/** @type {ReturnType<typeof setTimeout> | null} */ (null));
+  const dialogTitleId = useId();
+
+  const closeLightbox = useCallback(() => {
+    if (lightboxVideoRef.current) {
+      setResumeTime(lightboxVideoRef.current.currentTime);
+    }
+    setIsOpen(false);
+  }, []);
+
+  const handlePreviewMouseEnter = useCallback(() => {
+    if (!resetOnHover || hasHoverOptionParent || !previewVideoRef.current || isOpen) {
+      return;
+    }
+
+    previewVideoRef.current.currentTime = 0;
+    setResumeTime(0);
+
+    if (previewVideoRef.current.paused) {
+      previewVideoRef.current.play().catch(() => {
+        // Silently ignore autoplay policy blocks.
+      });
+    }
+  }, [hasHoverOptionParent, isOpen, resetOnHover]);
 
   useEffect(() => {
-    if (!videoRef.current) return;
+    if (!resetOnHover || !hasHoverOptionParent || !previewVideoRef.current || isOpen) {
+      previousHoveredRef.current = hovered;
+      return;
+    }
+
+    if (!previousHoveredRef.current && hovered) {
+      previewVideoRef.current.currentTime = 0;
+      setResumeTime(0);
+
+      if (previewVideoRef.current.paused) {
+        previewVideoRef.current.play().catch(() => {
+          // Silently ignore autoplay policy blocks.
+        });
+      }
+    }
+
+    previousHoveredRef.current = hovered;
+  }, [hasHoverOptionParent, hovered, isOpen, resetOnHover]);
+
+  useEffect(() => {
+    if (isOpen) {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+        closeTimeoutRef.current = null;
+      }
+      setIsRendered(true);
+      return undefined;
+    }
+
+    setIsVisible(false);
+
+    if (!isRendered) {
+      return undefined;
+    }
+
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsRendered(false);
+      closeTimeoutRef.current = null;
+    }, 180);
+
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+        closeTimeoutRef.current = null;
+      }
+    };
+  }, [isOpen, isRendered]);
+
+  useEffect(() => {
+    if (!isRendered) {
+      return undefined;
+    }
+
+    const frameId = window.requestAnimationFrame(() => {
+      setIsVisible(true);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
+  }, [isRendered]);
+
+  useEffect(() => {
+    if (!previewVideoRef.current || isOpen) return;
+
+    if (!hover) {
+      previewVideoRef.current.play().catch(() => {
+        // Silently ignore autoplay policy blocks (e.g. Safari strict mode).
+      });
+      return undefined;
+    }
+
     if (hovered) {
-      videoRef.current.play().catch(() => {
+      previewVideoRef.current.play().catch(() => {
         // Silently ignore autoplay policy blocks (e.g. Safari strict mode).
       });
     } else {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
+      previewVideoRef.current.pause();
+      if (resetOnUnfocus) {
+        previewVideoRef.current.currentTime = 0;
+        setResumeTime(0);
+      } else {
+        setResumeTime(previewVideoRef.current.currentTime);
+      }
     }
-  }, [hovered]);
+
+    return undefined;
+  }, [hover, hovered, isOpen, resetOnUnfocus, resumeTime]);
+
+  useEffect(() => {
+    if (!previewVideoRef.current || isOpen) {
+      return;
+    }
+
+    if (Math.abs(previewVideoRef.current.currentTime - resumeTime) < 0.05) {
+      return;
+    }
+
+    previewVideoRef.current.currentTime = resumeTime;
+  }, [isOpen, resumeTime]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return undefined;
+    }
+
+    if (previewVideoRef.current) {
+      setResumeTime(previewVideoRef.current.currentTime);
+    }
+    previewVideoRef.current?.pause();
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        closeLightbox();
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [closeLightbox, isOpen]);
+
+  useEffect(() => {
+    if (!isVisible || !lightboxVideoRef.current) {
+      return;
+    }
+
+    lightboxVideoRef.current.currentTime = resumeTime;
+    lightboxVideoRef.current.play().catch(() => {
+      // Silently ignore autoplay policy blocks.
+    });
+  }, [isVisible, resumeTime]);
+
+  const lightbox = src && isRendered && typeof document !== 'undefined'
+    ? createPortal(
+        <div
+          className={`${xenoCardFrameStyles.lightbox} ${isVisible ? xenoCardFrameStyles.lightboxOpen : ''}`.trim()}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={dialogTitleId}
+          onClick={closeLightbox}
+        >
+          <div
+            className={`${xenoCardFrameStyles.lightboxPanel} ${isVisible ? xenoCardFrameStyles.lightboxPanelOpen : ''}`.trim()}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className={xenoCardFrameStyles.lightboxClose}
+              onClick={closeLightbox}
+              aria-label="Close enlarged video"
+            >
+              x
+            </button>
+            <video
+              ref={lightboxVideoRef}
+              src={resolvedSrc}
+              controls
+              playsInline
+              className={styles.lightboxVideo}
+            />
+            {title && (
+              <div id={dialogTitleId} className={xenoCardFrameStyles.lightboxCaption}>
+                {title}
+              </div>
+            )}
+          </div>
+        </div>,
+        document.body,
+      )
+    : null;
 
   return (
-    <XenoCardFrame title={title} topSpacing="none">
+    <>
+    <XenoCardFrame
+      title={title}
+      topSpacing="none"
+      className={src ? xenoCardFrameStyles.interactiveCard : ''}
+    >
       {src ? (
-        <video
-          ref={videoRef}
-          src={resolvedSrc}
-          muted
-          loop
-          playsInline
-          className={`${styles.videoMedia} ${xenoCardFrameStyles.mediaBlock}`}
-        />
+        <div className={styles.videoShell}>
+          <button
+            type="button"
+            className={styles.videoButton}
+            onClick={() => setIsOpen(true)}
+            onMouseEnter={handlePreviewMouseEnter}
+            aria-label={`Open enlarged video${title ? `: ${title}` : ''}`}
+          >
+            <video
+              ref={previewVideoRef}
+              src={resolvedSrc}
+              muted
+              loop
+              playsInline
+              className={`${styles.videoMedia} ${xenoCardFrameStyles.mediaBlock}`}
+            />
+          </button>
+        </div>
       ) : (
         <div className={styles.placeholder}>
           <span className={styles.placeholderIcon}>{'\u25B6'}</span>
@@ -86,5 +306,9 @@ export const HoverVideo = ({ src, title }) => {
         </div>
       )}
     </XenoCardFrame>
+    {lightbox}
+    </>
   );
 };
+
+export const HoverVideo = (props) => createElement(VideoFrame, props);
