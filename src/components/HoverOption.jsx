@@ -315,9 +315,8 @@ export const VideoFrame = ({
               loop
               playsInline
               preload="metadata"
-              onCanPlay={() => setIsLoaded(true)}
               onWaiting={() => setIsBuffering(true)}
-              onPlaying={() => setIsBuffering(false)}
+              onPlaying={() => { setIsLoaded(true); setIsBuffering(false); }}
               className={`${styles.videoMedia} ${xenoCardFrameStyles.mediaBlock}`}
             />
           </button>
