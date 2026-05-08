@@ -6,6 +6,69 @@ hide_title: true
 hide_table_of_contents: true
 ---
 
-import { HomeLandingSection } from '@site/src/components/HomeLandingSection';
+import { HomeLandingSection, LandingCard, CardGrid } from '@site/src/components/HomeLandingSection';
+import { SectionBanner } from '@site/src/components/XenoMarkers';
 
-<HomeLandingSection />
+<HomeLandingSection brandName="Lucario ReUnited">
+
+Monado Art avatars are free — this wiki, the public avatar, and the showcase world are all part of that.
+Keeping the project alive and growing takes time and resources, so if you get value out of any of it,
+consider picking up a support pack or throwing a few coins in the jar. It directly funds new avatars, updates, and content.
+
+<SectionBanner>Support the Project</SectionBanner>
+
+Support packs and donations are what make free avatars possible.
+Supporters also get early access to new content before it goes public.
+
+<CardGrid cols={3}>
+  <LandingCard
+    title="Gumroad"
+    aspectRatio="16/9"
+    description="Browse support packs and paid assets. Purchases go directly toward funding new content."
+    buttons={[{ label: 'Visit Gumroad', to: 'https://monadoart.gumroad.com/', external: true }]}
+  />
+  <LandingCard
+    title="Patreon"
+    aspectRatio="16/9"
+    description="Monthly support with early access to new avatars and content before public release."
+    buttons={[{ label: 'Visit Patreon', to: 'https://patreon.com/Monado_Art', external: true }]}
+  />
+  <LandingCard
+    title="Ko-fi"
+    aspectRatio="16/9"
+    description="One-time donations or memberships — no subscription commitment needed."
+    buttons={[{ label: 'Visit Ko-fi', to: 'https://ko-fi.com/monadoart', external: true }]}
+  />
+</CardGrid>
+
+<SectionBanner>Free Public Content</SectionBanner>
+
+No purchase required — grab the free public avatar or visit the showcase world in VRChat.
+
+<CardGrid cols={2}>
+  <LandingCard
+    title="Public Avatar"
+    description="A free public version of the avatar available directly in VRChat."
+    buttons={[{ label: 'Get Avatar', to: 'https://vrchat.com', external: true }]}
+  />
+  <LandingCard
+    title="Avatar World"
+    description="Try on avatars in the in-world showcase before deciding what to get."
+    buttons={[{ label: 'Visit World', to: 'https://vrchat.com', external: true }]}
+  />
+</CardGrid>
+
+<SectionBanner>Getting Started</SectionBanner>
+
+Already have an avatar and need help setting it up? The wiki covers everything from installation to upload.
+
+<CardGrid cols={1}>
+  <LandingCard
+    title="Avatar Wiki"
+    description="Step-by-step guides for importing, customising, and uploading your avatar into VRChat."
+    image="/img/yougotanymoreofthempixels.jpg"
+    buttons={[{ label: 'Start Here', to: '/docs/upload/installation' }]}
+  />
+</CardGrid>
+
+</HomeLandingSection>

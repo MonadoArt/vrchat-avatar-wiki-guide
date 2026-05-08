@@ -31,7 +31,9 @@
 }
 
 [class*='docItemCol'] {
-  background: var(--xeno-brown-dark) !important;
+  background:
+    linear-gradient(to bottom, rgb(20 14 6 / 70%) 0%, transparent 12rem),
+    var(--xeno-brown-dark) !important;
   border-radius: 1rem;
   padding: 1.5rem !important;
   box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);

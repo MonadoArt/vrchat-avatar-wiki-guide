@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'Wiki site',
   tagline: 'figure out something witty and funny to put here',
-  favicon: 'img/logo.png',
+  favicon: 'img/logo/logo_kanji.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -96,7 +96,7 @@ themes: [
       title: 'Monado Art!',
       logo: {
         alt: 'Monado Art Logo',
-        src: 'img/logo.png',
+        src: 'img/logo/logo_kanji.png',
       },
       items: [
         {

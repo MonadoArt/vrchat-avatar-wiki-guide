@@ -1,56 +1,56 @@
 import type { ReactNode } from 'react';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import IconExternalLink from '@theme/Icon/ExternalLink';
 import { GaugeHeader } from '@site/src/components/XenoMarkers';
 import { XenoCardFrame } from '@site/src/components/XenoCardFrame';
 
 import styles from './HomeLandingSection.module.css';
 
-type ButtonDef = {
+export type ButtonDef = {
   label: string;
   to: string;
   external?: boolean;
 };
 
-type CardProps = {
+export type CardDef = {
   title: string;
   description: string;
   image?: string;
+  aspectRatio?: '4/3' | '16/9';
   buttons: ButtonDef[];
 };
 
-const btnClass = 'button button--secondary';
+type Props = {
+  logoPath: string;
+  brandName: string;
+  children: ReactNode;
+};
 
-function CardButton({ label, to, external }: ButtonDef) {
+function CardButton({ label, to, external, className = '' }: ButtonDef & { className?: string }) {
+  const btnClass = `button button--secondary ${styles.cardBtn} ${className}`;
   if (external) {
     return (
-      <a className={`${btnClass} ${styles.cardBtn}`.trim()} href={to} target="_blank" rel="noopener noreferrer">
+      <a className={btnClass} href={to} target="_blank" rel="noopener noreferrer">
         <span>{label}</span>
         <IconExternalLink />
       </a>
     );
   }
-
   return (
-    <Link className={`${btnClass} ${styles.cardBtn}`.trim()} to={to}>
+    <Link className={btnClass} to={to}>
       {label}
     </Link>
   );
 }
 
-function LandingCard({ title, description, image, buttons }: CardProps) {
+export function LandingCard({ title, description, image, aspectRatio = '4/3', buttons }: CardDef) {
+  const imgSrc = useBaseUrl(image ?? '');
   return (
-    <XenoCardFrame
-      title={title}
-      className={styles.card}
-      frameClassName={styles.cardFrame}
-      labelClassName={styles.cardLabel}
-    >
-      <div className={styles.cardImage}>
+    <XenoCardFrame title={title} className={styles.card} frameClassName={styles.cardFrame} labelClassName={styles.cardLabel}>
+      <div className={styles.cardImage} style={{ '--card-aspect-ratio': aspectRatio } as React.CSSProperties}>
         {image ? (
-          <img src={useBaseUrl(image)} alt={title} className={styles.cardImg} />
+          <img src={imgSrc} alt={title} className={styles.cardImg} />
         ) : (
           <div className={styles.cardImagePlaceholder} />
         )}
@@ -60,8 +60,8 @@ function LandingCard({ title, description, image, buttons }: CardProps) {
       </div>
       <div className={styles.cardFooter}>
         <div className={styles.cardButtons}>
-          {buttons.map((btn) => (
-            <CardButton key={btn.label} {...btn} />
+          {buttons.map((btn, i) => (
+            <CardButton key={btn.label} {...btn} className={i === 0 ? styles.cardLink : styles.cardBtnSecondary} />
           ))}
         </div>
       </div>
@@ -69,43 +69,30 @@ function LandingCard({ title, description, image, buttons }: CardProps) {
   );
 }
 
-export function HomeLandingSection(): ReactNode {
-  const { siteConfig } = useDocusaurusContext();
+export function CardGrid({ children, cols = 3 }: { children: ReactNode; cols?: number }) {
+  return (
+    <div
+      className={styles.cards}
+      style={{ '--card-cols': String(cols) } as React.CSSProperties}
+    >
+      {children}
+    </div>
+  );
+}
+
+export function HomeLandingSection({ logoPath, brandName, children }: Props): ReactNode {
+  const logoSrc = useBaseUrl(logoPath);
 
   return (
-    <div className={styles.root}>
-      <div className={styles.hero}>
-        <GaugeHeader size="3rem" className={styles.heroGauge}>
-          <img src={useBaseUrl('/img/logo.png')} alt="" className={styles.gaugeLogoImg} />
-          Monado Art
-        </GaugeHeader>
-        <div className={styles.intro}>
-          <h1 className={styles.introTitle}>{siteConfig.title}</h1>
-          <p className={styles.introTagline}>{siteConfig.tagline}</p>
+    <div className={styles.contentBox} data-page="intro">
+      <div className={styles.root}>
+        <div className={styles.hero}>
+          <GaugeHeader size="3rem" className={styles.heroGauge}>
+            {brandName}
+          </GaugeHeader>
         </div>
-      </div>
-
-      <div className={styles.container}>
-        <div className={styles.cards}>
-          <LandingCard
-            title="Avatar Wiki"
-            description="Step-by-step guides for importing, customising, and uploading your avatar into VRChat."
-            image="/img/yougotanymoreofthempixels.jpg"
-            buttons={[{ label: 'Start Here', to: '/docs/upload/installation' }]}
-          />
-          <LandingCard
-            title="Store Pages"
-            description="Browse avatars and assets available for free over at Gumroad."
-            buttons={[{ label: 'Gumroad', to: 'https://monadoart.gumroad.com/', external: true }]}
-          />
-          <LandingCard
-            title="Patreon and Ko-fi"
-            description="If you think the project is cool and want to support it, consider donating! It helps cover hosting costs and gives you early access to content!"
-            buttons={[
-              { label: 'Visit Patreon', to: 'https://patreon.com/Monado_Art', external: true },
-              { label: 'Visit Ko-fi', to: 'https://ko-fi.com/monadoart', external: true },
-            ]}
-          />
+        <div className={styles.container}>
+          {children}
         </div>
       </div>
     </div>
