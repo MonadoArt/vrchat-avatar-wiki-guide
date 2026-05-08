@@ -23,16 +23,6 @@ export const VCC_PACKAGE_GROUPS = {
   ],
   optional: [
     {
-      id: 'gogoloco',
-      name: 'GoGoLoco',
-      description: 'Adds movement options like sitting and laying down anywhere in VRChat.',
-      url: 'vcc://vpm/addRepo?url=https://Spokeek.github.io/goloco/index.json',
-      fallback: 'https://Spokeek.github.io/goloco/index.json',
-      iconPath: '/img/vpm/gogoloco.png',
-      installTagline: '(Optional) - Used for flight and body poses without FullBody Tracking',
-      installNote: null,
-    },
-    {
       id: 'facetracking',
       name: "ADJerry's Face Tracking Templates",
       installName: "VRCFT - Jerry's Templates",
@@ -41,6 +31,16 @@ export const VCC_PACKAGE_GROUPS = {
       fallback: 'https://Adjerry91.github.io/VRCFaceTracking-Templates/index.json',
       iconPath: '/img/vpm/facetracking.png',
       installTagline: '(Optional) - Used for Face Tracking',
+      installNote: null,
+    },
+    {
+      id: 'gogoloco',
+      name: 'GoGoLoco',
+      description: 'Adds movement options like sitting and laying down anywhere in VRChat.',
+      url: 'vcc://vpm/addRepo?url=https://Spokeek.github.io/goloco/index.json',
+      fallback: 'https://Spokeek.github.io/goloco/index.json',
+      iconPath: '/img/vpm/gogoloco.png',
+      installTagline: '(Optional) - Used for flight and body poses without FullBody Tracking',
       installNote: null,
     },
   ],
