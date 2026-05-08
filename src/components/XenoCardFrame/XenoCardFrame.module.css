@@ -141,7 +141,6 @@
   background: radial-gradient(circle at center, transparent 50%, color-mix(in srgb, var(--xeno-decor-mid-base), transparent 60%) 200%);
   border-radius: 0.5rem;
   backdrop-filter: brightness(2);
-  -webkit-backdrop-filter: brightness(2);
 }
 
 .darkened {
@@ -155,7 +154,6 @@
 .imageContainer:hover .highlight {
   opacity: 30%;
   backdrop-filter: brightness(1);
-  -webkit-backdrop-filter: brightness(1);
 }
 
 .staticHighlightContainer.imageContainer:hover .darkened {
@@ -165,7 +163,6 @@
 .staticHighlightContainer.imageContainer:hover .highlight {
   opacity: 1;
   backdrop-filter: brightness(2);
-  -webkit-backdrop-filter: brightness(2);
 }
 
 .mediaBlock {
@@ -182,7 +179,6 @@
   padding: 2rem;
   background: rgb(10 12 18 / 86%);
   backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
   opacity: 0;
 }
 
