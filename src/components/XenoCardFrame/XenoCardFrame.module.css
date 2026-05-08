@@ -2,8 +2,6 @@
   position: relative;
   display: inline-block;
   margin: 1.4em 0 0.75em 0;
-  --dark: 0.5;
-  --dark-inverse: 2; /* 1 / (1 - 0.5) */
 }
 
 .frame {
@@ -142,12 +140,12 @@
   border: 4px dotted var(--xeno-decor-mid-base);
   background: radial-gradient(circle at center, transparent 50%, color-mix(in srgb, var(--xeno-decor-mid-base), transparent 60%) 200%);
   border-radius: 0.5rem;
-  backdrop-filter: brightness(var(--dark-inverse));
-  -webkit-backdrop-filter: brightness(var(--dark-inverse));
+  backdrop-filter: brightness(2);
+  -webkit-backdrop-filter: brightness(2);
 }
 
 .darkened {
-  filter: brightness(calc(1 - var(--dark)));
+  filter: brightness(0.5);
 }
 
 .imageContainer:hover .darkened {
@@ -161,13 +159,13 @@
 }
 
 .staticHighlightContainer.imageContainer:hover .darkened {
-  filter: brightness(calc(1 - var(--dark)));
+  filter: brightness(0.5);
 }
 
 .staticHighlightContainer.imageContainer:hover .highlight {
   opacity: 1;
-  backdrop-filter: brightness(var(--dark-inverse));
-  -webkit-backdrop-filter: brightness(var(--dark-inverse));
+  backdrop-filter: brightness(2);
+  -webkit-backdrop-filter: brightness(2);
 }
 
 .mediaBlock {
