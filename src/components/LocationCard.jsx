@@ -145,7 +145,7 @@ export const LocationCard = ({ src, title, alt, style, imageStyle, imageHeight, 
           onClick={closeLightbox}
           aria-label="Close enlarged image"
         />
-        <div className={`${xenoCardFrameStyles.imageContainer}${staticHighlight ? ` ${xenoCardFrameStyles.staticHighlightContainer}` : ''}`} style={{ '--dark': 0.5 }}>
+        <div className={`${xenoCardFrameStyles.imageContainer}${staticHighlight ? ` ${xenoCardFrameStyles.staticHighlightContainer}` : ''}`} style={{ '--dark': 0.5, '--dark-inverse': 2 }}>
           <img
             src={imgSrc}
             alt={alt || title || ''}
