@@ -18,13 +18,6 @@ export const VccIcon = ({ size = '1.2em' }) => (
   />
 );
 
-export const VccAppBadge = ({ label = 'Creator Companion' }) => (
-  <span className={styles.vccAppBadge}>
-    <img src={useBaseUrl('/img/vcc-favicon.ico')} alt="" aria-hidden="true" className={styles.vccAppIcon} />
-    <span>{label}</span>
-  </span>
-);
-
 export const VccProjectsLabel = () => (
   <span className={styles.vccSidebarItem}>
     <svg

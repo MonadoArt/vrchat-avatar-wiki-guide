@@ -5,14 +5,20 @@ title: Style Reference
 
 import { SectionTab, SectionBanner, SubSectionBanner, GaugeHeader } from '@site/src/components/XenoMarkers';
 import { LocationCard } from '@site/src/components/LocationCard';
+import { PlaceholderCard } from '@site/src/components/PlaceholderCard';
+import { XenoCardFrame } from '@site/src/components/XenoCardFrame';
+import { HoverOption, HoverVideo } from '@site/src/components/HoverOption';
+import { DocsMediaRow } from '@site/src/components/DocsMediaRow';
+import { DocsPageLead } from '@site/src/components/DocsPageLead';
+import { VccIcon, VccProjectsLabel, VccManageProjectLabel, AddIcon, RemoveIcon, VersionNone, VersionInstalled } from '@site/src/components/InstallationInlineUi/InstallationInlineUi';
 import ColorTokenPalette from '@site/src/components/ColorTokenPalette';
 import { UnityIconReference } from '@site/src/components/UnityIconReference';
 
-## Style Reference
+Visual reference and usage guide for every component and style used across this wiki.
 
-Quick visual reference for every heading and ribbon style used across this wiki.
+## Headings & Ribbons
 
-### Ribbons
+The `##` above is what every `##` heading looks like automatically — no import needed. The XenoMarkers components give explicit control over the same shapes.
 
 <SectionTab>SectionTab</SectionTab>
 <SectionBanner>SectionBanner</SectionBanner>
@@ -20,101 +26,21 @@ Quick visual reference for every heading and ribbon style used across this wiki.
 <br />
 
 <SubSectionBanner>SubSectionBanner</SubSectionBanner>
+```in order to replace a subsection name with the banner do
+### Subsection Name
+<SubSectionBanner>Subsection Name (this will replace the subsection on the page</SubSectionBanner>
+```
 
 <GaugeHeader value="right value">GaugeHeader</GaugeHeader>
 
-`##` headings automatically get the SectionBanner style:
+### Usage
+<SubSectionBanner>Usage</SubSectionBanner>
 
-## Default h2 (auto SectionBanner)
-
-### Location Card
-
-<LocationCard src="/img/settings-test.png" title="Settings" />
-
-To not have a title just have the title be emtpy
-
-### Colors
-
-<ColorTokenPalette />
-
----
-
-## Contributing
-
-This section is for anyone adding or editing pages. Read it before touching anything.
-
-### Admonitions
-
-<SubSectionBanner>Admonitions</SubSectionBanner>
-
-Admonitions are callout boxes for things that need to stand out. Keep them short and punchy - one or two sentences max. Here are all the available types:
-
-:::note
-This is a **note**. Use it for neutral extra context that's helpful but not critical. Tag: `:::note`
-:::
-
-:::tip
-This is a **tip**. Use it for shortcuts, recommendations, or things that make life easier. Tag: `:::tip`
-:::
-
-:::info
-This is an **info** box. Use it for background context the reader might not know. Tag: `:::info`
-:::
-
-:::caution
-This is a **caution**. Use it for things that are easy to get wrong or miss. Also used as a placeholder marker for screenshots that still need to be added. Tag: `:::caution`
-:::
-
-:::warning
-This is a **warning**. Use it for things that can actually break something if ignored. Tag: `:::warning`
-:::
-
-:::danger
-This is **danger**. Use it sparingly - only for things with serious consequences. Tag: `:::danger`
-:::
-
-For screenshot placeholders specifically, the convention is:
-
-```
-:::caution
-Put an image of X here
-:::
-```
-
-Don't remove these - they mark where screenshots still need to go. When you have the screenshot, replace the whole block with a standard image tag.
-
-### Page Structure
-
-<SubSectionBanner>Page Structure</SubSectionBanner>
-
-Every page file is `.mdx` (not `.md`) so React components work inline. The frontmatter at the top sets the sidebar position and title:
+Most of the time `##` headings are all you need. Use the explicit components when you need a tab label above a banner, a named sub-section break, or a gauge bar with a right-side value:
 
 ```mdx
----
-sidebar_position: 2
-title: My Page
----
-```
+import { SectionTab, SectionBanner, SubSectionBanner, GaugeHeader } from '@site/src/components/XenoMarkers';
 
-To use any of the style components, import them at the top of the file right after the frontmatter block:
-
-```mdx
-import { SectionBanner, SubSectionBanner, GaugeHeader, SectionTab } from '@site/src/components/XenoMarkers';
-```
-
-### Using the Style Components
-
-<SubSectionBanner>Using the Style Components</SubSectionBanner>
-
-Most of the time you just need `##` headings - they automatically get the SectionBanner style with no import required:
-
-```mdx
-## My Section
-```
-
-Use the explicit components when you need something the auto-style can't do, like a tab label above a banner, a named sub-section break, or a gauge bar with a right-side value:
-
-```mdx
 <SectionTab>Optional</SectionTab>
 <SectionBanner>My Section</SectionBanner>
 
@@ -123,11 +49,10 @@ Use the explicit components when you need something the auto-style can't do, lik
 <GaugeHeader value="3/3">Progress Header</GaugeHeader>
 ```
 
-### Sizing Overrides
+### Sizing
+<SubSectionBanner>Sizing</SubSectionBanner>
 
-<SubSectionBanner>Sizing Overrides</SubSectionBanner>
-
-Every component accepts a `size` prop that sets its `font-size`. Because all internal dimensions (padding, taper depth, margins) use `em` units, everything scales proportionally - you only need to change one value:
+Every component accepts a `size` prop that sets its `font-size`. All internal dimensions use `em` units so everything scales proportionally:
 
 ```mdx
 <SectionBanner size="0.8rem">Smaller than default</SectionBanner>
@@ -137,11 +62,10 @@ Every component accepts a `size` prop that sets its `font-size`. Because all int
 
 Default sizes: `SectionTab` → `0.72rem`, `SectionBanner` → `1rem`, `SubSectionBanner` → `1.25rem`, `GaugeHeader` → `0.78rem`.
 
-### ToC and Components
+### ToC Behavior
+<SubSectionBanner>ToC Behavior</SubSectionBanner>
 
-<SubSectionBanner>ToC and Components</SubSectionBanner>
-
-The table of contents only picks up markdown `##` headings - JSX components are invisible to it. If a section using an explicit component also needs a ToC entry, add a `##` heading immediately before it:
+The table of contents only picks up markdown `##` headings — JSX components are invisible to it. If a section using an explicit component also needs a ToC entry, place a `##` heading immediately before it:
 
 ```mdx
 ## My Section
@@ -149,11 +73,222 @@ The table of contents only picks up markdown `##` headings - JSX components are 
 <SectionBanner>My Section</SectionBanner>
 ```
 
-The CSS collapses the `##` heading visually (so the component shows instead) while keeping the anchor alive for the ToC link.
+The CSS collapses the `##` heading visually (the component shows instead) while keeping the anchor alive for the ToC link.
 
-### Images and Assets
+## Cards
 
-<SubSectionBanner>Images and Assets</SubSectionBanner>
+All card components share a dark frame with metallic-yellow rivets at each corner.
+
+### LocationCard
+<SubSectionBanner>Location Card</SubSectionBanner>
+
+<LocationCard src="/img/settings-test.png" title="Settings" />
+
+Shows a screenshot inside the card frame with an optional floating pill label above it. `src` is passed through `useBaseUrl` automatically — use the `/img/` path as-is.
+
+```mdx
+import { LocationCard } from '@site/src/components/LocationCard';
+
+<LocationCard src="/img/settings-panel.png" title="Settings" />
+<LocationCard src="/img/something.png" />  {/* no label */}
+```
+
+The `highlight` prop annotates regions of the screenshot. Coordinates are fractions of the image (0–1). Highlighted regions pulse with a gold border; hovering fades them so the full image is visible. `grow` expands a region outward by that many pixels on every side:
+
+```mdx
+<LocationCard
+  src="/img/panel.png"
+  title="Panel"
+  highlight={[
+    { l: 0.05, t: 0.1, w: 0.4, h: 0.15, text: "Name field" },
+    { l: 0.6,  t: 0.7, w: 0.3, h: 0.2,  text: "Save button", grow: 4 },
+  ]}
+/>
+```
+
+### PlaceholderCard
+<SubSectionBanner>Placeholder Card</SubSectionBanner>
+
+<PlaceholderCard title="Right-click Menu" text="Put a screenshot of the right-click menu here" />
+
+Same frame and rivets as `LocationCard`, but shows a caution area instead of an image. Use it anywhere a screenshot is still needed and replace the whole tag with a `<LocationCard>` once the real image is ready.
+
+```mdx
+import { PlaceholderCard } from '@site/src/components/PlaceholderCard';
+
+<PlaceholderCard title="Settings Panel" text="Put a screenshot of the Settings panel here" />
+```
+
+### XenoCardFrame
+<SubSectionBanner>XenoCardFrame</SubSectionBanner>
+
+<XenoCardFrame title="Custom Content">
+  <p style={{ padding: '1rem', color: 'white' }}>Anything here gets the riveted frame.</p>
+</XenoCardFrame>
+
+The raw frame primitive used by `LocationCard` and `PlaceholderCard`. Use it directly when you need the riveted frame around non-image content. Accepts `title`, `style`, `className`, `frameClassName`, `labelClassName`, `frameStyle`, `labelStyle`, and `topSpacing="none"` to suppress the margin reserved for the floating label.
+
+```mdx
+import { XenoCardFrame } from '@site/src/components/XenoCardFrame';
+
+<XenoCardFrame title="Custom Content">
+  <p style={{ padding: '1rem', color: 'white' }}>Anything here gets the riveted frame.</p>
+</XenoCardFrame>
+```
+
+## Colors
+
+<ColorTokenPalette />
+
+Never hardcode hex or rgb values anywhere in CSS or JSX. Always reference the `--xeno-*` CSS variables defined in `src/css/custom.css`.
+
+## Layout
+
+### DocsPageLead
+<SubSectionBanner>DocsPageLead</SubSectionBanner>
+
+Centers a short intro sentence directly under the page `h1`. Collapses its own bottom margin so it sits tight against whatever follows.
+
+```mdx
+import { DocsPageLead } from '@site/src/components/DocsPageLead';
+
+# My Page
+
+<DocsPageLead>A one-liner that describes what this page is for.</DocsPageLead>
+
+## First Section
+```
+
+### DocsMediaRow
+<SubSectionBanner>DocsMediaRow</SubSectionBanner>
+
+Two-column layout: text on the left, a media card on the right. Stacks vertically on narrow viewports with the media below. The `media` prop takes any JSX, typically a `<LocationCard />` or `<HoverVideo />`.
+
+```mdx
+import { DocsMediaRow } from '@site/src/components/DocsMediaRow';
+
+<DocsMediaRow media={<LocationCard src="/img/something.png" title="The Panel" />}>
+
+Your step-by-step instructions here. The media card floats right at 220 px wide
+and aligns to the bottom of the text column.
+
+</DocsMediaRow>
+```
+
+### HoverOption & HoverVideo
+<SubSectionBanner>HoverOption & HoverVideo</SubSectionBanner>
+
+Hover-aware wrapper for optional steps that have an accompanying video. Hovering the `<HoverOption>` block adds a warm left accent bar and plays the embedded `<HoverVideo>`. Omit `src` from `<HoverVideo>` to show a "Video coming soon" placeholder instead.
+
+```mdx
+import { HoverOption, HoverVideo } from '@site/src/components/HoverOption';
+
+<HoverOption>
+  <DocsMediaRow media={<HoverVideo src="/video/my-option.mp4" title="Right-click Menu" />}>
+
+  1. Your steps here...
+
+  </DocsMediaRow>
+</HoverOption>
+```
+
+The hover effect degrades gracefully to plain content if JS is unavailable.
+
+## Inline Icons
+
+### VCC Interface Elements
+<SubSectionBanner>VCC Interface Elements</SubSectionBanner>
+
+These render inline replicas of VCC's own UI so prose instructions match what the reader sees. Import what you need:
+
+```mdx
+import {
+  VccIcon, VccProjectsLabel, VccManageProjectLabel,
+  AddIcon, RemoveIcon, VersionNone, VersionInstalled,
+} from '@site/src/components/InstallationInlineUi/InstallationInlineUi';
+```
+
+**`<VccIcon />`** — the VCC favicon inline with text. Accepts a `size` prop (CSS value, default `1.2em`).
+
+Open <VccIcon /> **Creator Companion**.
+
+```mdx
+Open <VccIcon /> **Creator Companion**.
+```
+
+**`<VccProjectsLabel />`** — the **Projects** sidebar entry as it appears in VCC, including the grid icon.
+
+Go to the <VccProjectsLabel /> tab.
+
+```mdx
+Go to the <VccProjectsLabel /> tab.
+```
+
+**`<VccManageProjectLabel />`** — the **Manage Project** action label, styled like a small VCC button.
+
+Click <VccManageProjectLabel /> next to your project.
+
+```mdx
+Click <VccManageProjectLabel /> next to your project.
+```
+
+**`<AddIcon />`** and **`<RemoveIcon />`** — the circular add and remove buttons from VCC's package list.
+
+Click <AddIcon /> to install, <RemoveIcon /> to remove.
+
+```mdx
+Click <AddIcon /> to install, <RemoveIcon /> to remove.
+```
+
+**`<VersionNone />`** and **`<VersionInstalled />`** — the version dropdown pills from the VCC package list.
+
+If the version column shows <VersionNone />, the package isn't installed. Once installed it shows <VersionInstalled />.
+
+```mdx
+If the version column shows <VersionNone />, the package isn't installed. Once installed it shows <VersionInstalled />.
+```
+
+### Unity Asset Icons
+
+Small inline icons matching the Unity editor's own file-type indicators. Use them next to any mention of a Unity asset type.
+
+```mdx
+import { SceneIcon, PrefabIcon, ModelIcon, PrefabModelIcon, PrefabVariantIcon, UnityPackageIcon, UnityPackage } from '@site/src/components/UnityIcon';
+```
+
+<UnityIconReference />
+
+All icon components accept an optional `size` prop (number, pixels). Default is `16`.
+
+```mdx
+Double-click the scene file <SceneIcon /> to open it.
+Drag the prefab <PrefabIcon /> into the Hierarchy.
+```
+
+**`<UnityPackage />`** combines the `.unitypackage` filename and icon into a single styled inline badge. Use it instead of writing `` `.unitypackage` <UnityPackageIcon /> ``.
+
+```mdx
+Save your <UnityPackage /> file somewhere you can find it.
+```
+
+## Page Setup
+
+### File Structure
+<SubSectionBanner>File Structure</SubSectionBanner>
+
+Every page is `.mdx` (not `.md`) so React components work inline. Frontmatter sets the sidebar position and title:
+
+```mdx
+---
+sidebar_position: 2
+title: My Page
+---
+```
+
+Imports go right after the frontmatter block, before any content.
+
+### Images & Assets
+<SubSectionBanner>Images & Assets</SubSectionBanner>
 
 Static images go in `static/img/`. In **markdown prose**, use the path as-is:
 
@@ -168,39 +303,93 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 const src = useBaseUrl('/img/something.png');
 ```
 
-### Colors
+### Admonitions
+<SubSectionBanner>Admonitions</SubSectionBanner>
 
-<SubSectionBanner>Colors</SubSectionBanner>
+Callout boxes for things that need to stand out. Keep them short — one or two sentences max.
 
-Never hardcode hex or rgb values anywhere in CSS or JSX. Always reference the CSS variables defined in `src/css/custom.css`. The full palette is in the color swatches above.
+:::note
+**note** — neutral extra context that's helpful but not critical. Tag: `:::note`
+:::
 
-### Unity Icons
+:::tip
+**tip** — shortcuts, recommendations, or things that make life easier. Tag: `:::tip`
+:::
 
-<SubSectionBanner>Unity Icons</SubSectionBanner>
+:::info
+**info** — background context the reader might not know. Tag: `:::info`
+:::
 
-Small inline icons that match the Unity editor's own file-type indicators. Use them next to any mention of a specific Unity asset type so readers can visually identify the file they're looking for.
+:::caution
+**caution** — things that are easy to get wrong or miss. Also used as a placeholder marker for screenshots still needed. Tag: `:::caution`
+:::
 
-Import from `UnityIcon`:
+:::warning
+**warning** — things that can actually break something if ignored. Tag: `:::warning`
+:::
 
-```mdx
-import { SceneIcon, PrefabIcon, ModelIcon, PrefabModelIcon, PrefabVariantIcon, UnityPackageIcon, UnityPackage } from '@site/src/components/UnityIcon';
+:::danger
+**danger** — use sparingly, only for things with serious consequences. Tag: `:::danger`
+:::
+
+### CSS Architecture
+<SubSectionBanner>CSS Architecture</SubSectionBanner>
+
+The site CSS is split into six files loaded in dependency order from `src/css/custom.css`:
+
+`theme-foundation.css` — all `--xeno-*` CSS custom properties, base `html`/`body` rules, scrollbar styling, and text-wrap settings. **This is the only place hex values should ever appear.**
+
+`theme-decor.css` — the four fixed pseudo-element layers that create the framed decorative border on every page. Appearance is driven entirely by CSS variables, so per-page themes only need to override those variables.
+
+`theme-docs.css` — main content column: doc container background, `h1`/`h2` heading styles, and the rules that hide placeholder markdown headings when a XenoMarkers component immediately follows them.
+
+`theme-sidebar.css` — sidebar shell, category frame cards with rivets, pill labels, the hover-highlight cursor, and the `no-frame` category modifier.
+
+`theme-toc.css` — right-hand table of contents panel, active cursor indicator, and the previous/next pagination cards.
+
+`theme-chrome.css` — breadcrumbs, navbar, footer (including the rivet decorations at the footer corners), and `kbd`/`abbr` overrides.
+
+### Page Themes
+
+Each section of the wiki has its own color theme that changes the decorative border layers. Themes are defined in `src/theme/shared/xenoPageTheme.ts` and applied automatically on navigation — no MDX changes required.
+
+| Path pattern | `data-xeno-decor` | Decor style | Notes |
+|---|---|---|---|
+| `/docs/troubleshooting` | `troubleshooting` | `alt` | Yellow/olive palette, alternate mask images |
+| `/docs/updating` | `updating` | `default` | Blue/purple palette |
+| `/docs/customizing/**` | `customizing` | `default` | Default palette |
+| `/docs/upload/**` | `upload` | `default` | Default palette |
+| Everything else | `default` | `default` | Default warm orange/brown palette |
+
+To add a new theme, add an entry to `PAGE_THEME_DEFINITIONS` in `xenoPageTheme.ts`:
+
+```ts
+{
+  pattern: /\/docs\/my-section(?:\/|$)/,
+  decor: 'my-section',
+  style: 'default',   // 'default' or 'alt' — switches the mask image set
+  variables: {
+    '--xeno-page-bg-bottom': '#5ab2f2',
+    '--xeno-page-decor-before-ramp-base': '#113357',
+    '--xeno-page-decor-after-tl': 'rgb(197 220 237)',
+    // ...
+  },
+},
 ```
 
-Available icons:
+`style: 'alt'` swaps in `decor_top_alt.png`, `decor_bottom_alt.png`, and `decor_middle_alt.png`. Use it if the default mask shapes don't suit the palette.
 
-<UnityIconReference />
-
-All icon components accept an optional `size` prop (number, pixels). Default is `16`.
-
-```mdx
-Double-click the scene file <SceneIcon /> to open it.
-Drag the prefab <PrefabIcon /> into the Hierarchy.
-```
-
-**`<UnityPackage />`** is a special badge that combines the `.unitypackage` filename and icon into a styled inline element that looks like a code span:
-
-```mdx
-Save your <UnityPackage /> file somewhere you can find it.
-```
-
-Use `<UnityPackage />` wherever you'd otherwise write `` `.unitypackage` <UnityPackageIcon /> `` — it's the same thing in one tag.
+| Variable | Controls |
+|---|---|
+| `--xeno-page-bg-bottom` | Bottom color of the full-page background gradient |
+| `--xeno-page-bg-top` | Top color of the background gradient (defaults to `--xeno-beige-light`) |
+| `--xeno-page-decor-before-ramp-base` | Base color of the top/bottom mask overlay |
+| `--xeno-page-decor-before-ramp-highlight` | Highlight color within the mask overlay |
+| `--xeno-page-decor-before-opacity` | Overall opacity of the `html::before` / `body::before` layers |
+| `--xeno-page-decor-before-texture-shadow-blend` | Blend mode for the texture shadow |
+| `--xeno-page-decor-after-tl/tr/bl/br` | Corner radial gradient colors in the center decor layer |
+| `--xeno-page-decor-after-opacity` | Overall opacity of the `html::after` layer |
+| `--xeno-page-decor-after-texture-blend` | Blend mode for the center texture layer |
+| `--xeno-page-decor-after-ramp-base` | Base color of the ramp highlight layer |
+| `--xeno-page-decor-after-ramp-highlight` | Highlight color for the ramp |
+| `--xeno-page-decor-after-ramp-opacity` | Multiplied with the layer opacity |

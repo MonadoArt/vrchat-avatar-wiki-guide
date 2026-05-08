@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const TOKENS = [
+  // Base palette
   '--xeno-brown-dark',
   '--xeno-beige-light',
   '--xeno-beige-mid',
@@ -10,9 +11,26 @@ const TOKENS = [
   '--xeno-brown-menu',
   '--xeno-metallic-yellow',
   '--xeno-frame-dark',
+  '--xeno-dark-bg',
+  '--xeno-bg-tan',
+  // Scrollbar & borders
   '--xeno-scrollbar-track',
+  '--xeno-border-subtle',
+  // Rivet details
   '--xeno-rivet-bright',
   '--xeno-rivet-dark',
+  // Gauge / chrome
+  '--xeno-gauge-dark',
+  '--xeno-gauge-mid',
+  '--xeno-navbar-bg',
+  '--xeno-footer-bg',
+  // Sidebar nav states
+  '--xeno-nav-hover-bg',
+  '--xeno-nav-button-hover-bg',
+  '--xeno-nav-pill-hover-bg',
+  // Active cursor
+  '--xeno-cursor-c0',
+  '--xeno-cursor-c1',
 ];
 
 function readTokens() {

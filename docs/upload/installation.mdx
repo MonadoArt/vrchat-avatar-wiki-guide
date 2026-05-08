@@ -16,7 +16,8 @@ import {
   VccManageProjectLabel,
   VccProjectsLabel,
 } from '@site/src/components/InstallationInlineUi';
-import { TrustRankRequirement } from '@site/src/components/TrustRankRequirement';
+import { LocationCard } from '@site/src/components/LocationCard';
+import trustStyles from '@site/src/components/TrustRankRequirement.module.css';
 
 
 # Installation
@@ -28,15 +29,29 @@ import { TrustRankRequirement } from '@site/src/components/TrustRankRequirement'
 
 ## Step 0 - VRChat Trust Rank Requirement
 
-<TrustRankRequirement />
+<div className={trustStyles.row}>
+  <div className={trustStyles.content}>
+    :::warning
+      If you just made your VRChat account, you will need to play the game or <abbr title="away from keyboard">AFK</abbr> in order to increase <a href="https://docs.vrchat.com/docs/vrchat-safety-and-trust-system"><strong>Trust Rank</strong></a> from <strong>Visitior</strong> to <strong>New User</strong> to upload avatars! <br />
+      Making friends can speed this up, or you can get <abbr title="VRChat+ Subscription">VRC+</abbr> to receive <strong>New User</strong> rank immediately.
+    :::
+  </div>
+  <div className={trustStyles.media}>
+    <LocationCard
+      src="https://files.readme.io/c8af264-TrustLevels_4.png"
+      title="Trust Ranks"
+      topSpacing="none"
+    />
+  </div>
+</div>
 
 ## Step 1 - Download the Creator Companion
 
-The <VccIcon /> **VRChat Creator Companion** (usually just called VCC) is a free program made by VRChat. Think of it as a control panel that helps you set up everything else. You install it once and it handles the rest.
+The <VccIcon />**VRChat Creator Companion** (usually called VCC) is a free program made by VRChat. Think of it as a control panel that helps you set up everything else. You install it once and it handles the rest.
 
 1. Go to [vrchat.com](https://vrchat.com) and log in with your VRChat account.
 2. Click **Downloads** from the top menu.
-3. Download the **Creator Companion** and run the installer like you would any other program.
+3. Download the <VccIcon />**Creator Companion** and run the installer like you would any other program.
 
 When you open it for the first time, it will ask you to sign in with your VRChat account. Go ahead and do that.
 
@@ -50,7 +65,7 @@ If it asks for a verification code after signing in, check your email - VRChat s
 
 Unity is the program that actually lets you upload the avatar. <abbr title="VRChat Creator Companion">VCC</abbr> will prompt you to install it automatically, so you don't need to go hunting for the right version yourself.
 
-1. Open the **Creator Companion**.
+1. Open the <VccIcon />**Creator Companion**.
 2. If Unity isn't installed yet, <VccIcon /> VCC will show a message asking you to install it. Click **Install Unity**.
 3. This opens a program called **Unity Hub** - it's just a launcher that manages Unity for you. Follow the prompts to finish installing.
 4. During setup, you'll be asked to create a free Unity account and activate a **Personal license**. This is completely free and just lets you use Unity.
@@ -58,7 +73,7 @@ Unity is the program that actually lets you upload the avatar. <abbr title="VRCh
 :::warning
 **Don't install Unity yourself**
 
-If you go to the Unity website and download it manually, you'll probably get the wrong version. VRChat is very picky about which version it supports - always let <VccIcon /> <abbr title="VRChat Creator Companion">VCC</abbr> install it for you.
+If you go to the Unity website and download it manually, you'll probably get the wrong version. VRChat is very picky about which version it supports - always let <VccIcon /><abbr title="VRChat Creator Companion">VCC</abbr> install it for you.
 :::
 
 :::caution
@@ -68,11 +83,11 @@ If you haven't updated VCC or Unity in a while, you may have **Unity 2019** inst
 
 To fix this:
 
-1. First, make sure your **Creator Companion** itself is up to date - check for updates and install them if available.
-2. Open the **Creator Companion** and go to **Settings** in the bottom-left corner.
+1. First, make sure your <VccIcon />**Creator Companion** itself is up to date - check for updates and install them if available.
+2. Open the <VccIcon />**Creator Companion** and go to **Settings** in the bottom-left corner.
 3. Click the **General** tab.
 4. If you see a pop-up or banner that says something like **"Recommended Version Not Installed"**, click **Install Now**.
-5. Wait for <VccIcon /> Creator Companion to finish installing the correct version.
+5. Wait for <VccIcon />Creator Companion to finish installing the correct version.
 
 Once Unity 2022 is installed, you're good to continue.
 :::
@@ -81,9 +96,9 @@ Once Unity 2022 is installed, you're good to continue.
 
 ## Step 3 - Create a project
 
-A <q>project</q> is just a folder on your computer where all your avatar files will live. You create and manage it through the Creator Companion.
+A <q>project</q> is just a folder on your computer where all your avatar files will live. You create and manage it through the <VccIcon />Creator Companion.
 
-1. Open the **Creator Companion** and click **Projects** in the sidebar on the left.
+1. Open the <VccIcon />**Creator Companion** and click <VccProjectsLabel /> in the sidebar on the left.
 2. Click the blue **Create New Project** button in the top right.
 3. From the template list, select **"Unity 2022 Avatar Project"**.
 4. Give your project a name and choose where to save it.
