@@ -1,10 +1,6 @@
 /**
- * Breadcrumb, navbar/footer chrome, and remaining global utility styles.
+ * Breadcrumbs, navbar/footer chrome, and global utility overrides.
  */
-
-/* ==========================================================================
-   6. Breadcrumbs (Xenoblade Title Bar)
-   ========================================================================== */
 
 .theme-doc-breadcrumb {
   margin-bottom: 2rem !important;
@@ -82,10 +78,6 @@
     text-overflow: ellipsis;
   }
 }
-
-/* ==========================================================================
-   7. Theme Overrides (Dark Mode)
-   ========================================================================== */
 
 .navbar {
   border-bottom: solid 1px var(--xeno-orange-header);
@@ -192,10 +184,6 @@
 .footer::after {
   right: 18px;
 }
-
-/* ==========================================================================
-   Global elements
-   ========================================================================== */
 
 kbd {
   --ifm-color-emphasis-0: var(--xeno-dark-bg);

@@ -3,17 +3,21 @@ import styles from './XenoMarkers.module.css';
 /**
  * XenoMarkers - reusable section markers styled after Xenoblade 1's tutorial UI.
  *
+ * These components intentionally emit `data-xeno-marker` attributes.
+ * `src/css/theme-docs.css` consumes those markers to hide the placeholder
+ * markdown headings that sit immediately before the visual banner components.
+ *
  * <SectionTab>Party Gauge</SectionTab>
- *   → small dark compact label, like the gray "Party Gauge" tab above a panel
+ *   -> small dark compact label, like the gray "Party Gauge" tab above a panel
  *
  * <SectionBanner>Chain attacks</SectionBanner>
- *   → full-width centered beige hexagon ribbon, like the "Chain attacks" divider bar
+ *   -> full-width centered beige hexagon ribbon, like the "Chain attacks" divider bar
  *
  * <SubSectionBanner>Trust Rank</SubSectionBanner>
- *   → left-aligned beige banner that tapers on the right only, like the h1 title bar
+ *   -> left-aligned beige banner that tapers on the right only, like the h1 title bar
  *
  * <GaugeHeader value="3/3">Party Gauge</GaugeHeader>
- *   → dark bar fading to transparent on both ends, gradient lines top and bottom
+ *   -> dark bar fading to transparent on both ends, gradient lines top and bottom
  */
 
 // size prop sets font-size; all internal dimensions use `em` so both

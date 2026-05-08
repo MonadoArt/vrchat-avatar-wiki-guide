@@ -21,7 +21,7 @@
 
 @media (min-width: 997px) {
   .docsDesktopSidebarToggle {
-    display: flex; /* Infima hides .navbar__toggle on desktop; override it */
+    display: flex; /* Keep the custom docs-sidebar toggle visible in the desktop navbar. */
     margin-right: 0.75rem;
     border: 2px solid transparent;
     border-radius: 6px;

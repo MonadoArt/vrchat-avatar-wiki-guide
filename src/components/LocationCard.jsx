@@ -28,14 +28,6 @@ import { XenoCardFrame, xenoCardFrameStyles } from './XenoCardFrame';
  *   text?: string, style?: object, grow?: number
  * } } HighlightOptions
  */
-// /**
-//  * @param {any} src
-//  * @param {any} title
-//  * @param {any} alt
-//  * @param {any} style
-//  * @param {HighlightOptions} highlight
-//  * @returns {Element}
-//  */
 
 export const LocationCard = ({ src, title, alt, style, highlight, topSpacing }) => {
   const imgSrc = useBaseUrl(src);

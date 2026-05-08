@@ -1,8 +1,12 @@
 /**
- * Global CSS entrypoint for Docusaurus.
- * Keep this file as the configured stylesheet and import focused slices.
+ * Single Docusaurus CSS entrypoint.
+ * Import slices in dependency order so foundation tokens land before the
+ * decor, docs, navigation, and chrome layers that consume them.
  */
 
-@import './custom-base.css';
-@import './custom-navigation.css';
-@import './custom-chrome.css';
+@import './theme-foundation.css';
+@import './theme-decor.css';
+@import './theme-docs.css';
+@import './theme-sidebar.css';
+@import './theme-toc.css';
+@import './theme-chrome.css';

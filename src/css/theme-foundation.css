@@ -1,0 +1,161 @@
+/**
+ * Foundational design tokens, dark-mode globals, and shared scroll containers.
+ */
+
+/*
+ * This site intentionally ships as dark-mode only.
+ * If light mode is ever enabled, move the alternate palette into its own file
+ * instead of layering it into this foundation sheet.
+ */
+
+:root {
+  --xeno-brown-dark: #312929;
+  --xeno-beige-light: #b5b1ab;
+  --xeno-beige-mid: #ccc8bf;
+  --xeno-green-monado: #a4f13f;
+  --xeno-dark-green-monado: #6ab028;
+  --xeno-orange-header: #e68e35;
+  --xeno-brown-menu: #483b22;
+  --xeno-metallic-yellow: #9b947d;
+  --xeno-frame-dark: #140e06;
+  --xeno-scrollbar-track: #2d2a26;
+  --xeno-dark-bg: #1a1712;
+  --xeno-rivet-bright: #d4a96a;
+  --xeno-rivet-dark: #3a2008;
+  --xeno-gauge-dark: #0e0b07e0;
+  --xeno-gauge-mid: #46371ebf;
+  --xeno-navbar-bg: #211c15e6;
+  --xeno-footer-bg: rgba(0, 0, 0, 0.72);
+  --xeno-border-subtle: rgba(255, 255, 255, 0.1);
+  --xeno-cursor-c0: rgb(0, 64, 8);
+  --xeno-cursor-c1: rgb(24, 144, 18);
+  --xeno-bg-tan: #eeb88a;
+  --xeno-page-bg-bottom: var(--xeno-bg-tan);
+  --xeno-page-bg-top: var(--xeno-beige-light);
+  --xeno-page-decor-before-ramp-base: #341202;
+  --xeno-page-decor-before-ramp-highlight: #f2b037;
+  --xeno-page-decor-before-opacity: 0.2;
+  --xeno-page-decor-before-texture-highlight-blend: lighten;
+  --xeno-page-decor-before-texture-shadow-blend: multiply;
+  --xeno-page-decor-top-mask: url('/img/decor_top.png');
+  --xeno-page-decor-bottom-mask: url('/img/decor_bottom.png');
+  --xeno-decor-mid-base: #da8327;
+  --xeno-decor-mid-tl: #fae97c;
+  --xeno-decor-mid-tr: #a11a03;
+  --xeno-decor-mid-bl: #ff7e0e;
+  --xeno-decor-mid-br: #fbe17d;
+  --xeno-page-decor-after-tl: var(--xeno-decor-mid-tl);
+  --xeno-page-decor-after-tr: var(--xeno-decor-mid-tr);
+  --xeno-page-decor-after-bl: var(--xeno-decor-mid-bl);
+  --xeno-page-decor-after-br: var(--xeno-decor-mid-br);
+  --xeno-page-decor-after-opacity: 0.2;
+  --xeno-page-decor-after-texture-blend: soft-light;
+  --xeno-page-decor-after-ramp-base: var(--xeno-decor-mid-base);
+  --xeno-page-decor-after-ramp-highlight: rgb(237 237 197);
+  --xeno-page-decor-after-ramp-opacity: 1;
+  --xeno-page-decor-after-ramp-highlight-soft: color-mix(
+    in srgb,
+    var(--xeno-page-decor-after-ramp-highlight) 70%,
+    transparent
+  );
+  --xeno-page-decor-middle-mask: url('/img/decor_middle.png');
+  --xeno-chrome-titlebar-gradient: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--xeno-gauge-dark) 16%,
+    var(--xeno-gauge-mid) 50%,
+    var(--xeno-gauge-dark) 84%,
+    transparent 100%
+  );
+  --xeno-chrome-divider-gradient: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--xeno-orange-header) 16%,
+    var(--xeno-beige-light) 50%,
+    var(--xeno-orange-header) 84%,
+    transparent 100%
+  );
+  --ifm-color-primary: var(--xeno-green-monado);
+  --ifm-color-primary-dark: #8edc30;
+  --ifm-color-primary-darker: #7ec72b;
+  --ifm-color-primary-darkest: #68a423;
+  --ifm-color-primary-light: #b4f360;
+  --ifm-color-primary-lighter: #bdf571;
+  --ifm-color-primary-lightest: #d7f9a2;
+  --ifm-background-color: var(--xeno-beige-light);
+  --ifm-navbar-background-color: var(--xeno-navbar-bg);
+  --ifm-navbar-link-color: var(--xeno-beige-light);
+  --ifm-footer-background-color: transparent;
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-heading-color: var(--xeno-orange-header);
+}
+
+html {
+  overflow-x: hidden;
+  background-color: var(--xeno-brown-dark);
+  background-image:
+    linear-gradient(to top, var(--xeno-page-bg-bottom) 0%, var(--xeno-page-bg-top) 100%),
+    url('../../static/img/bg_texture.png');
+  background-blend-mode: multiply, screen;
+  background-attachment: fixed;
+  background-repeat: repeat, repeat;
+  background-size: 100% 100%, 30vh;
+}
+
+body {
+  margin: 0;
+  background: transparent !important;
+}
+
+.theme-doc-toc-desktop,
+.table-of-contents,
+[class*='docItemCol'],
+[class*='docMainContainer'] {
+  background: transparent !important;
+}
+
+.menu {
+  padding: 1.5rem 0 !important;
+  overflow-y: auto;
+  max-height: calc(100vh - var(--ifm-navbar-height) - 24px - 40px);
+}
+
+.table-of-contents {
+  padding: 0.5rem;
+}
+
+.menu::-webkit-scrollbar,
+.table-of-contents::-webkit-scrollbar,
+.theme-doc-toc-desktop::-webkit-scrollbar {
+  width: 0.875rem;
+}
+
+.menu::-webkit-scrollbar-track,
+.table-of-contents::-webkit-scrollbar-track,
+.theme-doc-toc-desktop::-webkit-scrollbar-track {
+  background: var(--xeno-scrollbar-track);
+}
+
+.menu::-webkit-scrollbar-thumb,
+.table-of-contents::-webkit-scrollbar-thumb,
+.theme-doc-toc-desktop::-webkit-scrollbar-thumb {
+  background: var(--xeno-orange-header);
+  border: 0.25rem solid var(--xeno-scrollbar-track);
+  border-radius: 0.625rem;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+[class*='Heading'],
+[class*='heading'] {
+  text-wrap: balance;
+}
