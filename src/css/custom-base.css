@@ -87,6 +87,22 @@
     transparent
   );
   --xeno-page-decor-middle-mask: url('/img/decor_middle.png');
+  --xeno-chrome-titlebar-gradient: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--xeno-gauge-dark) 16%,
+    var(--xeno-gauge-mid) 50%,
+    var(--xeno-gauge-dark) 84%,
+    transparent 100%
+  );
+  --xeno-chrome-divider-gradient: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--xeno-orange-header) 16%,
+    var(--xeno-beige-light) 50%,
+    var(--xeno-orange-header) 84%,
+    transparent 100%
+  );
   --ifm-color-primary: var(--xeno-green-monado);
   --ifm-color-primary-dark: #8edc30;
   --ifm-color-primary-darker: #7ec72b;
@@ -398,7 +414,7 @@ h4.section-header {
   position: relative;
   display: block;
   width: 100%;
-  background: linear-gradient(to right, transparent 0%, var(--xeno-gauge-dark) 16%, var(--xeno-gauge-mid) 50%, var(--xeno-gauge-dark) 84%, transparent 100%);
+  background: var(--xeno-chrome-titlebar-gradient);
   color: var(--xeno-beige-light) !important;
   font-size: 2rem;
   font-weight: 700;
@@ -416,7 +432,7 @@ h4.section-header {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(to right, transparent 0%, var(--xeno-orange-header) 16%, var(--xeno-beige-light) 50%, var(--xeno-orange-header) 84%, transparent 100%);
+  background: var(--xeno-chrome-divider-gradient);
 }
 
 .theme-doc-markdown h1::before {

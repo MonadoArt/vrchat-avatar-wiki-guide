@@ -15,7 +15,7 @@
   display: inline-flex !important;
   align-items: center;
   padding: 0.3em 3em !important;
-  background: linear-gradient(to right, transparent 0%, var(--xeno-gauge-dark) 16%, var(--xeno-gauge-mid) 50%, var(--xeno-gauge-dark) 84%, transparent 100%);
+  background: var(--xeno-chrome-titlebar-gradient);
   font-size: 0.95rem;
 }
 
@@ -26,7 +26,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(to right, transparent 0%, var(--xeno-orange-header) 16%, var(--xeno-beige-light) 50%, var(--xeno-orange-header) 84%, transparent 100%);
+  background: var(--xeno-chrome-divider-gradient);
 }
 
 .breadcrumbs::before {
