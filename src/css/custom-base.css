@@ -50,6 +50,8 @@
   --xeno-cursor-c0: rgb(0, 64, 8);
   --xeno-cursor-c1: rgb(24, 144, 18);
   --xeno-bg-tan: #eeb88a;
+  --xeno-page-bg-bottom: var(--xeno-bg-tan);
+  --xeno-page-bg-top: var(--xeno-beige-light);
   --xeno-decor-base: #341202;
   --xeno-decor-gold: #f2b037;
   --xeno-decor-mid-base: #da8327;
@@ -57,6 +59,34 @@
   --xeno-decor-mid-tr: #a11a03;
   --xeno-decor-mid-bl: #ff7e0e;
   --xeno-decor-mid-br: #fbe17d;
+  --xeno-page-decor-before-ramp-base: #341202;
+  --xeno-page-decor-before-ramp-highlight: #f2b037;
+  --xeno-page-decor-before-opacity: 0.2;
+  --xeno-page-decor-before-texture-highlight-blend: lighten;
+  --xeno-page-decor-before-texture-shadow-blend: multiply;
+  --xeno-page-decor-top-mask: url('/img/decor_top.png');
+  --xeno-page-decor-bottom-ramp-base: var(--xeno-page-decor-before-ramp-base);
+  --xeno-page-decor-bottom-ramp-highlight: var(--xeno-page-decor-before-ramp-highlight);
+  --xeno-page-decor-bottom-opacity: var(--xeno-page-decor-before-opacity);
+  --xeno-page-decor-bottom-texture-highlight-blend: var(--xeno-page-decor-before-texture-highlight-blend);
+  --xeno-page-decor-bottom-texture-shadow-blend: var(--xeno-page-decor-before-texture-shadow-blend);
+  --xeno-page-decor-bottom-mask: url('/img/decor_bottom.png');
+  --xeno-page-decor-after-base: var(--xeno-decor-mid-base);
+  --xeno-page-decor-after-tl: var(--xeno-decor-mid-tl);
+  --xeno-page-decor-after-tr: var(--xeno-decor-mid-tr);
+  --xeno-page-decor-after-bl: var(--xeno-decor-mid-bl);
+  --xeno-page-decor-after-br: var(--xeno-decor-mid-br);
+  --xeno-page-decor-after-opacity: 0.2;
+  --xeno-page-decor-after-texture-blend: soft-light;
+  --xeno-page-decor-after-ramp-base: var(--xeno-decor-mid-base);
+  --xeno-page-decor-after-ramp-highlight: rgb(237 237 197);
+  --xeno-page-decor-after-ramp-opacity: 1;
+  --xeno-page-decor-after-ramp-highlight-soft: color-mix(
+    in srgb,
+    var(--xeno-page-decor-after-ramp-highlight) 70%,
+    transparent
+  );
+  --xeno-page-decor-middle-mask: url('/img/decor_middle.png');
   --ifm-color-primary: var(--xeno-green-monado);
   --ifm-color-primary-dark: #8edc30;
   --ifm-color-primary-darker: #7ec72b;
@@ -76,7 +106,7 @@ html {
   overflow-x: hidden;
   background-color: var(--xeno-brown-dark);
   background-image:
-    linear-gradient(to top, var(--xeno-bg-tan) 0%, var(--xeno-beige-light) 100%),
+    linear-gradient(to top, var(--xeno-page-bg-bottom) 0%, var(--xeno-page-bg-top) 100%),
     url('../../static/img/bg_texture.png');
   background-blend-mode: multiply, screen;
   background-attachment: fixed;
@@ -131,7 +161,9 @@ body {
    ========================================================================== */
 
 html::before,
-html::after {
+html::after,
+body::before,
+body::after {
   content: '';
   position: fixed;
   top: 0;
@@ -140,32 +172,150 @@ html::after {
   height: 100%;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.2;
 }
 
 html::before {
-  background-color: var(--xeno-decor-base);
-  background-image: radial-gradient(ellipse at top right, var(--xeno-decor-gold) 0%, rgb(255, 255, 255) 65%);
-  background-blend-mode: multiply;
-  mask-image: url('/img/decor_top.png'), url('/img/decor_bottom.png');
-  -webkit-mask-image: url('/img/decor_top.png'), url('/img/decor_bottom.png');
-  mask-repeat: no-repeat, no-repeat;
-  mask-position: top center, bottom center;
-  mask-size: 100% auto, 100% auto;
+  opacity: var(--xeno-page-decor-before-opacity);
+  background-color: var(--xeno-page-decor-before-ramp-base);
+  background-image: var(--xeno-page-decor-top-mask);
+  background-blend-mode: var(--xeno-page-decor-before-texture-shadow-blend);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% auto;
+  mask-image: var(--xeno-page-decor-top-mask);
+  -webkit-mask-image: var(--xeno-page-decor-top-mask);
+  mask-mode: alpha;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: top center;
+  mask-position: top center;
+  -webkit-mask-size: 100% auto;
+  mask-size: 100% auto;
+}
+
+body::before {
+  opacity: var(--xeno-page-decor-bottom-opacity);
+  background-color: var(--xeno-page-decor-bottom-ramp-base);
+  background-image: var(--xeno-page-decor-bottom-mask);
+  background-blend-mode: var(--xeno-page-decor-bottom-texture-shadow-blend);
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100% auto;
+  mask-image: var(--xeno-page-decor-bottom-mask);
+  -webkit-mask-image: var(--xeno-page-decor-bottom-mask);
+  mask-mode: alpha;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: bottom center;
+  mask-position: bottom center;
+  -webkit-mask-size: 100% auto;
+  mask-size: 100% auto;
 }
 
 html::after {
-  background-color: var(--xeno-decor-mid-base);
+  opacity: var(--xeno-page-decor-after-opacity);
+  background-color: var(--xeno-page-decor-after-ramp-base);
   background-image:
-    radial-gradient(ellipse at top left, var(--xeno-decor-mid-tl), transparent 65%),
-    radial-gradient(ellipse at top right, var(--xeno-decor-mid-tr), transparent 65%),
-    radial-gradient(ellipse at bottom left, var(--xeno-decor-mid-bl), transparent 65%),
-    radial-gradient(ellipse at bottom right, var(--xeno-decor-mid-br), transparent 65%);
-  mask-image: url('/img/decor_middle.png');
-  -webkit-mask-image: url('/img/decor_middle.png');
+    radial-gradient(ellipse at top left, var(--xeno-page-decor-after-tl), transparent 65%),
+    radial-gradient(ellipse at top right, var(--xeno-page-decor-after-tr), transparent 65%),
+    radial-gradient(ellipse at bottom left, var(--xeno-page-decor-after-bl), transparent 65%),
+    radial-gradient(ellipse at bottom right, var(--xeno-page-decor-after-br), transparent 65%);
+  background-blend-mode:
+    var(--xeno-page-decor-after-texture-blend),
+    var(--xeno-page-decor-after-texture-blend),
+    var(--xeno-page-decor-after-texture-blend),
+    var(--xeno-page-decor-after-texture-blend);
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background-position: center, center, center, center;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+  mask-image: var(--xeno-page-decor-middle-mask);
+  -webkit-mask-image: var(--xeno-page-decor-middle-mask);
+  mask-mode: alpha;
+  -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
+  -webkit-mask-position: center;
   mask-position: center;
+  -webkit-mask-size: 100% auto;
   mask-size: 100% auto;
+}
+
+body::after {
+  opacity: calc(var(--xeno-page-decor-after-opacity) * var(--xeno-page-decor-after-ramp-opacity));
+  background-image:
+    radial-gradient(ellipse at top left, var(--xeno-page-decor-after-ramp-highlight) 0%, transparent 62%),
+    radial-gradient(ellipse at bottom right, var(--xeno-page-decor-after-ramp-highlight-soft) 0%, transparent 60%),
+    linear-gradient(
+      135deg,
+      var(--xeno-page-decor-after-ramp-highlight) 0%,
+      var(--xeno-page-decor-after-ramp-highlight-soft) 48%,
+      transparent 100%
+    );
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: center, center, center;
+  background-size: 100% 100%, 100% 100%, 100% 100%;
+  mask-image: var(--xeno-page-decor-middle-mask);
+  -webkit-mask-image: var(--xeno-page-decor-middle-mask);
+  mask-mode: luminance;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 100% auto;
+  mask-size: 100% auto;
+}
+
+html[data-xeno-decor-style='alt'] {
+  --xeno-page-decor-top-mask: url('/img/decor/decor_top_alt.png');
+  --xeno-page-decor-bottom-mask: url('/img/decor/decor_bottom_alt.png');
+  --xeno-page-decor-middle-mask: url('/img/decor/decor_middle_alt.png');
+}
+
+html[data-xeno-decor='troubleshooting'] {
+  --xeno-page-bg-bottom: #f2c25a;
+  --xeno-page-decor-before-ramp-base: #d6b12a;
+  --xeno-page-decor-before-ramp-highlight: #605301;
+  --xeno-page-decor-before-opacity: 0.34;
+  --xeno-page-decor-before-texture-highlight-blend: lighten;
+  --xeno-page-decor-before-texture-shadow-blend: multiply;
+  --xeno-page-decor-bottom-ramp-base: #d6b12a;
+  --xeno-page-decor-bottom-ramp-highlight: #605301;
+  --xeno-page-decor-bottom-opacity: 0.34;
+  --xeno-page-decor-bottom-texture-highlight-blend: lighten;
+  --xeno-page-decor-bottom-texture-shadow-blend: multiply;
+  --xeno-page-decor-after-base: #ab6d16;
+  --xeno-page-decor-after-tl: rgb(255, 255, 255);
+  --xeno-page-decor-after-tr: rgb(129 134 0);
+  --xeno-page-decor-after-bl: rgb(129 134 0);
+  --xeno-page-decor-after-br: rgb(237 237 197);
+  --xeno-page-decor-after-opacity: 0.3;
+  --xeno-page-decor-after-texture-blend: multiply;
+  --xeno-page-decor-after-ramp-base: #b19000;
+  --xeno-page-decor-after-ramp-highlight: #ffffd8;
+  --xeno-page-decor-after-ramp-opacity: 1;
+}
+
+html[data-xeno-decor='updating'] {
+  --xeno-page-bg-bottom: #5ab2f2;
+  --xeno-page-decor-before-ramp-base: #113357;
+  --xeno-page-decor-before-ramp-highlight: #011e60;
+  --xeno-page-decor-before-opacity: 0.34;
+  --xeno-page-decor-before-texture-highlight-blend: lighten;
+  --xeno-page-decor-before-texture-shadow-blend: multiply;
+  --xeno-page-decor-bottom-ramp-base: #113357;
+  --xeno-page-decor-bottom-ramp-highlight: #011e60;
+  --xeno-page-decor-bottom-opacity: 0.34;
+  --xeno-page-decor-bottom-texture-highlight-blend: lighten;
+  --xeno-page-decor-bottom-texture-shadow-blend: multiply;
+  --xeno-page-decor-after-base: #1655ab;
+  --xeno-page-decor-after-tl: rgb(197 220 237);
+  --xeno-page-decor-after-tr: rgb(212, 0, 255);
+  --xeno-page-decor-after-bl: rgb(85, 0, 134);
+  --xeno-page-decor-after-br: rgb(197 220 237);
+  --xeno-page-decor-after-opacity: 0.3;
+  --xeno-page-decor-after-texture-blend: multiply;
+  --xeno-page-decor-after-ramp-base: #007fb1;
+  --xeno-page-decor-after-ramp-highlight: #c8fbff;
+  --xeno-page-decor-after-ramp-opacity: 1;
 }
 
 .main-wrapper {

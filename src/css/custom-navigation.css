@@ -5,6 +5,7 @@
 :root {
   --xeno-nav-hover-bg: color-mix(in srgb, var(--xeno-green-monado), transparent 72%);
   --xeno-nav-button-hover-bg: color-mix(in srgb, var(--xeno-dark-green-monado), transparent 30%);
+  --xeno-nav-pill-hover-bg: color-mix(in srgb, var(--xeno-green-monado) 28%, var(--xeno-beige-light));
   --xeno-sidebar-page-offset: var(--doc-sidebar-width);
   --xeno-sidebar-page-offset-collapsed: var(--doc-sidebar-hidden-width);
   --xeno-collapse-speed: 0.3s;
@@ -107,7 +108,7 @@
   align-items: center;
 }
 
-.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:has(> .menu__list-item-collapsible) {
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:not(.no-frame):has(> .menu__list-item-collapsible) {
   position: relative;
   margin-top: 1.75rem !important;
   padding: 1.4rem 0.4rem 0.5rem !important;
@@ -117,8 +118,8 @@
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 8%), 0 6px 20px rgba(0, 0, 0, 0.6);
 }
 
-.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:has(> .menu__list-item-collapsible)::before,
-.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:has(> .menu__list-item-collapsible)::after {
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:not(.no-frame):has(> .menu__list-item-collapsible)::before,
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:not(.no-frame):has(> .menu__list-item-collapsible)::after {
   content: '';
   position: absolute;
   top: -3px;
@@ -129,17 +130,17 @@
   z-index: 2;
 }
 
-.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:has(> .menu__list-item-collapsible)::before {
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:not(.no-frame):has(> .menu__list-item-collapsible)::before {
   left: -3px;
   border-radius: 50% 0 50% 0;
 }
 
-.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:has(> .menu__list-item-collapsible)::after {
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:not(.no-frame):has(> .menu__list-item-collapsible)::after {
   right: -3px;
   border-radius: 0 50% 0 50%;
 }
 
-.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:has(> .menu__list-item-collapsible) > .menu__list-item-collapsible {
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:not(.no-frame):has(> .menu__list-item-collapsible) > .menu__list-item-collapsible {
   position: absolute;
   top: -1.15rem;
   left: 50%;
@@ -158,7 +159,7 @@
   z-index: 3;
 }
 
-.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item > .menu__list-item-collapsible > .menu__link {
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:not(.no-frame) > .menu__list-item-collapsible > .menu__link {
   padding: 0 !important;
   flex: 1;
   text-align: center;
@@ -168,14 +169,48 @@
   pointer-events: none;
 }
 
-.theme-doc-sidebar-container .menu__list-item:not(.menu__list-item--collapsed) > .menu__list-item-collapsible {
+.theme-doc-sidebar-container .menu__list-item:not(.no-frame):not(.menu__list-item--collapsed) > .menu__list-item-collapsible {
   border-bottom: 2px solid var(--xeno-brown-dark) !important;
   border-radius: 0 !important;
 }
 
-.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:has(> .menu__list-item-collapsible):not(.menu__list-item--collapsed) > .menu__list-item-collapsible {
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:not(.no-frame):has(> .menu__list-item-collapsible):not(.menu__list-item--collapsed) > .menu__list-item-collapsible {
   border-bottom: none !important;
   border-radius: 999px !important;
+}
+
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item.no-frame:has(> .menu__list-item-collapsible) {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0.375rem 0.75rem !important;
+  overflow: visible !important;
+}
+
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item.no-frame > .menu__list-item-collapsible {
+  position: static !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0.4rem 1.25rem !important;
+  background: var(--xeno-beige-light) !important;
+  border: 0.1rem solid var(--xeno-brown-dark) !important;
+  border-radius: 0.75rem !important;
+  box-shadow: none !important;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item.no-frame > .menu__list-item-collapsible > .menu__link {
+  color: inherit !important;
+  text-align: left !important;
+  padding: 0 !important;
+}
+
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item.no-frame:not(.menu__list-item--collapsed) > .menu__list-item-collapsible {
+  border-radius: 0.75rem !important;
+  border-bottom: 0.1rem solid var(--xeno-brown-dark) !important;
 }
 
 .theme-doc-sidebar-container .menu > .menu__list > .menu__list-item {
@@ -205,7 +240,6 @@
 
 .theme-doc-sidebar-container .menu__link:hover,
 .theme-doc-sidebar-container .menu__link--active,
-.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:has(.menu__link--active) > .menu__list-item-collapsible:has(> .menu__link.menu__link--sublist),
 .theme-doc-sidebar-container .menu > .menu__list > .menu__list-item > .menu__link:hover {
   background-color: var(--xeno-nav-hover-bg) !important;
   color: var(--xeno-brown-menu) !important;
@@ -216,9 +250,19 @@
   color: var(--xeno-brown-menu) !important;
 }
 
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:not(.no-frame) > .menu__list-item-collapsible:hover,
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:not(.no-frame):has(> .menu__list-item-collapsible > .menu__link--active) > .menu__list-item-collapsible,
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:not(.no-frame):has(> .menu__list-item-collapsible > .menu__link--active) > .menu__list-item-collapsible > .menu__link,
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item.no-frame > .menu__list-item-collapsible:hover,
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item.no-frame:has(> .menu__list-item-collapsible > .menu__link--active) > .menu__list-item-collapsible,
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item.no-frame:has(> .menu__list-item-collapsible > .menu__link--active) > .menu__list-item-collapsible > .menu__link {
+  background-color: var(--xeno-nav-pill-hover-bg) !important;
+  color: var(--xeno-brown-menu) !important;
+}
+
 .theme-doc-sidebar-container .menu__list-item .menu__list {
   margin: 0 !important;
-  padding: 0 !important;
+  padding-left: 1.5rem !important;
   background: transparent !important;
   border: none !important;
   overflow: visible;
@@ -252,6 +296,7 @@
 .theme-doc-sidebar-container .menu__list-item .menu__list .menu__list-item {
   margin: 0 !important;
   padding: 0 !important;
+  width: calc(100% - 1rem);
 }
 
 .theme-doc-sidebar-container .menu__list-item .menu__list .menu__link {
@@ -261,10 +306,39 @@
   opacity: 0.8;
 }
 
-.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:has(> .menu__list-item-collapsible) > .menu__list {
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:not(.no-frame):has(> .menu__list-item-collapsible) > .menu__list {
   margin-top: 0.5rem !important;
   border-radius: 0.5rem;
   overflow: hidden;
+}
+
+.theme-doc-sidebar-container .xeno-sidebar-category-items-collapse--no-frame {
+  margin-top: 0 !important;
+}
+
+.theme-doc-sidebar-container .xeno-sidebar-category-items-tray {
+  display: flow-root;
+}
+
+.theme-doc-sidebar-container .xeno-sidebar-category-items-tray > .menu__list {
+  margin-top: 0 !important;
+  padding-top: 0.2rem !important;
+  padding-bottom: 0.75rem !important;
+  background: var(--xeno-brown-dark) !important;
+  border-radius: 0.75rem !important;
+  overflow: hidden;
+}
+
+.theme-doc-sidebar-container .xeno-sidebar-category-items-tray > .menu__list .menu__list-item:first-child {
+  margin-top: 0 !important;
+}
+
+.theme-doc-sidebar-container .xeno-sidebar-category-items-tray > .menu__list .menu__list-item:last-child {
+  margin-bottom: 0 !important;
+}
+
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item.no-frame.menu__list-item--collapsed .xeno-sidebar-category-items-tray > .menu__list {
+  height: auto !important;
 }
 
 .theme-doc-sidebar-container .menu__list-item .menu__list .menu__link:hover,

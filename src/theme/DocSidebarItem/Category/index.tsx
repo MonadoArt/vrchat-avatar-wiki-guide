@@ -169,6 +169,7 @@ function DocSidebarItemCategoryCollapsible({
   ...props
 }: Props): ReactNode {
   const {items, label, collapsible, className, href, customProps} = item;
+  const isNoFrame = className?.split(/\s+/).includes('no-frame') ?? false;
   const {
     docs: {
       sidebar: {autoCollapseCategories},
@@ -275,15 +276,35 @@ function DocSidebarItemCategoryCollapsible({
         )}
       </div>
 
-      <Collapsible lazy as="ul" className="menu__list" collapsed={collapsed}>
-        <DocSidebarItems
-          items={items}
-          tabIndex={collapsed ? -1 : 0}
-          onItemClick={onItemClick}
-          activePath={activePath}
-          level={level + 1}
-        />
-      </Collapsible>
+      {isNoFrame ? (
+        <Collapsible
+          lazy
+          as="div"
+          className="xeno-sidebar-category-items-collapse xeno-sidebar-category-items-collapse--no-frame"
+          collapsed={collapsed}>
+          <div className="xeno-sidebar-category-items-tray">
+            <ul className="menu__list">
+              <DocSidebarItems
+                items={items}
+                tabIndex={collapsed ? -1 : 0}
+                onItemClick={onItemClick}
+                activePath={activePath}
+                level={level + 1}
+              />
+            </ul>
+          </div>
+        </Collapsible>
+      ) : (
+        <Collapsible lazy as="ul" className="menu__list" collapsed={collapsed}>
+          <DocSidebarItems
+            items={items}
+            tabIndex={collapsed ? -1 : 0}
+            onItemClick={onItemClick}
+            activePath={activePath}
+            level={level + 1}
+          />
+        </Collapsible>
+      )}
     </li>
   );
 }
