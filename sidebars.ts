@@ -71,11 +71,12 @@ const sidebars: SidebarsConfig = {
       label: 'Info',
       collapsible: false,
       items: [
-        {
-          type: 'link',
-          label: 'Blog',
-          href: '/blog',
-        },
+        // {
+        //   type: 'link',
+        //   label: 'Blog',
+        //   href: '/blog',
+        // },
+        'avatar_changelog',
         'style_reference',
       ],
     },

@@ -10,6 +10,7 @@
 
 :root {
   --xeno-brown-dark: #322a2acc;
+  --xeno-brown-dark-opaque: #322a2a;
   --xeno-beige-light: #b5b1ab;
   --xeno-beige-mid: #ccc8bf;
   --xeno-green-monado: #a4f13f;
@@ -88,6 +89,7 @@
   --ifm-footer-background-color: transparent;
   --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
   --ifm-heading-color: var(--xeno-orange-header);
+  --ifm-navbar-height: 4rem;
 }
 
 html {

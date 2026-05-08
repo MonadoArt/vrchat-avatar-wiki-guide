@@ -12,8 +12,13 @@
   margin-top: 0 !important;
 }
 
-[class*='docRoot'] {
-  background-color: rgba(0, 0, 0, 0.7);
+.main-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  z-index: -1;
 }
 
 .theme-doc-toc-desktop {

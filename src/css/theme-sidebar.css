@@ -294,7 +294,7 @@
 .theme-doc-sidebar-container .menu__list-item .menu__list .menu__link {
   padding: 6px 16px !important;
   font-size: 0.9rem;
-  color: var(--xeno-brown-dark) !important;
+  color: var(--xeno-brown-dark-opaque) !important;
   opacity: 0.8;
 }
 
