@@ -91,22 +91,33 @@ You can combine this with locking to have different Inspectors showing you diffe
 
 <LocationCard src="/img/unity-default-scene.png" title="Scene View" highlight={{l: 241/1279, t: 71/672, w:736/1279, h:343/672, grow:4, text: "Scene"}} staticHighlight/>
 
-The Scene View is a 3D viewport where you can see and move around your avatar visually. You can think of it like a free camera flying around your scene.
+The Scene View is a 3D viewport where you can see and move around the assets currently present in the Hierarchy visually. You can think of it like a free camera flying around your scene.
 
-**Basic controls:**
+### Basic controls:
+<SubsectionBanner />
 - **Right-click + drag** - Rotate the camera
-- **Right-click + <kbd>WASD</kbd>** - Fly through the scene (hold right-click, then move with <kbd>WASD</kbd>)
-- **Right-click + <kbd>Q</kbd>/<kbd>E</kbd>** - Move the camera down/up while flying
 - **Middle-click + drag** - Pan the camera
 - **Scroll wheel** - Zoom in/out
 - **Press <kbd>F</kbd>** (with something selected) - Focus the camera on that object
 
-:::caution
-TODO
-Mention scroll speed and shift to speed up flying
-:::
+<DocsMediaRow
+mediaStyle={{  }}
+media={<HoverVideo src="/vid/unity/sceneBasicControls.mp4" title="Scene view - Basic Controls" resetOnHover="true"/>}>
+</DocsMediaRow>
 
-<LocationCard src="/img/unity-default-scene.png" title="Scene View Navigation" />
+### Fly Controls
+<SubsectionBanner />
+
+- **Right-click + <kbd>WASD</kbd>** - Fly through the scene (hold right-click, then move with <kbd>WASD</kbd>)
+- **Right-click + <kbd>Q</kbd>/<kbd>E</kbd>** - Move the camera down/up while flying
+- **Right-click + Scroll Wheel Up/Down** - Change the camera speed
+- **Right-click + <kbd>WASD</kbd> + <kbd>Shift</kbd>** - Fly faster
+
+
+<DocsMediaRow
+mediaStyle={{  }}
+media={<HoverVideo src="/vid/unity/sceneFlyControls.mp4" title="Scene view - Fly Controls" resetOnHover="true"/>}>
+</DocsMediaRow>
 
 For uploading, you don't really need to move things around in the Scene View - just knowing how to navigate it is enough.
 
@@ -114,6 +125,10 @@ For uploading, you don't really need to move things around in the Scene View - j
 mediaStyle={{  }}
 media={<HoverVideo src="/vid/unity/sceneInspectorLink.mp4" title="Scene view - Inspector Link" resetOnHover="true"/>}>
 </DocsMediaRow>
+
+:::tip
+When you click something in the Hierarchy, it gets selected and it's details show up in the Inspector on the right (if the inspector is unlocked of-course).
+:::
 
 ---
 
