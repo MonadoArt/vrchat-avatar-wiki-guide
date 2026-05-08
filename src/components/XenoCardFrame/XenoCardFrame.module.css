@@ -23,7 +23,7 @@
   position: absolute;
   width: 18px;
   height: 18px;
-  background: var(--xeno-brown-dark);
+  background: var(--xeno-brown-dark-opaque);
   box-shadow: 0 0 0 2px var(--xeno-metallic-yellow), 0 2px 4px rgba(0, 0, 0, 0.5);
   z-index: 2;
 }
@@ -141,8 +141,8 @@
   border: 4px dotted var(--xeno-decor-mid-base);
   background: radial-gradient(circle at center, transparent 50%, color-mix(in srgb, var(--xeno-decor-mid-base), transparent 60%) 200%);
   border-radius: 0.5rem;
-  backdrop-filter: brightness(calc(1 + var(--dark)));
-  -webkit-backdrop-filter: brightness(calc(1 + var(--dark)));
+  backdrop-filter: brightness(calc(1 / (1 - var(--dark))));
+  -webkit-backdrop-filter: brightness(calc(1 / (1 - var(--dark))));
 }
 
 .darkened {
@@ -157,6 +157,16 @@
   opacity: 30%;
   backdrop-filter: brightness(1);
   -webkit-backdrop-filter: brightness(1);
+}
+
+.staticHighlightContainer.imageContainer:hover .darkened {
+  filter: brightness(calc(1 - var(--dark)));
+}
+
+.staticHighlightContainer.imageContainer:hover .highlight {
+  opacity: 1;
+  backdrop-filter: brightness(calc(1 / (1 - var(--dark))));
+  -webkit-backdrop-filter: brightness(calc(1 / (1 - var(--dark))));
 }
 
 .mediaBlock {
@@ -204,22 +214,45 @@
 
 .lightboxClose {
   position: absolute;
-  top: 0.7rem;
-  right: 0.7rem;
-  z-index: 1;
-  width: 2.4rem;
-  height: 2.4rem;
-  border: 2px solid var(--xeno-metallic-yellow);
-  border-radius: 999px;
-  background: rgb(0 0 0 / 45%);
-  color: var(--xeno-beige-light);
-  font-size: 1.2rem;
-  line-height: 1;
+  top: -5px;
+  right: -5px;
+  z-index: 3;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: 0 50% 0 50%;
+  background: #531616;
+  box-shadow: 0 0 0 2px #b03030, 0 2px 4px rgba(0, 0, 0, 0.5);
+  color: #ffdede;
+  font-size: 0.65rem;
+  font-weight: 700;
   cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.lightboxClose::before {
+  content: '';
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f08080, #7b1010);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+}
+
+.lightboxClose::after {
+  content: '✕';
+  position: relative;
+  z-index: 1;
 }
 
 .lightboxClose:focus-visible {
-  outline: 3px solid var(--xeno-metallic-yellow);
+  outline: 3px solid #b03030;
   outline-offset: 2px;
 }
 
@@ -271,7 +304,7 @@
   }
 
   .interactiveCard:hover {
-    transform: translateY(-1px);
+    transform: translateY(-5px);
   }
 
   .frame {

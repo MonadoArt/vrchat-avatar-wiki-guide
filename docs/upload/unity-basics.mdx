@@ -2,13 +2,15 @@
 sidebar_position: 2
 title: 2. Unity Basics
 ---
+import { HoverOption, HoverVideo } from '@site/src/components/HoverOption';
+import { DocsMediaRow } from '@site/src/components/DocsMediaRow';
 
 # Unity Basics
 
 :::tip
 **Already know Unity?**
 
-If you've used Unity before and feel comfortable navigating it, feel free to skip straight to [Uploading](./uploading).
+If you've used Unity before and feel comfortable navigating it, feel free to skip straight to [Importing the Avatar](./importing).
 :::
 
 When you open your project for the first time, Unity can look pretty overwhelming. There are panels everywhere and none of it is obvious. This page breaks down what each part of the screen does so you're not flying blind.
@@ -29,30 +31,56 @@ Each section is its own panel, and you can resize or rearrange them. Don't worry
 
 **Where:** Top-left panel.
 
-<LocationCard src="/img/unity-default-scene.png" title="Hierarchy Panel" highlight={{l:0, t:73/672, w: 241/1279, h: 341/672, grow:4, text: "Hirearchy"}} />
+<LocationCard src="/img/unity-default-scene.png" title="Hierarchy Panel" highlight={{l:0, t:73/672, w: 241/1279, h: 341/672, grow:4, text: "Hirearchy"}} staticHighlight/>
 
 The Hierarchy is a list of everything that exists in your current scene. Think of it like a folder tree - objects can be nested inside other objects.
 
 For avatar work, this is where you'll find your avatar. It will usually appear as a single entry that you can click the arrow next to expand and see all its parts (bones, meshes, etc.).
 
-When you click something in the Hierarchy, it gets selected and it's details show up in the Inspector on the right.
-
-<LocationCard src="/img/unity-default-scene.png" title="Hierarchy - Inspector Link" />
-
+:::tip
+When you click something in the Hierarchy, it gets selected and it's details show up in the Inspector on the right (if the inspector is unlocked of-course).
+:::
+<DocsMediaRow
+mediaStyle={{  }}
+media={<HoverVideo src="/vid/unity/hierarchyInspectorLink.mp4" title="Hierarchy - Inspector Link" resetOnHover="true"/>}>
+</DocsMediaRow>
 ---
 
 ## The Inspector
 
 **Where:** Right-side panel.
 
-<LocationCard src="/img/unity-default-scene.png" title="Inspector Panel" highlight={{l: 977/1279, t: 71/672, w:302/1279, h:578/672, grow:4, text: "Inspector"}} />
+<LocationCard src="/img/unity-inspector.png" title="Inspector Panel" highlight={{l: 977/1279, t: 71/672, w:302/1279, h:578/672, grow:4, text: "Inspector"}} staticHighlight/>
 
 The Inspector shows you the details of whatever you have selected. If you click on your avatar in the Hierarchy, the Inspector will show all the components attached to it - things like the Avatar Descriptor (which tells VRChat this is an avatar) and any other settings.
 
 You'll interact with the Inspector a lot when following guides, since most settings are changed here.
 
 :::info
-If you click somewhere and the Inspector goes blank or shows something unexpected, you probably just accidentally selected the wrong thing. Go back to the Hierarchy and click what you actually wanted.
+If you click somewhere and the Inspector goes shows something unexpected, you probably just accidentally selected the wrong thing, if it goes blank you likely have nothing selected. Go back to the Hierarchy and click what you actually wanted.
+:::
+
+### Locking the Inspector
+<SubsectionBanner />
+You can lock the inspector by pressing the little padlock icon in the top right corner of the Inspector window.
+
+Locking the inspector will prevent it from changing when you select other things or deselect everything altogether.
+
+<LocationCard src="/img/unity-inspector.png" title="Padlock location" highlight={{l: 1233/1279, t: 71/672, w:30/1279, h:25/672, grow:4, }} staticHighlight/>
+
+### Adding more inspectors
+<SubsectionBanner />
+
+You can add more Inspector panels (or any panels for that matter) if you need to.
+To do so Right-Click the Inspector tab and click "Add Tab/Inspector"
+
+<DocsMediaRow
+mediaStyle={{  }}
+media={<HoverVideo src="/vid/unity/addingInspectors.mp4" title="Adding and Locking Inspectors" resetOnHover="true"/>}>
+</DocsMediaRow>
+
+:::tip
+You can combine this with locking to have different Inspectors showing you different things if you need to quickly edit a number of things!
 :::
 
 ---
@@ -61,7 +89,7 @@ If you click somewhere and the Inspector goes blank or shows something unexpecte
 
 **Where:** Large panel in the center.
 
-<LocationCard src="/img/unity-default-scene.png" title="Scene View" highlight={{l: 241/1279, t: 71/672, w:736/1279, h:343/672, grow:4, text: "Scene"}} />
+<LocationCard src="/img/unity-default-scene.png" title="Scene View" highlight={{l: 241/1279, t: 71/672, w:736/1279, h:343/672, grow:4, text: "Scene"}} staticHighlight/>
 
 The Scene View is a 3D viewport where you can see and move around your avatar visually. You can think of it like a free camera flying around your scene.
 
@@ -82,15 +110,25 @@ Mention scroll speed and shift to speed up flying
 
 For uploading, you don't really need to move things around in the Scene View - just knowing how to navigate it is enough.
 
+<DocsMediaRow
+mediaStyle={{  }}
+media={<HoverVideo src="/vid/unity/sceneInspectorLink.mp4" title="Scene view - Inspector Link" resetOnHover="true"/>}>
+</DocsMediaRow>
+
 ---
 
 ## The Game View
 
-**Where:** Usually tabbed behind the Scene View (click the "Game" tab to switch).
+**Where:** Usually tabbed next to the Scene View (click the "Game" tab to switch).
 
-<LocationCard src="/img/unity-default-scene.png" title="Game View" highlight={{l: 307/1279, t: 60/672, w:99/1279, h:46/672, grow:3, style: {borderStyle: "solid"}}} />
+<LocationCard src="/img/unity-default-scene.png" title="Game View" highlight={{l: 307/1279, t: 60/672, w:99/1279, h:46/672, grow:3, style: {borderStyle: "solid"}}} staticHighlight/>
 
 The Game View shows what the camera inside the scene sees - basically a preview of what things would look like in-game. For avatar uploading you won't use this much.
+
+:::caution
+When entering play mode Unity will switch to this tab automatically!
+If you want to see the Scene view just press the **"Scene"** tab (next to the Game button)
+:::
 
 ---
 
@@ -98,13 +136,19 @@ The Game View shows what the camera inside the scene sees - basically a preview 
 
 **Where:** Bottom panel.
 
-<LocationCard src="/img/unity-default-scene.png" title="Project Window" highlight={{l: 0, t: 413/672, w:977/1279, h:238/672, grow:4, text: "Project"}} />
+<LocationCard src="/img/unity-default-scene.png" title="Project Window" highlight={{l: 0, t: 413/672, w:977/1279, h:238/672, grow:4, text: "Project"}} staticHighlight/>
 
 The Project window is your file browser. It shows all the files that make up your project - textures, materials, scripts, prefabs, and so on. Think of it like File Explorer, but only showing the contents of your project folder.
 
 When you import your avatar files, they'll appear here. You can double-click folders to open them, and drag files from the Project window into the Hierarchy to add them to your scene.
+<DocsMediaRow
+mediaStyle={{  }}
+media={<HoverVideo src="/vid/unity/projectdragdrop.mp4" title="Project - Hierarchy Drag" resetOnHover="true"/>}>
+</DocsMediaRow>
 
-<LocationCard src="/img/unity-default-scene.png" title="Project - Hierarchy Drag" />
+:::warning
+If you drag the item onto the Scene view the object will be created in the center of what the Scene view is looking at rather than at World origin
+:::
 
 ---
 
@@ -112,18 +156,18 @@ When you import your avatar files, they'll appear here. You can double-click fol
 
 **Where:** Usually tabbed next to the Project window (click "Console" to switch).
 
-<LocationCard src="/img/unity-default-scene.png" title="Console" highlight={{l: 60/1279, t: 392/672, w:122/1279, h:65/672, style: {borderStyle: "solid"}}} />
+<LocationCard src="/img/unity-default-scene.png" title="Console" highlight={{l: 60/1279, t: 392/672, w:122/1279, h:65/672, style: {borderStyle: "solid"}}} staticHighlight/>
 
 The Console shows messages from Unity - information, warnings, and errors.
 
 - **White messages** - General info, usually safe to ignore.
 - **Yellow messages** - Warnings. Often harmless, but worth noting.
-- **Red messages** - Errors. These mean something is actually wrong and usually need to be fixed before you can upload.
+- **Red messages** - Errors. These mean something may be actually wrong, usually not an issue though.
 
 If your upload fails or something breaks, the Console is the first place to check.
 
 :::tip
-If you see a wall of red errors when you first open your project, don't panic. Make sure all four packages from the [Installation](./installation#step-5---install-the-packages-into-your-project) step are properly installed - missing packages are the most common cause.
+If you see a wall of red errors when you first open your project, don't panic. Make sure all mandatory packages from the [Installation](./installation#step-5---install-the-packages-into-your-project) step are properly installed - missing packages are the most common cause.
 :::
 
 ---
@@ -132,7 +176,7 @@ If you see a wall of red errors when you first open your project, don't panic. M
 
 **Where:** Very top of the window.
 
-<LocationCard src="/img/unity-default-scene.png" title="Toolbar" highlight={{l: 0, t: 649/672, w:1, h:23/672, grow:4.5}} />
+<LocationCard src="/img/unity-default-scene.png" title="Toolbar" highlight={{l: 0, t: 20/672, w:1, h:25/672, grow:4.5, style: {borderStyle: "solid"}}} staticHighlight/>
 
 The row of menus across the top (File, Edit, Assets, GameObject, Component, VRChat SDK, Window, Help) works like any other program. The one you'll use most is **VRChat SDK**, which is where you open the upload panel.
 

@@ -8,8 +8,8 @@
   --xeno-nav-pill-hover-bg: color-mix(in srgb, var(--xeno-green-monado) 28%, var(--xeno-beige-light));
   --xeno-sidebar-page-offset: var(--doc-sidebar-width);
   --xeno-sidebar-page-offset-collapsed: var(--doc-sidebar-hidden-width);
-  --xeno-collapse-speed: 0.3s;
-  --xeno-collapse-easing: linear;
+  --xeno-collapse-speed: 0.15s;
+  --xeno-collapse-easing: ease-out;
 }
 
 .theme-doc-sidebar-container {

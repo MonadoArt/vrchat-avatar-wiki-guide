@@ -31,7 +31,7 @@ import { XenoCardFrame, xenoCardFrameStyles } from './XenoCardFrame';
  * } } HighlightOptions
  */
 
-export const LocationCard = ({ src, title, alt, style, imageStyle, imageHeight, highlight, topSpacing }) => {
+export const LocationCard = ({ src, title, alt, style, imageStyle, imageHeight, highlight, topSpacing, staticHighlight }) => {
   const imgSrc = useBaseUrl(src);
   const [isOpen, setIsOpen] = React.useState(false);
   const [isRendered, setIsRendered] = React.useState(false);
@@ -136,20 +136,33 @@ export const LocationCard = ({ src, title, alt, style, imageStyle, imageHeight, 
         className={`${xenoCardFrameStyles.lightboxPanel} ${isVisible ? xenoCardFrameStyles.lightboxPanelOpen : ''}`.trim()}
         onClick={(event) => event.stopPropagation()}
       >
+        <div className={`${xenoCardFrameStyles.rivet} ${xenoCardFrameStyles.rivetTl}`} />
+        <div className={`${xenoCardFrameStyles.rivet} ${xenoCardFrameStyles.rivetBl}`} />
+        <div className={`${xenoCardFrameStyles.rivet} ${xenoCardFrameStyles.rivetBr}`} />
         <button
           type="button"
           className={xenoCardFrameStyles.lightboxClose}
           onClick={closeLightbox}
           aria-label="Close enlarged image"
-        >
-          x
-        </button>
-        <img
-          src={imgSrc}
-          alt={alt || title || ''}
-          className={xenoCardFrameStyles.lightboxImage}
-          onClick={closeLightbox}
         />
+        <div className={`${xenoCardFrameStyles.imageContainer}${staticHighlight ? ` ${xenoCardFrameStyles.staticHighlightContainer}` : ''}`} style={{ '--dark': 0.5 }}>
+          <img
+            src={imgSrc}
+            alt={alt || title || ''}
+            className={`${xenoCardFrameStyles.lightboxImage}${highlight ? ` ${xenoCardFrameStyles.darkened}` : ''}`}
+            onClick={closeLightbox}
+          />
+          {highlight && [highlight].flat().map((/** @type {HighlightOptions} */ hi, i) =>
+            <div className={xenoCardFrameStyles.highlight} key={(hi.text||"")+i} style={{
+              position: 'absolute',
+              top:    hi.grow ? `calc(${percent(hi.t)} - ${hi.grow}px)` : percent(hi.t),
+              left:   hi.grow ? `calc(${percent(hi.l)} - ${hi.grow}px)` : percent(hi.l),
+              width:  hi.grow ? `calc(${percent(hi.w)} + ${2*hi.grow}px)` : percent(hi.w),
+              height: hi.grow ? `calc(${percent(hi.h)} + ${2*hi.grow}px)` : percent(hi.h),
+              ...(hi.style || {})
+            }}>{hi.text || ""}</div>
+          )}
+        </div>
         {(title || alt) && (
           <div id={dialogTitleId} className={xenoCardFrameStyles.lightboxCaption}>
             {title || alt}
@@ -174,7 +187,7 @@ export const LocationCard = ({ src, title, alt, style, imageStyle, imageHeight, 
           onClick={() => setIsOpen(true)}
           aria-label={`Open enlarged image${title ? `: ${title}` : ''}`}
         >
-          <div className={xenoCardFrameStyles.imageContainer}>
+          <div className={`${xenoCardFrameStyles.imageContainer}${staticHighlight ? ` ${xenoCardFrameStyles.staticHighlightContainer}` : ''}`}>
           <img
             src={imgSrc}
             alt={alt || title || ''}

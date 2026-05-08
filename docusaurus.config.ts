@@ -96,7 +96,7 @@ themes: [
       title: 'Monado Art!',
       logo: {
         alt: 'Monado Art Logo',
-        src: 'img/logo/logo_kanji.png',
+        src: 'img/logo.png',
       },
       items: [
         {

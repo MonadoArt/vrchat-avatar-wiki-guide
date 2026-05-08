@@ -15,16 +15,18 @@ A reference for errors you're likely to run into when uploading or using avatars
 ## SDK / Upload errors
 
 ### "No avatar descriptor found"
+<SubsectionBanner />
 
-**Cause:** The selected object doesn't have a `VRC Avatar Descriptor` component, or no object is selected in the Builder tab.
+**Cause:** The selected object doesn't have a `VRC Avatar Descriptor` component, meaning you likely dragged the raw .fbx model instead of the prefab into your hierarchy!
 
-**Fix:** Select the root GameObject of your avatar in the scene, then open the SDK Builder tab again. Make sure a `VRC Avatar Descriptor` is attached to that object.
+**Fix:** Make sure you put the Prefab into your hierarchy (check [Importing the Avatar](./upload/importing#step-4---find-the-scene-and-prefab))
 
 ---
 
 ### "Build failed" with no clear reason
+<SubsectionBanner />
 
-**Cause:** Often a script compilation error somewhere in the project that prevents Unity from building.
+**Cause:** You might have some dependencies missing or you are on the wrong version of Unity.
 
 **Fix:**
 1. Check the Unity **Console** (Window → General → Console) for any red errors.
@@ -36,53 +38,52 @@ A reference for errors you're likely to run into when uploading or using avatars
 ### "VRCFury encountered an error."
 <SubsectionBanner />
 
-<div>
-    <div>
-    If you get this error while entering play mode or attempting to upload the model that means you are missing either **GoGoLoco** or **ADJerry's Facetracking Templates** while using an older version of the Avatar. <br />
-    Please either update the Lucario Avatar or remove "FT- Lucario ReUnited UE FaceTracking Prefab" or "GogoLoco Beyond - Lucario ReUnited  (VRCFury)" from the avatar in the Hierarchy. <br />
-    Compare your error to the images below to know which one to delete.
-    </div>
-    <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem", flexWrap: "nowrap" }}>
-        <LocationCard src="/img/troubleshooting/gogoloco-error.png" title="GoGoLoco Error" style={{ flex: "0 1 auto", minWidth: 0 }} />
-        <LocationCard src="/img/troubleshooting/vrcft-error.png" title="VRCFT Error" style={{ flex: "0 1 auto", minWidth: 0 }} imageHeight="301px" />
-        [The 1px is needed for the frames to align]: #
-    </div>
+If you get the "VRCFury encountered an error. Failed to build VRCFury component: " error while entering play mode or attempting to upload the model that means you are missing either **GoGoLoco** or **ADJerry's Facetracking Templates** while using an older version of the Avatar. <br />
+
+**Fix: Do one of the following**
+<ol style={{ listStyleType: 'upper-alpha' }}>
+    <li>
+        Update the Lucario Avatar (Check [Updating](./updating.mdx))
+    </li>
+    <li>
+        Remove either "FT- Lucario ReUnited UE FaceTracking Prefab" or "GogoLoco Beyond - Lucario ReUnited  (VRCFury)" from the avatar in the Hierarchy. <br />
+        (use the images below to figure out which one to delete)
+    </li>
+</ol>
+
+<div style={{ display: "flex", alignItems: "flex-start", gap: "1rem", flexWrap: "nowrap" }}>
+    <LocationCard src="/img/troubleshooting/gogoloco-error.png" title="GoGoLoco Error" style={{ flex: "0 1 auto", minWidth: 0 }} />
+    <LocationCard src="/img/troubleshooting/vrcft-error.png" title="VRCFT Error" style={{ flex: "0 1 auto", minWidth: 0 }} imageHeight="301px" />
+    [The 1px is needed for the frames to align]: #
 </div>
+
 
 ---
 
 ## Unity errors
 
-### Missing scripts on avatar components
-
-{/* Add details here */}
-
----
 
 ### Avatar shows as bright neon pink
 <SubsectionBanner />
+If your avatar appears as neon pink you most likely are missing the Poiyomi Shaders!
 
-<div className={trustStyles.row}>
-    <div className={trustStyles.content}>
-        If your avatar appears as neon pink you most likely are missing the Poiyomi Shaders! <br />
-        In order to fix you will need to install Poiyomi (Follow this [guide](./upload/installation#step-4---add-the-package-sources-to-vcc))
-    </div>
-    <div className={trustStyles.media}>
-        <LocationCard src="/img/troubleshooting/shader-error.png"/>
-    </div>
-</div>
+**Cause:** Likely missing shaders
 
-<HoverOption>
-<DocsMediaRow media={<HoverVideo src="/vid/troubleshooting/fixShadersGuide.mp4" title="Fixing Shaders" resetOnHover="true"/>}>
-Test
+**Fix:**
+1. Install Poiyomi using the [Installing needed things](./upload/installation#step-4---add-the-package-sources-to-vcc) guide
+2. If the shaders still appear as pink even after importing Poiyomi you might need to re-assign the shader as seen in the video below!
+
+<DocsMediaRow
+mediaStyle={{  }}
+media={<HoverVideo src="/vid/troubleshooting/fixShadersGuide.mp4" title="Fixing Shaders" resetOnHover="true"/>}>
 </DocsMediaRow>
-</HoverOption>
 
 ---
 
 ## Quest-specific issues
 
 ### Quest avatar shows as a different avatar than PC
+<SubsectionBanner />
 
 **Cause:** The Quest and PC versions have different Pipeline IDs and aren't linked.
 
@@ -91,5 +92,5 @@ Test
 ---
 
 :::info
-Don't see your error here? More entries will be added over time. Feel free to reach out if you're stuck.
+Don't see your error here? More entries will be added over time. Feel free to reach out on [Twitter](https://x.com/Monado_Art) or the [Discord server](https://discord.gg/DtsFNcynqn) if you're stuck.
 :::

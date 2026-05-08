@@ -73,6 +73,8 @@ export const VideoFrame = ({
   const [isRendered, setIsRendered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [resumeTime, setResumeTime] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isBuffering, setIsBuffering] = useState(false);
   const closeTimeoutRef = useRef(/** @type {ReturnType<typeof setTimeout> | null} */ (null));
   const dialogTitleId = useId();
 
@@ -162,14 +164,24 @@ export const VideoFrame = ({
   }, [isRendered]);
 
   useEffect(() => {
-    if (!previewVideoRef.current || isOpen) return;
+    const el = previewVideoRef.current;
+    if (!el || hover) return undefined;
 
-    if (!hover) {
-      previewVideoRef.current.play().catch(() => {
-        // Silently ignore autoplay policy blocks (e.g. Safari strict mode).
-      });
-      return undefined;
-    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (isOpen) return;
+      if (entry.isIntersecting) {
+        el.play().catch(() => {});
+      } else {
+        el.pause();
+      }
+    }, { threshold: 0.25 });
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [hover, isOpen]);
+
+  useEffect(() => {
+    if (!previewVideoRef.current || isOpen || !hover) return undefined;
 
     if (hovered) {
       previewVideoRef.current.play().catch(() => {
@@ -247,19 +259,21 @@ export const VideoFrame = ({
             className={`${xenoCardFrameStyles.lightboxPanel} ${isVisible ? xenoCardFrameStyles.lightboxPanelOpen : ''}`.trim()}
             onClick={(event) => event.stopPropagation()}
           >
+            <div className={`${xenoCardFrameStyles.rivet} ${xenoCardFrameStyles.rivetTl}`} />
+            <div className={`${xenoCardFrameStyles.rivet} ${xenoCardFrameStyles.rivetBl}`} />
+            <div className={`${xenoCardFrameStyles.rivet} ${xenoCardFrameStyles.rivetBr}`} />
             <button
               type="button"
               className={xenoCardFrameStyles.lightboxClose}
               onClick={closeLightbox}
               aria-label="Close enlarged video"
-            >
-              x
-            </button>
+            />
             <video
               ref={lightboxVideoRef}
               src={resolvedSrc}
               controls
               playsInline
+              preload="metadata"
               className={styles.lightboxVideo}
             />
             {title && (
@@ -289,12 +303,21 @@ export const VideoFrame = ({
             onMouseEnter={handlePreviewMouseEnter}
             aria-label={`Open enlarged video${title ? `: ${title}` : ''}`}
           >
+            {(!isLoaded || isBuffering) && (
+              <div className={styles.playOverlay} aria-hidden="true">
+                {isLoaded ? <div className={styles.spinner} /> : '▶'}
+              </div>
+            )}
             <video
               ref={previewVideoRef}
               src={resolvedSrc}
               muted
               loop
               playsInline
+              preload="metadata"
+              onCanPlay={() => setIsLoaded(true)}
+              onWaiting={() => setIsBuffering(true)}
+              onPlaying={() => setIsBuffering(false)}
               className={`${styles.videoMedia} ${xenoCardFrameStyles.mediaBlock}`}
             />
           </button>

@@ -11,6 +11,19 @@ html:has([data-page='intro']) .theme-doc-breadcrumbs {
   margin: 0 !important;
 }
 
+html:has([data-page='intro']) .theme-doc-markdown h1 {
+  all: revert;
+}
+html:has([data-page='intro']) .theme-doc-markdown h2 {
+  color: inherit !important;
+  all: revert;
+}
+html:has([data-page='intro']) .theme-doc-markdown h3 {
+  color: inherit !important;
+  all: revert;
+}
+
+
 .breadcrumbs {
   position: relative;
   display: inline-flex !important;

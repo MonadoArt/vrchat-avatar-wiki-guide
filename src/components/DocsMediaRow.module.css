@@ -12,7 +12,6 @@
 }
 
 .media {
-  flex-shrink: 0;
-  width: 220px;
+  flex-shrink: 0;;
   max-width: 100%;
 }
