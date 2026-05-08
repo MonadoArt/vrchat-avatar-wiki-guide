@@ -116,7 +116,7 @@ export const VccPackageCards = ({ className = '', mandatoryClassName = '', optio
         className={optionalClassName}
         warning={
           <>
-            ⚠️ These packages are not strictly required, but <strong>pay close attention during the upload process</strong> if you skip them - missing packages will produce errors and the upload will fail.
+            ⚠️ These packages are not strictly required, but <strong>pay close attention during the upload process</strong>. If you choose to skip them, missing packages can produce errors and cause the upload to fail.
           </>
         }
       />
