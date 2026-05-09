@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_=self.webpackChunk_||[]).push([["1833"],{5513(e){e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"funny","permalink":"/vrchat-avatar-wiki-guide/blog/2026/05/07/funny","unlisted":false,"date":"2026-05-07T00:00:00.000Z"}]}')}}]);
