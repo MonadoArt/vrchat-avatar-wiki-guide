@@ -16,7 +16,7 @@ Visual reference and usage guide for every component and style used across this 
 
 ## Headings & Ribbons
 
-The `##` above is what every `##` heading looks like automatically — no import needed. The XenoMarkers components give explicit control over the same shapes.
+The `##` above is what every `##` heading looks like automatically - no import needed. The XenoMarkers components give explicit control over the same shapes.
 
 <SectionTab>SectionTab</SectionTab>
 <SectionBanner>SectionBanner</SectionBanner>
@@ -64,7 +64,7 @@ Default sizes: `SectionTab` → `0.72rem`, `SectionBanner` → `1rem`, `SubSecti
 ### ToC Behavior
 <SubSectionBanner />
 
-The table of contents only picks up markdown `##` headings — JSX components are invisible to it. If a section using an explicit component also needs a ToC entry, place a `##` heading immediately before it:
+The table of contents only picks up markdown `##` headings - JSX components are invisible to it. If a section using an explicit component also needs a ToC entry, place a `##` heading immediately before it:
 
 ```mdx
 ## My Section
@@ -83,7 +83,7 @@ All card components share a dark frame with metallic-yellow rivets at each corne
 
 <LocationCard src="/img/settings-test.png" title="Settings" />
 
-Shows a screenshot inside the card frame with an optional floating pill label above it. `src` is passed through `useBaseUrl` automatically — use the `/img/` path as-is.
+Shows a screenshot inside the card frame with an optional floating pill label above it. `src` is passed through `useBaseUrl` automatically - use the `/img/` path as-is.
 
 ```mdx
 import { LocationCard } from '@site/src/components/LocationCard';
@@ -207,7 +207,7 @@ import {
 } from '@site/src/components/InstallationInlineUi/InstallationInlineUi';
 ```
 
-**`<VccIcon />`** — the VCC favicon inline with text. Accepts a `size` prop (CSS value, default `1.2em`).
+**`<VccIcon />`** - the VCC favicon inline with text. Accepts a `size` prop (CSS value, default `1.2em`).
 
 Open <VccIcon /> **Creator Companion**.
 
@@ -215,7 +215,7 @@ Open <VccIcon /> **Creator Companion**.
 Open <VccIcon /> **Creator Companion**.
 ```
 
-**`<VccProjectsLabel />`** — the **Projects** sidebar entry as it appears in VCC, including the grid icon.
+**`<VccProjectsLabel />`** - the **Projects** sidebar entry as it appears in VCC, including the grid icon.
 
 Go to the <VccProjectsLabel /> tab.
 
@@ -223,7 +223,7 @@ Go to the <VccProjectsLabel /> tab.
 Go to the <VccProjectsLabel /> tab.
 ```
 
-**`<VccManageProjectLabel />`** — the **Manage Project** action label, styled like a small VCC button.
+**`<VccManageProjectLabel />`** - the **Manage Project** action label, styled like a small VCC button.
 
 Click <VccManageProjectLabel /> next to your project.
 
@@ -231,7 +231,7 @@ Click <VccManageProjectLabel /> next to your project.
 Click <VccManageProjectLabel /> next to your project.
 ```
 
-**`<AddIcon />`** and **`<RemoveIcon />`** — the circular add and remove buttons from VCC's package list.
+**`<AddIcon />`** and **`<RemoveIcon />`** - the circular add and remove buttons from VCC's package list.
 
 Click <AddIcon /> to install, <RemoveIcon /> to remove.
 
@@ -239,7 +239,7 @@ Click <AddIcon /> to install, <RemoveIcon /> to remove.
 Click <AddIcon /> to install, <RemoveIcon /> to remove.
 ```
 
-**`<VersionNone />`** and **`<VersionInstalled />`** — the version dropdown pills from the VCC package list.
+**`<VersionNone />`** and **`<VersionInstalled />`** - the version dropdown pills from the VCC package list.
 
 If the version column shows <VersionNone />, the package isn't installed. Once installed it shows <VersionInstalled />.
 
@@ -305,30 +305,30 @@ const src = useBaseUrl('/img/something.png');
 ### Admonitions
 <SubSectionBanner />
 
-Callout boxes for things that need to stand out. Keep them short — one or two sentences max.
+Callout boxes for things that need to stand out. Keep them short - one or two sentences max.
 
 :::note
-**note** — neutral extra context that's helpful but not critical. Tag: `:::note`
+**note** - neutral extra context that's helpful but not critical. Tag: `:::note`
 :::
 
 :::tip
-**tip** — shortcuts, recommendations, or things that make life easier. Tag: `:::tip`
+**tip** - shortcuts, recommendations, or things that make life easier. Tag: `:::tip`
 :::
 
 :::info
-**info** — background context the reader might not know. Tag: `:::info`
+**info** - background context the reader might not know. Tag: `:::info`
 :::
 
 :::caution
-**caution** — things that are easy to get wrong or miss. Also used as a placeholder marker for screenshots still needed. Tag: `:::caution`
+**caution** - things that are easy to get wrong or miss. Also used as a placeholder marker for screenshots still needed. Tag: `:::caution`
 :::
 
 :::warning
-**warning** — things that can actually break something if ignored. Tag: `:::warning`
+**warning** - things that can actually break something if ignored. Tag: `:::warning`
 :::
 
 :::danger
-**danger** — use sparingly, only for things with serious consequences. Tag: `:::danger`
+**danger** - use sparingly, only for things with serious consequences. Tag: `:::danger`
 :::
 
 ### CSS Architecture
@@ -336,21 +336,21 @@ Callout boxes for things that need to stand out. Keep them short — one or two 
 
 The site CSS is split into six files loaded in dependency order from `src/css/custom.css`:
 
-`theme-foundation.css` — all `--xeno-*` CSS custom properties, base `html`/`body` rules, scrollbar styling, and text-wrap settings. **This is the only place hex values should ever appear.**
+`theme-foundation.css` - all `--xeno-*` CSS custom properties, base `html`/`body` rules, scrollbar styling, and text-wrap settings. **This is the only place hex values should ever appear.**
 
-`theme-decor.css` — the four fixed pseudo-element layers that create the framed decorative border on every page. Appearance is driven entirely by CSS variables, so per-page themes only need to override those variables.
+`theme-decor.css` - the four fixed pseudo-element layers that create the framed decorative border on every page. Appearance is driven entirely by CSS variables, so per-page themes only need to override those variables.
 
-`theme-docs.css` — main content column: doc container background, `h1`/`h2` heading styles, and the rules that hide placeholder markdown headings when a XenoMarkers component immediately follows them.
+`theme-docs.css` - main content column: doc container background, `h1`/`h2` heading styles, and the rules that hide placeholder markdown headings when a XenoMarkers component immediately follows them.
 
-`theme-sidebar.css` — sidebar shell, category frame cards with rivets, pill labels, the hover-highlight cursor, and the `no-frame` category modifier.
+`theme-sidebar.css` - sidebar shell, category frame cards with rivets, pill labels, the hover-highlight cursor, and the `no-frame` category modifier.
 
-`theme-toc.css` — right-hand table of contents panel, active cursor indicator, and the previous/next pagination cards.
+`theme-toc.css` - right-hand table of contents panel, active cursor indicator, and the previous/next pagination cards.
 
-`theme-chrome.css` — breadcrumbs, navbar, footer (including the rivet decorations at the footer corners), and `kbd`/`abbr` overrides.
+`theme-chrome.css` - breadcrumbs, navbar, footer (including the rivet decorations at the footer corners), and `kbd`/`abbr` overrides.
 
 ### Page Themes
 
-Each section of the wiki has its own color theme that changes the decorative border layers. Themes are defined in `src/theme/shared/xenoPageTheme.ts` and applied automatically on navigation — no MDX changes required.
+Each section of the wiki has its own color theme that changes the decorative border layers. Themes are defined in `src/theme/shared/xenoPageTheme.ts` and applied automatically on navigation - no MDX changes required.
 
 | Path pattern | `data-xeno-decor` | Decor style | Notes |
 |---|---|---|---|
@@ -366,7 +366,7 @@ To add a new theme, add an entry to `PAGE_THEME_DEFINITIONS` in `xenoPageTheme.t
 {
   pattern: /\/docs\/my-section(?:\/|$)/,
   decor: 'my-section',
-  style: 'default',   // 'default' or 'alt' — switches the mask image set
+  style: 'default',   // 'default' or 'alt' - switches the mask image set
   variables: {
     '--xeno-page-bg-bottom': '#5ab2f2',
     '--xeno-page-decor-before-ramp-base': '#113357',

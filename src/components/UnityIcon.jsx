@@ -25,7 +25,7 @@ export const PrefabVariantIcon = (props) => <UnityIcon src="/img/unity-icons/pre
 export const UnityPackageIcon = (props) => <UnityIcon src="/img/unity-icons/unitypackage.png" alt=".unitypackage" {...props} />;
 
 /**
- * <UnityPackage /> — inline ".unitypackage" badge with icon.
+ * <UnityPackage /> - inline ".unitypackage" badge with icon.
  * Styled like an inline code element (monospace, dark background).
  *
  * Usage:  Save the <UnityPackage /> file to your Downloads folder.

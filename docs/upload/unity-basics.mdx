@@ -4,6 +4,7 @@ title: 2. Unity Basics
 ---
 import { HoverOption, HoverVideo } from '@site/src/components/HoverOption';
 import { DocsMediaRow } from '@site/src/components/DocsMediaRow';
+import { VccIcon } from '@site/src/components/InstallationInlineUi';
 
 # Unity Basics
 
@@ -19,11 +20,15 @@ When you open your project for the first time, Unity can look pretty overwhelmin
 
 ## Opening Unity
 
-1. Open the **Creator Companion** and go to the **Projects** tab.
+1. Open the <VccIcon />**Creator Companion** and go to the **Projects** tab.
 2. Click **Open Project** next to your project. Unity will launch, which can take a minute or two.
 
 :::info
-Unity is slow to open. Just let it load.
+Unity takes a while to open, especially on first launch. This is normal - just let it finish.
+:::
+
+:::warning
+**Unity does not autosave.** Press <kbd>Ctrl</kbd>+<kbd>S</kbd> regularly to save your scene. If you close Unity without saving, any changes you made will be gone.
 :::
 
 ## The Layout
@@ -34,20 +39,26 @@ When Unity first opens, you'll see something like this:
 
 Each section is its own panel, and you can resize or rearrange them. Don't worry if yours looks slightly different - Unity lets you move things around.
 
+:::info
+**What's a scene?**
+
+A scene is what's currently loaded and active in your project. Think of it like a stage - your project folder holds all your files, and the scene is what's actually set up and ready to work with. The avatar lives inside a scene, and you'll need to open the right one before you can upload it.
+:::
+
 ---
 
 ## The Hierarchy
 
 **Where:** Top-left panel.
 
-<LocationCard src="/img/unity-default-scene.png" title="Hierarchy Panel" highlight={{l:0, t:73/672, w: 241/1279, h: 341/672, grow:4, text: "Hirearchy"}} staticHighlight/>
+<LocationCard src="/img/unity-default-scene.png" title="Hierarchy Panel" highlight={{l:0, t:73/672, w: 241/1279, h: 341/672, grow:4, text: "Hierarchy"}} staticHighlight/>
 
 The Hierarchy is a list of everything that exists in your current scene. Think of it like a folder tree - objects can be nested inside other objects.
 
 For avatar work, this is where you'll find your avatar. It will usually appear as a single entry that you can click the arrow next to expand and see all its parts (bones, meshes, etc.).
 
 :::tip
-When you click something in the Hierarchy, it gets selected and it's details show up in the Inspector on the right (if the inspector is unlocked of-course).
+When you click something in the Hierarchy, it gets selected and its details show up in the Inspector on the right.
 :::
 <DocsMediaRow
 mediaStyle={{  }}
@@ -63,15 +74,13 @@ media={<HoverVideo src="/vid/unity/hierarchyInspectorLink.mp4" title="Hierarchy 
 
 The Inspector shows you the details of whatever you have selected. If you click on your avatar in the Hierarchy, the Inspector will show all the components attached to it - things like the Avatar Descriptor (which tells VRChat this is an avatar) and any other settings.
 
-You'll interact with the Inspector a lot when following guides, since most settings are changed here.
-
-:::info
-If you click somewhere and the Inspector goes shows something unexpected, you probably just accidentally selected the wrong thing, if it goes blank you likely have nothing selected. Go back to the Hierarchy and click what you actually wanted.
-:::
+You'll interact with the Inspector a lot when following guides, since most settings are changed here. If it shows something unexpected you probably clicked the wrong thing - go back to the Hierarchy and click what you wanted. If it goes blank, nothing is selected.
 
 ### Locking the Inspector
 <SubsectionBanner />
+:::tip
 You can lock the inspector by pressing the little padlock icon in the top right corner of the Inspector window.
+:::
 
 Locking the inspector will prevent it from changing when you select other things or deselect everything altogether.
 
@@ -130,13 +139,18 @@ media={<HoverVideo src="/vid/unity/sceneFlyControls.mp4" title="Scene view - Fly
 
 For uploading, you don't really need to move things around in the Scene View - just knowing how to navigate it is enough.
 
+### Transform Tools
+<SubsectionBanner />
+
+If you select an object and see colored arrows or handles appear on it, you've activated a transform tool. <kbd>W</kbd>, <kbd>E</kbd>, and <kbd>R</kbd> switch between Move, Rotate, and Scale. If you accidentally nudge something, <kbd>Ctrl</kbd>+<kbd>Z</kbd> will undo it.
+
 <DocsMediaRow
 mediaStyle={{  }}
 media={<HoverVideo src="/vid/unity/sceneInspectorLink.mp4" title="Scene view - Inspector Link" resetOnHover="true"/>}>
 </DocsMediaRow>
 
 :::tip
-When you click something in the Hierarchy, it gets selected and it's details show up in the Inspector on the right (if the inspector is unlocked of-course).
+Clicking something in the Scene view selects it, just like clicking in the Hierarchy - and its details will show up in the Inspector on the right.
 :::
 
 ---
@@ -149,9 +163,10 @@ When you click something in the Hierarchy, it gets selected and it's details sho
 
 The Game View shows what the camera inside the scene sees - basically a preview of what things would look like in-game. For avatar uploading you won't use this much.
 
-:::caution
-When entering play mode Unity will switch to this tab automatically!
-If you want to see the Scene view just press the **"Scene"** tab (next to the Game button)
+:::danger
+**Entering play mode switches to this tab automatically.** To get back to the Scene view, press the **Scene** tab next to the Game tab.
+
+More importantly - **any changes you make while in play mode are discarded when you stop it.** If you tweak something and it looks right, stop play mode first, then make the change for real.
 :::
 
 ---
@@ -165,14 +180,15 @@ If you want to see the Scene view just press the **"Scene"** tab (next to the Ga
 The Project window is your file browser. It shows all the files that make up your project - textures, materials, scripts, prefabs, and so on. Think of it like File Explorer, but only showing the contents of your project folder.
 
 When you import your avatar files, they'll appear here. You can double-click folders to open them, and drag files from the Project window into the Hierarchy to add them to your scene.
+
+:::note
+Dragging onto the Scene view instead places the object wherever the camera is looking, not at the center of the world.
+:::
+
 <DocsMediaRow
 mediaStyle={{  }}
 media={<HoverVideo src="/vid/unity/projectdragdrop.mp4" title="Project - Hierarchy Drag" resetOnHover="true"/>}>
 </DocsMediaRow>
-
-:::warning
-If you drag the item onto the Scene view the object will be created in the center of what the Scene view is looking at rather than at World origin
-:::
 
 ---
 
@@ -186,11 +202,11 @@ The Console shows messages from Unity - information, warnings, and errors.
 
 - **White messages** - General info, usually safe to ignore.
 - **Yellow messages** - Warnings. Often harmless, but worth noting.
-- **Red messages** - Errors. These mean something may be actually wrong, usually not an issue though.
+- **Red messages** - Errors. These are usually safe to ignore unless they prevent you from entering play mode or building the avatar.
 
 If your upload fails or something breaks, the Console is the first place to check.
 
-:::tip
+:::note
 If you see a wall of red errors when you first open your project, don't panic. Make sure all mandatory packages from the [Installation](./installation#step-5---install-the-packages-into-your-project) step are properly installed - missing packages are the most common cause.
 :::
 
@@ -202,10 +218,14 @@ If you see a wall of red errors when you first open your project, don't panic. M
 
 <LocationCard src="/img/unity-default-scene.png" title="Toolbar" highlight={{l: 0, t: 20/672, w:1, h:25/672, grow:4.5, style: {borderStyle: "solid"}}} staticHighlight/>
 
-The row of menus across the top (File, Edit, Assets, GameObject, Component, VRChat SDK, Window, Help) works like any other program. The one you'll use most is **VRChat SDK**, which is where you open the upload panel.
+The menu bar at the top works like any other program. The one you'll use most is **VRChat SDK**, which is where you open the upload panel.
+
+:::tip
+If you accidentally drag panels around and can't get back to a normal layout, go to **Window → Layouts → Default** to reset everything.
+:::
 
 ---
 
 ## Next steps
 
-Now that you know your way around, head to [Uploading](./uploading) to get your avatar into VRChat.
+Now that you know your way around, head to [Importing the Avatar](./importing) to continue.

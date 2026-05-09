@@ -7,6 +7,7 @@ import { SceneIcon, PrefabIcon, PrefabVariantIcon, UnityPackage } from '@site/sr
 import { PlaceholderCard } from '@site/src/components/PlaceholderCard';
 import { HoverOption, HoverVideo } from '@site/src/components/HoverOption';
 import { DocsMediaRow } from '@site/src/components/DocsMediaRow';
+import { VccIcon } from '@site/src/components/InstallationInlineUi';
 
 # Importing the Avatar
 
@@ -16,7 +17,7 @@ To get the avatar into Unity you need to import a **Unity Package** - a <UnityPa
 
 ## Step 1 - Open your project in Unity
 If it's not already open then:
-1. Open the **Creator Companion** and go to the **Projects** tab.
+1. Open the <VccIcon />**Creator Companion** and go to the **Projects** tab.
 2. Click **Open Project** next to your project. Unity will launch, which can take a minute or two.
 
 :::info
@@ -64,6 +65,10 @@ These two panels are easy to mix up. The **Hierarchy** (left side of the screen)
 </DocsMediaRow>
 </HoverOption>
 
+:::tip
+If the import dialog never appears after doing this, try **Option B** or **Option C** below instead.
+:::
+
 ---
 
 ### Option B - Drag and drop
@@ -73,7 +78,7 @@ These two panels are easy to mix up. The **Hierarchy** (left side of the screen)
 <DocsMediaRow media={<HoverVideo title="Drag and Drop" />}>
 1. Open the folder where your <UnityPackage /> file is saved.
 2. Drag the file on top of the **Project window** in Unity.
-3. Hold until the cursor changes, then let go.
+3. Drop it anywhere in the panel.
 </DocsMediaRow>
 </HoverOption>
 
@@ -105,6 +110,10 @@ FBX import warnings may appear in the Console after importing. As long as the te
 
 ---
 
+:::danger
+**Don't start customizing yet.** Do a clean upload first to make sure everything is working correctly before you start making changes. It's much easier to spot problems on a fresh import than after you've already changed things. Head to [Uploading](./uploading) once you're done here.
+:::
+
 ## Step 4 - Find the scene and prefab
 
 Once the import finishes, navigate to this folder in the Project window:
@@ -113,25 +122,23 @@ Once the import finishes, navigate to this folder in the Project window:
 Assets / Monado_Art / Lucario ReUnited VRC /
 ```
 
-You may also notice a `_MekenoTools` folder in your Assets. It's a dependency that came with the avatar - just leave it alone, you don't need to touch it.
+You may also notice a `_MekenoTools` folder in your Assets. It's a helper package that came with the avatar - just leave it alone, you don't need to touch it.
 
 Inside you'll find:
 
 - <SceneIcon /> **The Scene** - Double-click to open it. If you're new to Unity this is the easiest starting point since the avatar is already set up inside it.
-- <PrefabIcon /> **The Prefab** - Drag it from the Project window into the **Hierarchy** to add it to your scene. The included scene has both prefabs placed in it side by side, so opening it first is a good way to see what each one looks like. There are two versions:
+- <PrefabIcon /> **The Prefab** - The avatar itself, as a reusable file. The included scene already has both prefabs placed in it, so if you just opened the scene you don't need to drag anything in. There are two versions:
   - <PrefabVariantIcon /> **Lucario ReUnited PC Prefab** - the base version, with the Sir Aaron outfit and mohawk hair on by default.
-  - <PrefabVariantIcon /> **Lucario ReUnited PC Lite Prefab** - this is the same base, but with a few things removed to get a better performance ranking.
+  - <PrefabVariantIcon /> **Lucario ReUnited PC Lite Prefab** - the same avatar, but with a few things removed to get a better VRChat performance rating (which affects how your avatar looks to others based on their settings).
 
 :::caution
 Put an image of the Project window showing the folder and files here
 :::
 
+Once you've opened the scene, the avatar should be visible in the Hierarchy on the left and in the Scene view in the center. You're good to go.
+
 ---
 
 ## Before you start customizing
 
-:::warning
-I know, you're probably very excited to start customizing the avatar right now, but hold off for just a bit! Do a clean upload first to make sure everything is working correctly before you start making changes. It's much easier to spot problems in a fresh import than after you've already modified things.
-
-Head to [Uploading](./uploading) to get it into VRChat first.
-:::
+Head to [Uploading](./uploading) to get the avatar into VRChat before you touch anything.

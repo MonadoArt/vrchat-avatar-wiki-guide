@@ -62,6 +62,7 @@ export const VideoFrame = ({
   hover = false,
   resetOnUnfocus = false,
   resetOnHover = false,
+  noProgressBar = false,
 }) => {
   const hovered = useContext(HoverOptionContext);
   const hasHoverOptionParent = hovered !== null;
@@ -75,6 +76,7 @@ export const VideoFrame = ({
   const [resumeTime, setResumeTime] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isBuffering, setIsBuffering] = useState(false);
+  const [progress, setProgress] = useState(0);
   const closeTimeoutRef = useRef(/** @type {ReturnType<typeof setTimeout> | null} */ (null));
   const dialogTitleId = useId();
 
@@ -315,6 +317,7 @@ export const VideoFrame = ({
               loop
               playsInline
               preload="metadata"
+              onTimeUpdate={(e) => setProgress(e.target.currentTime / (e.target.duration || 1))}
               onWaiting={() => setIsBuffering(true)}
               onPlaying={() => { setIsLoaded(true); setIsBuffering(false); }}
               className={`${styles.videoMedia} ${xenoCardFrameStyles.mediaBlock}`}
@@ -326,6 +329,15 @@ export const VideoFrame = ({
           <span className={styles.placeholderIcon}>{'\u25B6'}</span>
           <span className={styles.placeholderText}>Video coming soon</span>
         </div>
+      )}
+      {!noProgressBar && src && (
+        <>
+          <div className={styles.progressTrack}>
+            <div className={styles.progressFill} style={{ width: `${progress * 100}%` }} />
+          </div>
+          <div className={styles.progressBorderTopOverlay} />
+          <div className={styles.progressBorderBottomOverlay} />
+        </>
       )}
     </XenoCardFrame>
     {lightbox}

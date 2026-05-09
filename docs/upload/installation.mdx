@@ -26,11 +26,11 @@ import trustStyles from '@site/src/components/TrustRankRequirement.module.css';
 
 ---
 
-## Step 0 - VRChat Trust Rank Requirement
+## Before You Begin - VRChat Trust Rank Requirement
 
 <div className={trustStyles.row}>
   <div className={trustStyles.content}>
-    :::warning
+    :::danger
       If you just made your VRChat account, you will need to play the game or <abbr title="away from keyboard">AFK</abbr> in order to increase <a href="https://docs.vrchat.com/docs/vrchat-safety-and-trust-system"><strong>Trust Rank</strong></a> from <strong>Visitor</strong> to <strong>New User</strong> to upload avatars! <br />
       Making friends can speed this up, or you can get <abbr title="VRChat+ Subscription">VRC+</abbr> to receive <strong>New User</strong> rank immediately.
     :::
@@ -48,24 +48,18 @@ import trustStyles from '@site/src/components/TrustRankRequirement.module.css';
 
 The <VccIcon />**VRChat Creator Companion** (usually called VCC) is a free program made by VRChat. Think of it as a control panel that helps you set up everything else. You install it once and it handles the rest.
 
-1. Go to [vrchat.com](https://vrchat.com) and log in with your VRChat account.
-2. Click **Downloads** from the top menu.
+1. Go to [vrchat.com](https://vrchat.com/home/download) and log in with your VRChat account.
+2. Click big blue **Download the Creator Companion** button.
 3. Download the <VccIcon />**Creator Companion** and run the installer like you would any other program.
-
-When you open it for the first time, it will ask you to sign in with your VRChat account. Go ahead and do that.
-
-:::info
-If it asks for a verification code after signing in, check your email - VRChat sends one for security.
-:::
 
 ---
 
 ## Step 2 - Install Unity
 
-Unity is the program that actually lets you upload the avatar. <abbr title="VRChat Creator Companion">VCC</abbr> will prompt you to install it automatically, so you don't need to go hunting for the right version yourself.
+Unity is the program that actually lets you upload the avatar. <VccIcon /><abbr title="VRChat Creator Companion">VCC</abbr> will prompt you to install it automatically, so you don't need to go hunting for the right version yourself.
 
 1. Open the <VccIcon />**Creator Companion**.
-2. If Unity isn't installed yet, <VccIcon />BCC will show a message asking you to install it. Click **Install Unity**.
+2. If Unity isn't installed yet, <VccIcon />VCC will show a message asking you to install it. Click **Install Unity**.
 3. This opens a program called **Unity Hub** - it's just a launcher that manages Unity for you. Follow the prompts to finish installing.
 4. During setup, you'll be asked to create a free Unity account and activate a **Personal license**. This is completely free and just lets you use Unity.
 
@@ -78,7 +72,7 @@ If you go to the Unity website and download it manually, you'll probably get the
 :::caution
 **Already have Unity installed? You might have the wrong version.**
 
-If you haven't updated VCC or Unity in a while, you may have **Unity 2019** installed instead of the required **Unity 2022**. Using the wrong version will cause your project to break.
+If you haven't updated <VccIcon />VCC or Unity in a while, you may have **Unity 2019** installed instead of the required **Unity 2022**. Using the wrong version will cause your project to break.
 
 To fix this:
 
@@ -100,14 +94,7 @@ A <q>project</q> is just a folder on your computer where all your avatar files w
 1. Open the <VccIcon />**Creator Companion** and click <VccProjectsLabel /> in the sidebar on the left.
 2. Click the blue **Create New Project** button in the top right.
 3. From the template list, select **"Unity 2022 Avatar Project"**.
-4. Give your project a name and choose where to save it.
-
-:::tip
-**Choose a sensible save location**
-
-By default, VCC might try to save it inside a hidden system folder (AppData). It's better to save it somewhere easy to find, like `Documents\VRChat Projects\` or similar.
-:::
-
+4. Give your project a name and choose where to save it. <VccIcon />VCC may default to a hidden system folder (Appdata) - somewhere like `Documents\VRChat Projects\` is much easier to find later.
 5. Click **Create** and wait for it to finish. This might take a minute or two.
 
 ---
@@ -116,13 +103,17 @@ By default, VCC might try to save it inside a hidden system folder (AppData). It
 
 Before you can install anything, VCC needs to know where to find these packages.
 
+:::warning
+**This step is not the same as installing them into Unity.**
+
+Clicking the buttons below only registers where the packages live. You still need to go through **Step 5** to actually put them in your project - don't stop here!
+:::
+
 Click <DisabledAddToVccCta /> on each card below. Once you've clicked all four, a message will appear at the bottom telling you what to do next.
 
 <VccPackageCards />
 
-:::info
-You only need to do this once per package, *ever*. Once a source is added to VCC, it stays there for all future projects.
-:::
+You only need to do this once per package, *ever* - once a source is added to VCC, it stays there for all future projects.
 
 ---
 

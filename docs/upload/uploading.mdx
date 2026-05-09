@@ -3,37 +3,32 @@ sidebar_position: 4
 title: 4. Uploading
 ---
 
+import { VccIcon } from '@site/src/components/InstallationInlineUi';
+
 # Uploading an Avatar
 
-This page covers how to upload your avatar using the VRChat SDK inside Unity. Make sure you've completed the [Installation](./installation) steps before continuing.
-Outfits and other customization options are covered in the [Customizing](../customizing) section.
+Make sure you've completed the [Installation](./installation) steps before continuing. Outfits and customization are covered in the [Customizing](../customizing) section.
 
 ---
 
 ## 1. Open the SDK window
 
-In Unity, go to the top menu bar and click:
-
-**VRChat SDK → Show Control Panel**
+In Unity, go to the top menu bar and click **VRChat SDK → Show Control Panel**.
 
 :::caution
 Put an image of where to find it
 :::
 
-This opens the SDK window. If you don't see this menu, the SDK probably isn't installed correctly - go back to the Creator Companion and make sure the VRChat SDK package is added to your project.
+If you don't see this menu, the SDK probably isn't installed correctly - go back to the <VccIcon />Creator Companion and make sure the VRChat SDK package is added to your project.
 
 ---
 
 ## 2. Sign in
 
-In the SDK window, go to the **Authentication** tab and sign in with your VRChat account.
+In the SDK window, go to the **Authentication** tab and sign in with your VRChat account. If prompted for a two-factor authentication code, check your email.
 
 :::tip
 Sign in with your **email address**, not your username. Username logins don't tend to work as reliably in the SDK.
-:::
-
-:::note
-You may be prompted for a two-factor authentication code. Check your email.
 :::
 
 ---
@@ -41,46 +36,48 @@ You may be prompted for a two-factor authentication code. Check your email.
 ## 3. Select your avatar
 
 1. Switch to the **Builder** tab at the top of the SDK window.
-2. In the **Selected Avatar** dropdown, choose your avatar.
-3. The SDK will run a few checks on your avatar. Fix any errors shown in red before continuing. Warnings (yellow) are usually safe to ignore.
+2. In the **Selected Avatar** dropdown, choose your avatar. If the dropdown is empty, make sure the avatar's scene is open and the avatar is in the Hierarchy.
+3. The SDK will run a few checks. Any errors shown in red will have a button next to them to fix them automatically - click it and continue. Warnings in yellow are usually safe to ignore.
 
 ---
 
-## 4. Upload (PCVR version)
+## 4. Upload (PCVR)
 
-1. Fill in the **Avatar Name** and give it a **Thumbnail**. Description and tags are entirely optional.
-2. Scroll down in the Builder tab.
-3. Make sure **Build & Publish your Avatar Online** is selected as the <q>Build Type</q> and **Windows** is selected in the <q>Platform</q> dropdown.
-4. Wait for Unity to build the avatar. Depending on how many components you have added, this can take a few minutes.
-5. If successful, you will see a message saying <q>Build Successful</q> in green text.
+1. Fill in the **Avatar Name** and give it a **Thumbnail** - click **Select Image** to use an image file, or **Capture in Scene** to take a screenshot from the Scene view. Description and tags are optional.
+2. Make sure **Build & Publish your Avatar Online** is selected as the Build Type and **Windows** is selected in the Platform dropdown.
+3. Click **Build & Publish**.
+4. Wait for Unity to finish building. This can take anywhere from a few minutes to upward of 20 - Unity may look frozen during this time, which is normal. Don't close it.
+5. If successful, you'll see <q>Build Successful</q> in green text in the SDK panel.
 
-Once finished, your avatar will appear in VRChat under **My Avatars**.
+Your avatar will appear in VRChat under **My Avatars**.
 
 ---
 
-## 5. Upload (Mobile version)
+## 5. Upload (Mobile/Quest)
 
-If you want to upload a Mobile compatible version, you need to link it to the same pipeline ID as the PC version so they're uploaded onto the same avatar.
+If you want Quest users to see your avatar when you're on PC (and vice versa), you need to upload a mobile version and link it to the same avatar slot.
 
-0. Find the prefab for the Mobile version of the avatar and drag it into the hierarchy, add the same additions as you did on the PC version.
-1. In the SDK's **Content Manager** tab, find your uploaded PC avatar and click **Copy ID**.
-2. In your scene, select the **root object of the Quest avatar**.
-3. Find the **Pipeline Manager** component on it.
-4. Paste the copied ID into the **Blueprint ID** field and click **Attach**.
-5. Now repeat the upload steps above using **Build & Publish Your Avatar Online** with **<q>Android</q>** selected in the **<q>Platform</q>** dropdown.
+:::info
+**What's a Blueprint ID?**
 
-:::caution
-If the mobile avatar is not uploaded onto the same Blueprint ID as the PCVR version, they will be treated as two entirely different avatar uploads. This means that if you are on PCVR, your Quest standalone friends wont see your avatar and vice-versa.
+It's VRChat's internal ID for an avatar slot. Linking both versions to the same ID means they count as one avatar. If you skip this, they'll be treated as two completely separate uploads and cross-platform visibility won't work.
 :::
 
+1. Find the prefab for the Mobile version and drag it into the Hierarchy.
+2. In the SDK's **Content Manager** tab, find your uploaded PC avatar and click **Copy ID**.
+3. In the Hierarchy, click the **top-level object of the Quest avatar** - the one at the very top, not any of the things nested inside it.
+4. In the Inspector, scroll down until you see a section called **Pipeline Manager**.
+5. Paste the copied ID into the **Blueprint ID** field and click **Attach**.
+6. Repeat the upload steps above with **Android** selected in the Platform dropdown.
+
 ---
 
-## Troubleshooting upload issues
+## Troubleshooting
 
-If something goes wrong during the upload, check the [Troubleshooting](../troubleshooting) page for common errors and fixes.
+If your build fails, the SDK throws an error you can't auto-fix, or the avatar doesn't appear in VRChat after uploading, check the [Troubleshooting](../troubleshooting) page for common errors and fixes.
 
 ---
 
 ## What's next?
 
-If the upload went through, nice work! If you want to start customizing the avatar - outfits, accessories, that sort of thing - head over to the [Customizing](../customizing) section.
+Nice work! Head over to the [Customizing](../customizing) section whenever you're ready to start on outfits and accessories.
