@@ -30,3 +30,13 @@
   height: 2em;
   margin-right: 0.4em;
 }
+
+:global(li.sidebar-info-compact) .categoryIcon {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+:global(li.sidebar-info-compact .menu__link) {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}

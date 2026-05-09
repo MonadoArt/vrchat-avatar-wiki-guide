@@ -6,7 +6,6 @@ export {
   PackageInstallList,
   DisabledAddToVccCta,
   VccIcon,
-  VccAppBadge,
   VccProjectsLabel,
   VccManageProjectLabel,
 } from './InstallationInlineUi';

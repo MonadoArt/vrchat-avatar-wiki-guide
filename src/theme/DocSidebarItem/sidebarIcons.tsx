@@ -9,6 +9,8 @@ import TroubleshootSvg from '@site/static/img/sidebar-icons/troubleshoot.svg';
 import UpdateSvg from '@site/static/img/sidebar-icons/update.svg';
 // @ts-ignore
 import UploadSvg from '@site/static/img/sidebar-icons/upload.svg';
+// @ts-ignore
+import InfoSvg from '@site/static/img/sidebar-icons/info.svg';
 
 export const svgIconMap: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
   '/img/sidebar-icons/home.svg': HomeSvg,
@@ -16,4 +18,5 @@ export const svgIconMap: Record<string, ComponentType<SVGProps<SVGSVGElement>>> 
   '/img/sidebar-icons/troubleshoot.svg': TroubleshootSvg,
   '/img/sidebar-icons/update.svg': UpdateSvg,
   '/img/sidebar-icons/upload.svg': UploadSvg,
+  '/img/sidebar-icons/info.svg': InfoSvg,
 };

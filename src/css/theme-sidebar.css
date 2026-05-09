@@ -237,6 +237,16 @@
   color: var(--xeno-brown-menu) !important;
 }
 
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item.sidebar-updating > .menu__link:hover,
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item.sidebar-updating > .menu__link.menu__link--active {
+  background-color: color-mix(in srgb, #60a5fa, transparent 72%) !important;
+}
+
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item.sidebar-troubleshooting > .menu__link:hover,
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item.sidebar-troubleshooting > .menu__link.menu__link--active {
+  background-color: color-mix(in srgb, #fbbf24, transparent 72%) !important;
+}
+
 .theme-doc-sidebar-container .menu .menu__list-item-collapsible:has(> .menu__link.menu__link--sublist):hover {
   background: var(--xeno-nav-hover-bg) !important;
   color: var(--xeno-brown-menu) !important;

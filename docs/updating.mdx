@@ -5,50 +5,53 @@ title: 🔄️ Updating
 
 # Updating Your Avatar
 
-### You'd like to update your avatar to the newest version? Here's how to get it into VRChat.
+To update your avatar to the newest version, follow these steps. Check the [Avatar Changelog](./avatar_changelog) first to see what changed - it's worth knowing before you start, especially if you've made customizations.
 
 ---
 
-## Step 1: Import the new unitypackage
+## Step 1: Download and import the new package
 
-Download the updated avatar package from [Gumroad](https://monadoart.gumroad.com/l/LucarioReUnitedVRC), then import it into your Unity project by double-clicking the `.unitypackage` file (or dragging it into the Project window). Unity will ask which files to import - in most cases you can import everything.
+New versions are released in the same places as the original - [Gumroad](https://monadoart.gumroad.com/l/LucarioReUnitedVRC), or early on [Patreon](https://patreon.com/Monado_Art) for supporters. See the [home page](/) for all download links.
+
+Download the updated `.unitypackage` file, then import it into your Unity project by double-clicking it or dragging it into the Project window. Unity will show a list of files - leave everything checked and click **Import**.
 
 :::warning
-This overwrites the old avatar files in your project with the new ones. <br />
-This does mean that if you have chosen to overwrite the original avatar textures or model then you will LOSE your changes. Be sure to back-up your textures
+**If you edited any of the original files that came with the avatar** (painted over a texture, swapped out a mesh, etc.), those changes will be overwritten. Files you created yourself and added separately are safe - Unity only replaces files it recognises from the original package.
+
+Before importing, copy anything you want to keep to a folder **outside** your Unity project. Don't just move it within the project - the import will still overwrite it there.
 :::
 
 ---
 
-## Step 2: Make sure the Blueprint ID matches!
+## Step 2: Make sure the Blueprint ID matches
 
-Click on the root of the avatar in the hierarchy then in the Inspector scroll down until you see Pipeline Manager (Script)
-:::warn
-TODO put a video or an image of the thingymajig
+The Blueprint ID is what tells VRChat which avatar slot to update. If it's missing or wrong, your upload will create a brand new avatar instead of replacing the existing one.
+
+In the Hierarchy, click the **top-level avatar object** (the one at the very top, not anything nested inside it). In the Inspector, scroll down until you see a section called **Pipeline Manager**. Check the **Blueprint ID** field:
+
+- **If it already has an ID** - you're good, skip to Step 3.
+- **If it's empty** - go to **VRChat SDK → Content Manager** in the Unity menu bar, find your previously uploaded avatar in the list, and click **Copy ID**. Paste that into the Blueprint ID field and click **Attach**.
+
+:::tip
+Not sure what any of that means? The [Uploading](./upload/uploading#5-upload-mobilequest) page explains the Blueprint ID process in detail.
 :::
-If you see an empty input box that means your Blueprint ID is not set!
-In order to set it go to VRChat SDK > Content Manager and find your previously uploaded avatar from [Uploading](./upload/uploading) click "Copy ID" and then paste that into the Blueprint ID box then click "Attatch"
 
 ---
 
 ## Step 3: Upload it
 
-Once the import is done and you have verified that the blueprint ID matches, upload the avatar the same way you did the first time. Head over to the [Uploading](./upload/uploading) page if you need a refresher on the steps.
+Once the import is done and the Blueprint ID is confirmed, upload the avatar the same way you did the first time. Head over to the [Uploading](./upload/uploading) page if you need a refresher on the steps.
 
 :::tip
 You don't need to re-enter the name or description. VRChat remembers those from your first upload since you're updating the same avatar, not creating a new one.
-:::
-
-:::info
-Uploading overwrites the existing version of your avatar - no duplicates, it just updates the same one in your list.
 :::
 
 ---
 
 ## Don't forget the Quest version!
 
-If your avatar has a Quest version, make sure you upload that too - otherwise Quest users (including yourself on Quest) will still see the old version. Once you've uploaded for Windows, repeat the process for the Quest version and select **"Android"** in the **"Platform"** dropdown instead.
+If your avatar has a Quest version, make sure you upload that too - otherwise Quest users (including yourself on Quest) will still see the old version. Once you've uploaded for Windows, repeat the process for the Quest version and select **Android** in the **Platform** dropdown instead.
 
 :::warning
-Make sure the **Pipeline ID** matches that of the PC version! If you need a reminder on how to do that check [how to upload the Mobile version](./upload/uploading#5-upload-mobile-version)
+Make sure the **Blueprint ID** on the Quest prefab matches the PC version! If you need a reminder on how to do that, check the [Mobile upload steps](./upload/uploading#5-upload-mobilequest).
 :::

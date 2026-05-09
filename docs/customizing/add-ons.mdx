@@ -1,0 +1,75 @@
+---
+sidebar_position: 1
+title: Outfits/Traits/Systems
+---
+
+# Add-ons
+
+Add-ons are modular pieces you can attach to your avatar in Unity. The process is the same for all of them - drag a prefab onto the avatar root in the Hierarchy and re-upload. VRCFury wires up the toggle in your expression menu automatically.
+
+---
+
+## Outfits
+
+The avatar includes five outfits. Find them in `Monado_Art/Lucario ReUnited VRC/Add-ons/Outfits/`.
+
+| Outfit |
+|---|
+| Concert |
+| Martial Arts |
+| Ruins |
+| Sir Aaron |
+| Space Jacket |
+
+1. Navigate to the outfit folder in the **Project** panel
+2. Drag the prefab onto the **top-level avatar object** in the **Hierarchy**
+3. Re-upload - see [Uploading](../upload/uploading) if you need a refresher
+
+:::tip
+To remove an outfit, delete its prefab from the Hierarchy and re-upload.
+:::
+
+---
+
+## Hair & Traits
+
+Appearance options for hair, head shape, face style, and body. Find them in `Monado_Art/Lucario ReUnited VRC/Add-ons/Trait/`.
+
+| Folder | What it changes |
+|---|---|
+| **Hair** | Hair style |
+| **Head** | Head shape |
+| **Face Styles** | Facial appearance |
+| **Body** | Body shape |
+
+Same process as outfits - drag the prefab onto the avatar root and re-upload.
+
+:::tip
+These don't conflict with each other. You can add one from each folder at the same time.
+:::
+
+---
+
+## Systems
+
+The avatar ships with these systems built in and ready to use from the expression menu:
+
+| System | What it does |
+|---|---|
+| **GoGo Loco** | Fly, prone, and crouch locomotion modes |
+| **Face Tracking** | Custom face tracking for supported headsets |
+| **Facial Expressions** | Hand gesture-driven expressions |
+| **Color Customization** | Basic in-game color controls |
+| **Eye Proximity** | Reacts when other players get close to your face |
+| **Hair Flip X** | Hair physics and wiggle controls |
+| **Nose End Indicator** | Shows nose tip position for face tracking alignment |
+| **Tail Control** | Manual control over tail physics |
+| **FUCK** | Eyes pop out when you talk loud |
+
+GoGo Loco and Face Tracking are modified external packages and sit directly in `Add-ons/` rather than `Add-ons/System/`. The rest are in `Add-ons/System/`.
+
+If you removed a system and want it back, drag its prefab back onto the avatar root and re-upload.
+
+:::warning
+TODO - add screenshots or video of the drag-and-drop process
+:::

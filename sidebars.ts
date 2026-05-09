@@ -58,18 +58,23 @@ const sidebars: SidebarsConfig = {
       type: 'doc',
       label: 'Updating',
       id: 'updating',
+      className: 'sidebar-updating',
       customProps: { svgIcon: '/img/sidebar-icons/update.svg' },
     },
     {
       type: 'doc',
       label: 'Troubleshooting',
       id: 'troubleshooting',
+      className: 'sidebar-troubleshooting',
       customProps: { svgIcon: '/img/sidebar-icons/troubleshoot.svg' },
     },
     {
       type: 'category',
       label: 'Info',
-      collapsible: false,
+      className: 'no-frame sidebar-info-compact',
+      collapsible: true,
+      collapsed: true,
+      customProps: { svgIcon: '/img/sidebar-icons/info.svg' },
       items: [
         // {
         //   type: 'link',

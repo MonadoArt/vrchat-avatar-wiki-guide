@@ -1,10 +1,81 @@
 ---
 sidebar_position: 3
-title: Texturing in 2D
+title: PSD & 2D Editing
 ---
 
-PSD files dont exist yet!
+# PSD & 2D Editing
+
+If you'd rather paint textures flat in a 2D image editor than work directly on the 3D model, this is the approach for you. You edit the texture as a regular image file, export it, and drop it into Unity.
+
+---
+
+## File types & apps
+
+Different 2D apps use different native file formats. The avatar textures are provided as PSD files, which most apps can open.
+
+| Format | App | Notes |
+|---|---|---|
+| `.psd` | Adobe Photoshop | Industry standard. Readable by most other apps |
+| `.csp` | Clip Studio Paint | Popular for illustration. Has a one-time purchase option |
+| `.mdp` | MediBang Paint | Free and lightweight. Good starting point |
+
+:::tip
+Work in your app's native format and only export to PNG when you're ready to bring it into Unity. Editing a flattened PNG loses your layers.
+:::
+
+---
+
+## Getting the texture file
+
+The avatar's texture files are in your Unity project under `Monado_Art/Lucario ReUnited VRC/Textures/`. Right-click the file in the Project panel and choose **Show in Explorer** to open its location on disk, then open it in your image editor from there.
+
+---
+
+## Understanding UVs
+
+The texture is a flat image that wraps around the 3D model. The way it maps to the model is determined by the UV layout - essentially a flattened-out version of the mesh.
+
+If your app supports it, import the UV layout as a reference layer so you know what part of the image corresponds to what part of the model. This prevents painting in the wrong spot.
 
 :::info
-This section is still being written. Check back later!
+TODO - add UV layout image for reference
 :::
+
+---
+
+## Working in layers
+
+Keep your original texture on its own locked layer at the bottom and do all your painting above it. This way you can always revert to the original without starting over.
+
+Common layer setup:
+- **Original** - locked, untouched base texture
+- **Edits** - your changes on top
+- **UV Guide** - the UV layout for reference, set to Multiply or low opacity
+
+---
+
+## Exporting for Unity
+
+When you're done, export a flattened copy as **PNG**. Avoid JPEG - it introduces compression artifacts that look bad on a 3D model, especially near sharp edges.
+
+In most apps: **File → Export As → PNG**, make sure it's the same resolution as the original texture.
+
+---
+
+## Bringing it into Unity
+
+Drop the exported PNG into your Unity project (drag it into the Project panel or copy it into the project folder). Then open the material and drag the new texture into the relevant slot - see [Materials & Textures](./materials-textures) for how to do that.
+
+:::tip
+Press **Ctrl+S** in Unity after swapping the texture, then re-upload to see it in VRChat.
+:::
+
+---
+
+## Things to watch out for
+
+**Resolution** - Export at the same resolution as the original texture. Scaling up causes blurring, scaling down loses detail.
+
+**Color space** - Body/diffuse textures should be in sRGB. If colors look washed out or wrong in Unity, check that the texture import settings have **sRGB (Color Texture)** checked.
+
+**Normal maps** - If you're editing the normal map, it needs to stay in linear color space. Don't apply color profiles or corrections to it.

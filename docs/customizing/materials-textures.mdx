@@ -1,0 +1,49 @@
+---
+sidebar_position: 4
+title: Materials & Textures
+---
+
+# Materials & Textures
+
+If you want to change how the avatar looks beyond what the in-game color controls offer - like swapping a texture file entirely or adjusting the emission and roughness - you'll do that by editing the material directly in Unity.
+
+---
+
+## What's a material, what's a texture?
+
+A **texture** is an image file - like a PNG - that gets painted onto the 3D model.
+
+A **material** is the full set of settings that controls how a surface looks: which textures it uses, how shiny it is, whether it glows, and so on. The avatar body uses a single material, so there's one place to change all of this.
+
+---
+
+## Finding the material
+
+1. In the **Project** panel, navigate to `Monado_Art/Lucario ReUnited VRC/Materials/`
+2. Click the body material to select it
+3. The **Inspector** will show all of its properties on the right
+
+---
+
+## What the slots do
+
+| Slot | What it controls |
+|---|---|
+| **Base Color / Albedo** | The main painted texture |
+| **Normal Map** | Surface detail like bumps and creases - usually leave this alone |
+| **Emission** | Glow - color and texture of any glowing areas |
+| **Metallic / Roughness** | How shiny or matte the surface looks |
+
+---
+
+## Swapping a texture
+
+Drag your new texture file from the Project panel into the slot in the Inspector. Click the small thumbnail to the left of the slot name and it'll highlight - then drag your file onto it.
+
+:::tip
+Press **Ctrl+S** to save after making changes, then re-upload to see them in VRChat.
+:::
+
+:::warning
+TODO - add screenshots of the material Inspector and slots
+:::
